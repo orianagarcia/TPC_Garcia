@@ -1,13 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Web.Inicio" %>
 
 <!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap">
 <style>
     .sidebar {
 	position: absolute;
 	width: 210px;
 	height: 100%;	
-	background: #000000;
-	color: #fff;
+	background: deepskyblue ;
+	color: black;
 }
 .sidebar ul {
 	list-style: none;
@@ -17,19 +18,19 @@
 .sidebar h2 {
 	text-align: center;
 	margin: 0;
-	background: blue;
+	background: lightgreen;
 	padding: 10px;
 }
 .sidebar li {
 	border: 1px solid 
 }
 .sidebar li:hover {
-	background: #F10F64;
+	background: white;
 	
 }
 .sidebar a {
 	display: block;
-	color: #FFFFFF;
+	color: black;
 	padding: 10px;
 	text-decoration: none;
 }
@@ -37,7 +38,7 @@
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	background: lightblue;
+	background: aqua;
 }
 .menu-bar {
 	cursor: pointer;
@@ -54,7 +55,7 @@
 </head>
 <body>
 
-    <div class= "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <div class="sidebar">
         <h2>   MENU  </h2>
         <ul>
          <li> <a href="#">Inicio</a></li>
