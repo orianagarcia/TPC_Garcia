@@ -1,0 +1,6 @@
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\bin\Debug\Dominio.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\bin\Debug\Dominio.pdb
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\obj\Debug\Dominio.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Dominio\obj\Debug\Dominio.pdb

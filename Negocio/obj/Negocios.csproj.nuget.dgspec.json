@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocio.csproj": {}
+    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio1.csproj": {
+    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio1.csproj",
-        "projectName": "Dominio1",
-        "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio1.csproj"
+        "projectUniqueName": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio.csproj",
+        "projectName": "Dominio",
+        "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio.csproj"
       },
       "frameworks": {
         "net461": {}
       }
     },
-    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocio.csproj": {
+    "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocio.csproj",
-        "projectName": "Negocio",
-        "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocio.csproj",
+        "projectUniqueName": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocios.csproj",
+        "projectName": "Negocios",
+        "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\Negocios.csproj",
         "packagesPath": "C:\\Users\\ORIANAG\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Negocio\\obj\\",
         "projectStyle": "PackageReference",
@@ -41,8 +41,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio1.csproj": {
-                "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio1.csproj"
+              "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Users\\ORIANAG\\Downloads\\TPC_Garcia-master\\Dominio\\Dominio.csproj"
               }
             }
           }

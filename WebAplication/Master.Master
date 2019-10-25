@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="WebAplication.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+        <style>
+    .sidebar {
+	position: fixed;
+	width: 210px;
+	height: 100%;	
+	background: deepskyblue ;
+	color: black;
+}
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.sidebar h2 {
+	text-align: center;
+	margin: 0;
+	background: lightgreen;
+	padding: 10px;
+}
+.sidebar li {
+	border: 1px solid 
+}
+.sidebar li:hover {
+	background: white;
+	
+}
+.sidebar a {
+	display: block;
+	color: black;
+	padding: 10px;
+	text-decoration: none;
+}
+.contenido {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: aqua;
+}
+.menu-bar {
+	cursor: pointer;
+}
+.abrir {
+	transform: translateX(210px);
+}
+</style>
+
+    <div class="sidebar" >
+        <h2>   MENU  </h2>
+        <ul>
+         <li> <a href="Inicio.aspx">Inicio</a></li>
+         <li> <a href="Compras.aspx">Compras</a></li> 
+         <li> <a href="Insumos.aspx">Insumos</a></li>
+         <li> <a href="#">Proveedores</a></li>   
+         <li> <a href="#">Ventas</a></li>   
+         <li> <a href="#">Productos</a></li>
+         <li> <a href="#">Stock</a></li>   
+         <li> <a href="#">Empleados</a></li>   
+        </ul>
+    </div>
+
+            </div>
+    </form>
+</body>
+</html>
