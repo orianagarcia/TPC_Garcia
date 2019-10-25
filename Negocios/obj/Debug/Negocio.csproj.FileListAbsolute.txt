@@ -1,0 +1,9 @@
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\obj\Debug\Negocio.csprojAssemblyReference.cache
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\bin\Debug\Negocios.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\bin\Debug\Negocios.pdb
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\bin\Debug\Dominio.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\bin\Debug\Dominio.pdb
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\obj\Debug\Negocios.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\Negocios\obj\Debug\Negocios.pdb

@@ -17,5 +17,16 @@ namespace WebAplication
             dgvInsumos.DataSource = lista;
             dgvInsumos.DataBind();
         }
+
+        protected void BtnAgregar_Click(object sender, EventArgs e)
+        {
+            InsumoNegocio insumoNeg = new InsumoNegocio();
+            Insumo insumo = new Insumo();
+
+            insumo.nombre = txbNombre.Text;
+            insumo.stock = 0;
+            insumo.Medida = "Kilos";
+            insumoNeg.agregar(insumo);
+        }
     }
 }

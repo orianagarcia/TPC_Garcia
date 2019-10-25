@@ -16,6 +16,20 @@
             </asp:ContentPlaceHolder>
 
         <style>
+.grid-container {
+  display: grid;
+  grid-template: 150px / auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
     .sidebar {
 	position: fixed;
 	width: 210px;
@@ -67,7 +81,7 @@
          <li> <a href="Inicio.aspx">Inicio</a></li>
          <li> <a href="Compras.aspx">Compras</a></li> 
          <li> <a href="Insumos.aspx">Insumos</a></li>
-         <li> <a href="#">Proveedores</a></li>   
+         <li> <a href="Proveedores.aspx">Proveedores</a></li>   
          <li> <a href="#">Ventas</a></li>   
          <li> <a href="#">Productos</a></li>
          <li> <a href="#">Stock</a></li>   

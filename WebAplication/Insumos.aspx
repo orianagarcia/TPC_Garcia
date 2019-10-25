@@ -23,7 +23,7 @@
         <div>
         <div>
             <asp:Label text="Medida " ID="lblMedida" runat =server></asp:Label>
-            <select name="listMedida">
+            <select ID="listamedidas" name="listMedida">
   <option value="1">Kilos</option> 
   <option value="2" selected>Gramos</option>
   <option value="3">Litros</option>
@@ -33,7 +33,7 @@
 
         <div>
         
-             <asp:Button Text="Agregar" ID= "btnAgregar" runat = server>
+             <asp:Button Text="Agregar" ID= "BtnAgregar" runat = server OnClick= "BtnAgregar_Click">
                 
             </asp:Button>
         <div>

@@ -10,7 +10,7 @@
 namespace WebAplication {
     
     
-    public partial class Insumos {
+    public partial class Proveedores {
         
         /// <summary>
         /// Control lblNombre.
@@ -31,13 +31,40 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.TextBox txbNombre;
         
         /// <summary>
-        /// Control lblMedida.
+        /// Control lblTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMedida;
+        protected global::System.Web.UI.WebControls.Label lblTelefono;
+        
+        /// <summary>
+        /// Control txbTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbTelefono;
+        
+        /// <summary>
+        /// Control lblDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDireccion;
+        
+        /// <summary>
+        /// Control txbDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbDireccion;
         
         /// <summary>
         /// Control BtnAgregar.
@@ -49,12 +76,12 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.Button BtnAgregar;
         
         /// <summary>
-        /// Control dgvInsumos.
+        /// Control dgvProveedores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvInsumos;
+        protected global::System.Web.UI.WebControls.GridView dgvProveedores;
     }
 }

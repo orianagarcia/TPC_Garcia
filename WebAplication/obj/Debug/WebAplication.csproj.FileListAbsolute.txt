@@ -54,7 +54,7 @@ C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\obj\Debug\WebAplicati
 C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\obj\Debug\WebAplication.csproj.CopyComplete
 C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\obj\Debug\WebAplication.dll
 C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\obj\Debug\WebAplication.pdb
-C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\ClassLibrary1.dll
 C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\Dominio.dll
-C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\ClassLibrary1.pdb
 C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\Dominio.pdb
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\Negocios.dll
+C:\Users\ORIANAG\Downloads\TPC_Garcia-master\WebAplication\bin\Negocios.pdb
