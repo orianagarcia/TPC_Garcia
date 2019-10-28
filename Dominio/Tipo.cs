@@ -10,6 +10,6 @@ namespace Dominio
     {
         public long id;
         public string nombre;
-        bool estado;
+       // bool estado;
     }
 }

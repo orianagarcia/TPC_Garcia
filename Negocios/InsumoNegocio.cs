@@ -15,7 +15,7 @@ namespace Negocio
             List<Insumo> lista = new List <Insumo> ();
             try
             {
-                datos.setearQuery("SELECT id,nombre,stock,Medida from insumos");
+                datos.setearQuery("SELECT id,nombre,stock,medida from insumos");
                 datos.ejecutarLector();
 
                 while (datos.lector.Read())
@@ -24,7 +24,7 @@ namespace Negocio
                     aux.id = datos.lector.GetInt64(0);
                     aux.nombre = datos.lector.GetString(1);
                     aux.stock = datos.lector.GetInt32(2);
-                    aux.Medida = datos.lector.GetString(3);
+                    aux.medida = datos.lector.GetString(3);
                     lista.Add(aux);
                 }
                 return lista;
@@ -48,7 +48,7 @@ namespace Negocio
                 datos.setearQuery("Insert into insumos values (@nombre,@stock, @Medida)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@stock", aux.stock);
-                datos.agregarParametro("Medida", aux.idMedida);
+                datos.agregarParametro("Medida", aux.medida);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

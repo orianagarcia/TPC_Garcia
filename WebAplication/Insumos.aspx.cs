@@ -16,6 +16,13 @@ namespace WebAplication
             List<Insumo> lista = (new InsumoNegocio().listar());
             dgvInsumos.DataSource = lista;
             dgvInsumos.DataBind();
+            if (!IsPostBack) { 
+            cboMedidas.Items.Add("Kilos");
+            cboMedidas.Items.Add("Gramos");
+            cboMedidas.Items.Add("Miligramos");
+            cboMedidas.Items.Add("Litros");
+            cboMedidas.Items.Add("Mililitros");
+            }
         }
 
         protected void BtnAgregar_Click(object sender, EventArgs e)
@@ -25,7 +32,7 @@ namespace WebAplication
 
             insumo.nombre = txbNombre.Text;
             insumo.stock = 0;
-            insumo.Medida = "Kilos";
+            insumo.medida = cboMedidas.SelectedItem.ToString();
             insumoNeg.agregar(insumo);
         }
     }

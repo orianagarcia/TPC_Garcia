@@ -71,6 +71,7 @@
     <Content Include="Inicio.aspx" />
     <Content Include="Insumos.aspx" />
     <Content Include="Proveedores.aspx" />
+    <Content Include="prueba.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +110,13 @@
     </Compile>
     <Compile Include="Proveedores.aspx.designer.cs">
       <DependentUpon>Proveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="prueba.aspx.cs">
+      <DependentUpon>prueba.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="prueba.aspx.designer.cs">
+      <DependentUpon>prueba.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
