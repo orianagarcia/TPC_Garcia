@@ -4,116 +4,119 @@
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion de Comercio</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
 
-        <style>
-        *{
+    <style>
+        * {
             margin: 0;
             padding: 0;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
-
         }
+
         body {
             background-color: antiquewhite;
             font-size-adjust: initial;
         }
+
         .navbar {
             width: 100%;
             background: lightgreen;
         }
-        .navbar ul{   /*CADA UL DELTRO DE MI NAVBAR*/
-            list-style: none;
-        }
+
+            .navbar ul { /*CADA UL DELTRO DE MI NAVBAR*/
+                list-style: none;
+            }
         /*menu*/
         .menu > li {
-            position:relative;
-            display:inline-block;  /*UN MENU AL LADO DEL OTRO--*/
+            position: relative;
+            display: inline-block; /*UN MENU AL LADO DEL OTRO--*/
         }
-        .menu > li  a {
-            display: block;
-            padding: 15px 20px; /*ESPACIO */
-            color: black;
-            font-size: 16px;
-            font-family: 'Calibri';
-            text-decoration: none;
-        }
-        .menu li a:hover{
+
+            .menu > li a {
+                display: block;
+                padding: 15px 20px; /*ESPACIO */
+                color: black;
+                font-size: 16px;
+                font-family: 'Calibri';
+                text-decoration: none;
+            }
+
+        .menu li a:hover {
             color: green; /*color en el menu al desplazarme */
-            border:  1px solid #808080;
+            border: 1px solid #808080;
         }
 
         /*SUBMENU*/
-        .submenu 
-        { 
+        .submenu {
             position: absolute; /*ordena los submenu debajo del menu que lo usa*/
             background: lightgreen; /*Color fondo del submenu*/
             width: 130%; /*Aumento para que se vea todo el tex de mi submenu, si supera el del menu*/
             display: none; /*Para que no se muestre automaticamente*/
         }
-        .submenu li a{
-            display:block block;
-            padding: 15px; /*15px a todos los lados, espacio*/
-            color: black;
-            font-family: Calibri;
-            font-size: 16px;
-            text-decoration: none; /*SIN SUBRAYADO EL ENLACE*/
 
-        }
-        .menu li:hover .submenu{
-            display: block;  /*Se muestra el submenu cuando paso el mouse por el menu*/
-            border:  1px solid #808080;
-        }
+            .submenu li a {
+                display: block block;
+                padding: 15px; /*15px a todos los lados, espacio*/
+                color: black;
+                font-family: Calibri;
+                font-size: 16px;
+                text-decoration: none; /*SIN SUBRAYADO EL ENLACE*/
+            }
 
-      
+        .menu li:hover .submenu {
+            display: block; /*Se muestra el submenu cuando paso el mouse por el menu*/
+            border: green;
+        }
     </style>
 
-    <nav class="navbar">
-       <ul class="menu">
-         <li><a href="#">Insumos</a>
-         <ul class="submenu">
-            <li><a href="insumos.aspx" class=""> Insumos </a></li>
-            <li><a href="Proveedores.aspx" class=""> Proveedores </a></li>
-            <li><a href="#" class="">Compras</a></li>
-            <li><a href="#" class="">Stock</a></li>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
 
-        </ul>
-         </li>
-        <li><a href="#">Productos</a>
-            <ul class="submenu">
-                <li><a href="#" class="">Productos</a></li>
-                <li><a href="#" class="">Marcas</a></li>
-                <li><a href="#" class="">Categorias</a></li>
-                <li><a href="#" class="">Tipos</a></li>
-                <li><a href="#" class="">Formulas</a></li>
-                <li><a href="#" class="">Stock</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Ventas</a>
-        <ul class="submenu">
-            <li><a href="#" class="">Ventas</a></li>
-            <li><a href="#" class="">Clientes</a></li>
-        </ul>
-    </li>
-    <li><a href="#">Ayuda</a></li>
- 
-</ul> <!-- end .menu -->
-    </nav>
+            <nav class="navbar">
+                <ul class="menu">
+                    <li><a href="#">Insumos</a>
+                        <ul class="submenu">
+                            <li><a href="insumos.aspx" class="">Insumos </a></li>
+                            <li><a href="Proveedores.aspx" class="">Proveedores </a></li>
+                            <li><a href="Compras.aspx" class="">Compras</a></li>
+                            <li><a href="#" class="">Stock</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Productos</a>
+                        <ul class="submenu">
+                            <li><a href="#" class="">Productos</a></li>
+                            <li><a href="#" class="">Marcas</a></li>
+                            <li><a href="#" class="">Categorias</a></li>
+                            <li><a href="#" class="">Tipos</a></li>
+                            <li><a href="#" class="">Formulas</a></li>
+                            <li><a href="#" class="">Stock</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Ventas</a>
+                        <ul class="submenu">
+                            <li><a href="#" class="">Ventas</a></li>
+                            <li><a href="#" class="">Clientes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Empleados</a></li>
+
+                </ul>
+                <!-- end .menu -->
+            </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            </div>
-        </form>
+        </div>
+    </form>
 </body>
 </html>

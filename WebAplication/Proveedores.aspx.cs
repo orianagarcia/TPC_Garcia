@@ -22,9 +22,9 @@ namespace WebAplication
         {
             ProveedorNegocio proveedorNeg = new ProveedorNegocio();
             Proveedor prov = new Proveedor();
-            prov.nombre = txbNombre.Text;
-            prov.telefono = txbTelefono.Text;
-            prov.direccion = txbDireccion.Text;
+            //prov.nombre = txbNombre.Text;
+            //prov.telefono = txbTelefono.Text;
+            //prov.direccion = txbDireccion.Text;
             proveedorNeg.agregar(prov);
         }
     }

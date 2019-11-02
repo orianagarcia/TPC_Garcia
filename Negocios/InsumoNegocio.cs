@@ -61,5 +61,48 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void Eiminar(string cod)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update insumos set estado = 0 where codigo = '" + cod + "'");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+               throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void Modificar(Insumo aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update ARTICULOS set nombre = @nombre where ID = @Id;update ARTICULOS set stock = @stock where ID = @Id;update ARTICULOS set Medida = @medida where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@nombre", aux.nombre);
+                datos.agregarParametro("@stock", aux.stock);
+                datos.agregarParametro("@medida", aux.medida);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

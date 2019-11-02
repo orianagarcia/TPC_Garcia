@@ -16,13 +16,12 @@ namespace WebAplication
             List<Insumo> lista = (new InsumoNegocio().listar());
             dgvInsumos.DataSource = lista;
             dgvInsumos.DataBind();
-            if (!IsPostBack) { 
+            cboMedidas.SelectedValue = null;
             cboMedidas.Items.Add("Kilos");
             cboMedidas.Items.Add("Gramos");
             cboMedidas.Items.Add("Miligramos");
             cboMedidas.Items.Add("Litros");
             cboMedidas.Items.Add("Mililitros");
-            }
         }
 
         protected void BtnAgregar_Click(object sender, EventArgs e)
