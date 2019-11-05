@@ -11,7 +11,7 @@ namespace Dominio
         public long id { get; set; }
         public string nombre { get; set; }
         public Marca marca;
-        public CategoriaProducto categoria;
+        public Categoria categoria;
         public Tipo tipo;
         public int stock { get; set; }
         public float costo { get; set; }

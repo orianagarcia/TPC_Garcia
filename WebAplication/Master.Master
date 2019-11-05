@@ -90,17 +90,15 @@
                             <li><a href="insumos.aspx" class="">Insumos </a></li>
                             <li><a href="Proveedores.aspx" class="">Proveedores </a></li>
                             <li><a href="Compras.aspx" class="">Compras</a></li>
-                            <li><a href="#" class="">Stock</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Productos</a>
                         <ul class="submenu">
-                            <li><a href="#" class="">Productos</a></li>
-                            <li><a href="#" class="">Marcas</a></li>
-                            <li><a href="#" class="">Categorias</a></li>
+                            <li><a href="Productos.aspx" class="">Productos</a></li>
+                            <li><a href="Marcas.aspx" class="">Marcas</a></li>
+                            <li><a href="Categorias.aspx" class="">Categorias</a></li>
                             <li><a href="#" class="">Tipos</a></li>
                             <li><a href="#" class="">Formulas</a></li>
-                            <li><a href="#" class="">Stock</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Ventas</a>
