@@ -13,22 +13,10 @@ namespace WebAplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            cboProveedores.DataSource = new ProveedorNegocio().listar();
-            cboProveedores.DataTextField = "Nombre";
-            cboProveedores.DataValueField = "id";
-            cboProveedores.DataBind();
-         //  cboInsumos.DataSource = new InsumoNegocio().listar();
-         //  cboInsumos.DataTextField = "Nombre";
-         //  cboInsumos.DataBind();
-            cboEstado.Items.Add("");
-            cboEstado.Items.Add("Entregado");
-            cboEstado.Items.Add("En espera");
-            cboEstado.Items.Add("Devolucion");
-            cboPago.Items.Add("");
-            cboPago.Items.Add("Efectivo");
-            cboPago.Items.Add("Mercado Pago");
-            cboPago.Items.Add("Tarjeta de credito");
-            cboPago.Items.Add("Transferencia");
+            if(!IsPostBack)
+            {
+                CargarCombos();
+            }
         }
         protected void BtnAgregar_Click(object sender, EventArgs e)
         {
@@ -40,6 +28,45 @@ namespace WebAplication
             compra.fechaCompra = DateTime.Now;
             compraNeg.agregar(compra);
 
+        }
+        protected void BtnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            DetalleCompraNegocio detalleNegocio = new DetalleCompraNegocio();
+            DetalleCompra detalle = new DetalleCompra();
+            detalle.idCompra = Convert.ToInt64(cboCompra.SelectedValue);
+            detalle.idInsumo = Convert.ToInt64(cboInsumos.SelectedValue);
+            detalle.precioUnitario = float.Parse(txbPrecio.Text);
+            detalle.cantidad = Convert.ToInt32(txbCantidad.Text);
+            detalleNegocio.Agregar(detalle);
+
+        }
+        protected void CargarCombos()
+        {
+
+            List<Compra> lista = (new CompraNegocio().listar());
+            dgvCompras.DataSource = lista;
+            dgvCompras.DataBind();
+            cboProveedores.DataSource = new ProveedorNegocio().listar();
+            cboProveedores.DataTextField = "Nombre";
+            cboProveedores.DataValueField = "id";
+            cboProveedores.DataBind();
+            cboEstado.Items.Add(" ");
+            cboEstado.Items.Add("Entregado");
+            cboEstado.Items.Add("En espera");
+            cboEstado.Items.Add("Devolucion");
+            cboPago.Items.Add("");
+            cboPago.Items.Add("Efectivo");
+            cboPago.Items.Add("Mercado Pago");
+            cboPago.Items.Add("Tarjeta de credito");
+            cboPago.Items.Add("Transferencia");
+            cboInsumos.DataSource = new InsumoNegocio().listar();
+            cboInsumos.DataTextField = "Nombre";
+            cboInsumos.DataValueField = "id";
+            cboInsumos.DataBind();
+            cboCompra.DataSource = new CompraNegocio().listar();
+            cboCompra.DataTextField = "id";
+            cboCompra.DataValueField = "id";
+            cboCompra.DataBind();
         }
     }
 }

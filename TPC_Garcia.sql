@@ -72,7 +72,6 @@ idCompra bigint not null foreign key references compras(id),
 idInsumo bigint not null foreign key references insumos(id),
 cantidad int not null,
 precioUnitario float not null,
-precioTotal float not null,
 )
 
 create table empleados

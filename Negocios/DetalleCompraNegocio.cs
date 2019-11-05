@@ -15,7 +15,7 @@ namespace Negocio
             DetalleCompra aux;
             try
             {
-                datos.setearQuery("select id,idCompra,idInsumo,cantidad,precioUnitario,precioTotal from detalleCompra");
+                datos.setearQuery("select * from detalleCompra");
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {
@@ -23,9 +23,9 @@ namespace Negocio
                     aux.id = datos.lector.GetInt64(0);
                     aux.idCompra = datos.lector.GetInt64(1);
                     aux.idInsumo = datos.lector.GetInt64(2);
-                    aux.cantidad = datos.lector.GetDecimal(3);
-                    aux.precioUnitario = datos.lector.GetDecimal(4);
-                    aux.totalProducto = datos.lector.GetDecimal(5);
+                    aux.cantidad = datos.lector.GetInt32(3);
+                    aux.precioUnitario = datos.lector.GetFloat(4);
+                    aux.totalProducto = 0;
                     lista.Add(aux);
                 }
                 return lista;
@@ -47,13 +47,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into detalleCompra values (@id,@idCompra,@idInsumo, @cantidad,@precioUnitario,@precioTotal))");
-                datos.agregarParametro("@id", aux.id);
+                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idInsumo, @cantidad,@precioUnitario)");
                 datos.agregarParametro("@idCompra", aux.idCompra);
                 datos.agregarParametro("@idInsumo", aux.idInsumo);
                 datos.agregarParametro("@cantidad", aux.cantidad);
                 datos.agregarParametro("@precioUnitario", aux.precioUnitario);
-                datos.agregarParametro("@precioTotal", aux.totalProducto);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
