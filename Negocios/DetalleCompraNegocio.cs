@@ -47,11 +47,15 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idInsumo, @cantidad,@precioUnitario)");
+                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idIns, @cant,@precioUnitario)");
                 datos.agregarParametro("@idCompra", aux.idCompra);
-                datos.agregarParametro("@idInsumo", aux.idInsumo);
-                datos.agregarParametro("@cantidad", aux.cantidad);
+                datos.agregarParametro("@idIns", aux.idInsumo);
+                datos.agregarParametro("@cant", aux.cantidad);
                 datos.agregarParametro("@precioUnitario", aux.precioUnitario);
+                datos.ejecutarAccion();
+                datos.setearQuery("update insumos set stock=@cantidad where id=@idInsumo ");
+                datos.agregarParametro("@cantidad", aux.cantidad);
+                datos.agregarParametro("@idInsumo", aux.idInsumo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

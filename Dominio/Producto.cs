@@ -10,14 +10,15 @@ namespace Dominio
     {
         public long id { get; set; }
         public string nombre { get; set; }
+
         public Marca marca;
         public Categoria categoria;
         public Tipo tipo;
-        public int stock { get; set; }
+        public float stock { get; set; }
         public float costo { get; set; }
         public DateTime fechaActualizacion { get; set; }
         public float precioVenta { get; set; }
-        bool estado { get; set; } 
+        public bool estado { get; set; } 
 
     }
 }

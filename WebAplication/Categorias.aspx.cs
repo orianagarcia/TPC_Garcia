@@ -13,9 +13,14 @@ namespace WebAplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           // List<Categoria> lista = (new CategoriaNegocio().Listar());
-           // dgvCategorias.DataSource = lista;
-           // dgvCategorias.DataBind();
+            if(!IsPostBack)
+            {
+                List<Categoria> lista = (new CategoriaNegocio().Listar());
+                dgvCategorias.DataSource = lista;
+                dgvCategorias.DataBind();
+                
+            }
+           
         }
         protected void BtnAgregar_Click(object sender, EventArgs e)
         {

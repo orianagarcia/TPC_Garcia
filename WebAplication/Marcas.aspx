@@ -11,6 +11,6 @@
         <asp:TextBox ID="txbMarca" runat="server" Style="margin-top: 30px; margin-left: 30px;" CausesValidation="False">  </asp:TextBox>
             <asp:Button Text="Agregar" ID= "btnAgregar" runat = server  OnClick="BtnAgregar_Click" Style="margin-top: 30px; margin-left: 30px;"> </asp:Button>
          </div>
-    <asp:GridView ID="dgvMarcas" runat=server Style="margin-top: 30px; margin-left: 30px;">
+    <asp:GridView ID="dgvMarcas" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
     </asp:GridView>
 </asp:Content>

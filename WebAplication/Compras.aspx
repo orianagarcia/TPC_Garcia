@@ -41,9 +41,9 @@
      </div>
    
       <div>  
-          <asp:GridView ID="dgvCompras" runat=server Style="margin-top: 30px; margin-left: 30px;">
+          <asp:GridView ID="dgvCompras" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
           </asp:GridView>
-        <asp:GridView ID="dgvDetalles" runat=server Style="margin-top: 30px; margin-left: 30px;">
+        <asp:GridView ID="dgvDetalles" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
           </asp:GridView>
      </div>
 
