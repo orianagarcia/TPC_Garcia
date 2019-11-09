@@ -26,7 +26,7 @@
      <div class="container" Style="margin-top: 30px; margin-left: 30px;">
 
          <div class="form-row"Style="margin-top: 30px; margin-left: 30px;">
-
+       
              <asp:Label text="Compra" ID="lblCompra" runat="server" Style="margin-top: 30px; margin-left: 30px;"></asp:Label>
            <asp:DropDownList runat="server" ID="cboCompra" Style="margin-top: 30px; margin-left: 30px;"></asp:DropDownList>
             <asp:Label text="Insumo" ID="lblInsumo" runat=server Style="margin-top: 30px; margin-left: 30px;"></asp:Label>

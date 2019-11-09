@@ -41,8 +41,8 @@
 
     </div>
     <%--</div>--%>
-    <div>
-        <asp:GridView ID="dgvProveedores" runat="server">
+    <div class="form-row ">
+        <asp:GridView ID="dgvProveedores" CssClass="table table-striped" runat="server">
         </asp:GridView>
     </div>
     <%--  --%>

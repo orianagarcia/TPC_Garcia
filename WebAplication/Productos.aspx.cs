@@ -40,7 +40,7 @@ namespace WebAplication
             prod.marca.id = Convert.ToInt64(cboMarca.SelectedValue);
             prod.categoria = new Categoria();
             prod.categoria.id = Convert.ToInt64(cboCategoria.SelectedValue);
-            prod.stock= 0;
+            prod.stock = 0;
             prod.costo = 0;
             prod.precioVenta = float.Parse(txbPrecio.Text);
             prod.fechaActualizacion = DateTime.Now;

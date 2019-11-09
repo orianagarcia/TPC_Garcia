@@ -73,7 +73,7 @@
     <Content Include="Insumos.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Proveedores.aspx" />
-    <Content Include="prueba.aspx" />
+    <Content Include="Formulas.aspx" />
     <Content Include="Marcas.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -128,12 +128,12 @@
     <Compile Include="Proveedores.aspx.designer.cs">
       <DependentUpon>Proveedores.aspx</DependentUpon>
     </Compile>
-    <Compile Include="prueba.aspx.cs">
-      <DependentUpon>prueba.aspx</DependentUpon>
+    <Compile Include="Formulas.aspx.cs">
+      <DependentUpon>Formulas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="prueba.aspx.designer.cs">
-      <DependentUpon>prueba.aspx</DependentUpon>
+    <Compile Include="Formulas.aspx.designer.cs">
+      <DependentUpon>Formulas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Marcas.aspx.cs">
       <DependentUpon>Marcas.aspx</DependentUpon>

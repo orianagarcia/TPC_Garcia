@@ -97,12 +97,12 @@
                             <li><a href="Productos.aspx" class="">Productos</a></li>
                             <li><a href="Marcas.aspx" class="">Marcas</a></li>
                             <li><a href="Categorias.aspx" class="">Categorias</a></li>
-                            <li><a href="#" class="">Tipos</a></li>
-                            <li><a href="#" class="">Formulas</a></li>
+                            <li><a href="Formulas.aspx" class="">Formulas</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Ventas</a>
                         <ul class="submenu">
+                            <li><a href="Pedidos.aspx" class="">Pedidos</a></li>
                             <li><a href="#" class="">Ventas</a></li>
                             <li><a href="#" class="">Clientes</a></li>
                         </ul>

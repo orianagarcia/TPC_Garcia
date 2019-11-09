@@ -28,9 +28,9 @@ namespace Negocio
                     aux.marca.nombre = datos.lector.GetString(2);
                     aux.categoria = new Categoria();
                     aux.categoria.nombre = datos.lector.GetString(3);
-                    aux.stock = datos.lector.GetFloat(4);
-                    aux.costo = datos.lector.GetFloat(5);
-                    aux.precioVenta = datos.lector.GetFloat(6);
+                    aux.stock = 0;
+                    aux.costo = 0;
+                    aux.precioVenta = 0;
                     aux.fechaActualizacion = datos.lector.GetDateTime(7);
                     lista.Add(aux);
                 }
@@ -51,8 +51,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into productos values (@nombre,@marca, @categoria, @stock, @costo, @precioVenta,@fecha, @estado)");
-                datos.agregarParametro("@nombre", aux.nombre);
+                datos.setearQuery("Insert into productos values (@nombreProd,@marca, @categoria, @stock, @costo, @precioVenta,@fecha, @estado)");
+                datos.agregarParametro("@nombreProd", aux.nombre);
                 datos.agregarParametro("@marca", aux.marca.id);
                 datos.agregarParametro("@categoria", aux.categoria.id);
                 datos.agregarParametro("@stock", aux.stock);

@@ -10,6 +10,7 @@ namespace Dominio
     {
         public long id { get; set; }
         public long idProducto { get; set; }
+
         public long idInsumo { get; set; }
         public float cantidad { get; set; }
     }

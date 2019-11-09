@@ -14,8 +14,8 @@
          </div>
     
     <div>
-        <asp:GridView ID="dgvCategorias" runat="server" AutoGenerateColumns="True">
-        </asp:GridView>
-
+      <div class="form-row">
+        <asp:GridView ID="dgvCategorias" runat=server  CssClass="table table-striped"> </asp:GridView>
+    </div>
     </div>
 </asp:Content>

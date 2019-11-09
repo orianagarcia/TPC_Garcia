@@ -7,17 +7,11 @@ create table marcas
   nombre varchar (100) not null,
 )
 
-
 create table categorias
 ( id bigint not null primary key identity(1,1),
   nombre varchar (100) not null,
 )
 
-create table tipos 
-( 
-id bigint not null primary key identity(1,1),
-nombre varchar(100) not null,
-) 
 
 create table insumos
 (
@@ -41,10 +35,9 @@ id bigint not null primary key identity (1,1),
 nombre varchar (100) not null,
 idMarca bigint not null foreign key references marcas(id),
 idCategoria bigint not null foreign key references categorias(id),
-idTipo bigint not null foreign key references tipos (id),
-stock int null,
-costo int null, 
-precioVenta int null, 
+stock float not null,
+costo float not null, 
+precioVenta float not null, 
 ultimaActualizacion datetime not null,
 estado bit not null,
 )
