@@ -28,9 +28,9 @@ namespace Negocio
                     aux.marca.nombre = datos.lector.GetString(2);
                     aux.categoria = new Categoria();
                     aux.categoria.nombre = datos.lector.GetString(3);
-                    aux.stock = 0;
-                    aux.costo = 0;
-                    aux.precioVenta = 0;
+                    aux.stock = datos.lector.GetDouble(4);
+                    aux.costo = datos.lector.GetDouble(5);
+                    aux.precioVenta = datos.lector.GetDouble(6);
                     aux.fechaActualizacion = datos.lector.GetDateTime(7);
                     lista.Add(aux);
                 }

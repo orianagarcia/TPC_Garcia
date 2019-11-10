@@ -14,6 +14,7 @@ namespace WebAplication
         protected void Page_Load(object sender, EventArgs e)
         {
             List<Insumo> lista = (new InsumoNegocio().listar());
+            dgvInsumos.DataSourceID = null;
             dgvInsumos.DataSource = lista;
             dgvInsumos.DataBind();
             cboMedidas.SelectedValue = null;
@@ -33,6 +34,24 @@ namespace WebAplication
             insumo.stock = 0;
             insumo.medida = cboMedidas.SelectedItem.ToString();
             insumoNeg.agregar(insumo);
+        }
+
+        protected void dgvInsumos_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            InsumoNegocio insumoNegocio = new InsumoNegocio();
+            Insumo insumo = new Insumo();
+            dgvInsumos.EditIndex = e.NewEditIndex;
+            dgvInsumos.DataBind();
+        }
+        protected void dgvInsumos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            InsumoNegocio insumoNegocio = new InsumoNegocio();
+            Insumo insumo = new Insumo();
+            dgvInsumos.DataBind();
+        }
+        protected void dgvInsumos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            Response.Redirect("insumos.aspx");
         }
     }
 }

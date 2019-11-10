@@ -14,10 +14,10 @@ namespace Dominio
         public Marca marca;
         public Categoria categoria;
         public Tipo tipo;
-        public float stock { get; set; }
-        public float costo { get; set; }
+        public Double stock { get; set; }
+        public Double costo { get; set; }
         public DateTime fechaActualizacion { get; set; }
-        public float precioVenta { get; set; }
+        public Double precioVenta { get; set; }
         public bool estado { get; set; } 
 
     }
