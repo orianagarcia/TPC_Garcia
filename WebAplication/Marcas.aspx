@@ -2,15 +2,49 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>
-        Marcas
-    </h2>
-    <div class="form-row"Style="margin-top: 30px; margin-left: 30px;">
+  <div>
+        <h2 style= "color:Green ">Marcas</h2>
+    </div>
+    <%--</div>--%>
+    <div class="form-row ">
+        <asp:GridView ID="dgvMarcas" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+            OnRowCommand="dgvMarcas_RowCommand" OnRowEditing="dgvMarcas_RowEditing"
+            OnRowCancelingEdit="dgvMarcas_RowCancelingEdit" OnRowUpdating="dgvMarcas_RowUpdating"
+            OnRowDeleting="dgvMarcas_RowDeleting">
+            <columns>
+                 <%--<NOMBRE>--%>
+                    <asp:TemplateField HeaderText="Nombre">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("Nombre")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:TextBox runat="server" ID="txbNombre" Text='<%# Eval("Nombre")%>' />  
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:TextBox runat="server" ID="txbNombreFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+                   <%--<ACCIONES >--%>
+                    <asp:TemplateField >
+                    <ItemTemplate> 
+                        <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
+                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
+                        </ItemTemplate>
+                    <EditItemTemplate> 
+                       <asp:ImageButton ImageUrl="~/Images/guardar.png" runat="server" CommandName="Update" Tooltip="Update" width="20px" Height="20px"/>
+                       <asp:ImageButton ImageUrl="~/Images/cancelar.png" runat="server" CommandName="Cancel" Tooltip="Cancel" width="20px" Height="20px"/>
+                       
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:ImageButton ImageUrl="~/Images/agregar.png" runat="server" CommandName="AddNew" Tooltip="AddNew" width="20px" Height="20px"/>
+                    </FooterTemplate>
+                    </asp:TemplateField>
+            </columns>
+        </asp:GridView>
 
-              <asp:Label Text=" Nombre" ID="lblMarca" runat="server" Style="margin-top: 30px; margin-left: 30px;"></asp:Label>
-        <asp:TextBox ID="txbMarca" runat="server" Style="margin-top: 30px; margin-left: 30px;" CausesValidation="False">  </asp:TextBox>
-            <asp:Button Text="Agregar" ID= "btnAgregar" runat = server  OnClick="BtnAgregar_Click" Style="margin-top: 30px; margin-left: 30px;"> </asp:Button>
-         </div>
-    <asp:GridView ID="dgvMarcas" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
-    </asp:GridView>
+        <br />
+        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
+        <br />
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+    </div>
 </asp:Content>

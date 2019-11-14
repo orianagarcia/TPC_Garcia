@@ -16,7 +16,7 @@ namespace Negocio
             List<Proveedor> lista = new List<Proveedor>();
             try
             {
-                datos.setearQuery("select id, nombre,telefono,direccion from proveedores");
+                datos.setearQuery("select id, nombre,telefono,direccion from proveedores where estado=1");
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {
@@ -45,7 +45,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into proveedores values (@nombre,@telefono, @direccion)");
+                datos.setearQuery("Insert into proveedores values (@nombre,@telefono, @direccion,1)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@telefono", aux.telefono);
                 datos.agregarParametro("@direccion",aux.direccion);
@@ -54,6 +54,49 @@ namespace Negocio
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void Modificar(Proveedor aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update proveedores set nombre = @nombre, direccion=@direccion, telefono=@telefono where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@nombre", aux.nombre);
+                datos.agregarParametro("@direccion", aux.direccion);
+                datos.agregarParametro("@telefono", aux.telefono);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ModificarEstado(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update proveedores set estado = 0 where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

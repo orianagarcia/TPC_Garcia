@@ -15,7 +15,7 @@ namespace Negocio
             List<Categoria> lista = new List<Categoria>();
             try
             {
-                datos.setearQuery("Select id,nombre from categorias ");
+                datos.setearQuery("Select id,nombre from categorias where estado=1 ");
                 datos.ejecutarLector();
                 while (datos.lector.Read())
                 {
@@ -43,13 +43,54 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into categorias values (@nombre)");
+                datos.setearQuery("Insert into categorias values (@nombre,1)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void Modificar(Categoria aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update Categorias set nombre = @nombre where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@nombre", aux.nombre);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ModificarEstado(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update Categorias set estado = 0 where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

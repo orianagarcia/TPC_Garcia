@@ -15,7 +15,7 @@ namespace Negocio
             List<Marca> lista = new List<Marca>();
             try
             {
-                datos.setearQuery("Select id,nombre from marcas ");
+                datos.setearQuery("Select id,nombre from marcas where estado=1");
                 datos.ejecutarLector();
                 while (datos.lector.Read())
                 {
@@ -43,13 +43,55 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into marcas values (@nombre)");
+                datos.setearQuery("Insert into marcas values (@nombre,1)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void Modificar(Marca aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update Marcas set nombre = @nombre where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@nombre", aux.nombre);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ModificarEstado(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update Marcas set estado = 0 where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

@@ -13,17 +13,92 @@ namespace WebAplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                Cargardgv();
+            }
+        }
+        void Cargardgv()
+        {
             List<Marca> lista = (new MarcaNegocio().Listar());
             dgvMarcas.DataSource = lista;
             dgvMarcas.DataBind();
         }
-        protected void BtnAgregar_Click(object sender, EventArgs e)
+        protected void dgvMarcas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            MarcaNegocio marcaNeg = new MarcaNegocio();
-            Marca marca = new Marca();
-            marca.nombre = txbMarca.Text;
-            marcaNeg.Agregar(marca);
+            try
+            {
+                if (e.CommandName.Equals("AddNew"))
+                {
+                    MarcaNegocio MarcaNeg = new MarcaNegocio();
+                    Marca marca = new Marca();
+                    marca.nombre = (dgvMarcas.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
+                    MarcaNeg.Agregar(marca);
+                    lblCorrecto.Text = "Agregado correctamente.";
+                    lblIncorrecto.Text = "";
+                    Cargardgv();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
 
+            }
+
+        }
+
+        protected void dgvMarcas_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            dgvMarcas.EditIndex = e.NewEditIndex;
+            Cargardgv();
+
+        }
+
+        protected void dgvMarcas_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            dgvMarcas.EditIndex = -1;
+            Cargardgv();
+        }
+
+        protected void dgvMarcas_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                MarcaNegocio MarcaNeg = new MarcaNegocio();
+                Marca marca = new Marca();
+                marca.id = Convert.ToInt64(dgvMarcas.DataKeys[e.RowIndex].Value.ToString());
+                marca.nombre = (dgvMarcas.Rows[e.RowIndex].FindControl("txbNombre") as TextBox).Text;
+                MarcaNeg.Modificar(marca);
+                lblCorrecto.Text = "Modificado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("marcas.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+        }
+
+        protected void dgvMarcas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                MarcaNegocio MarcaNeg = new MarcaNegocio();
+                long id = Convert.ToInt64(dgvMarcas.DataKeys[e.RowIndex].Value.ToString());
+                MarcaNeg.ModificarEstado(id);
+                lblCorrecto.Text = "Elminado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("marcas.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
         }
     }
 }

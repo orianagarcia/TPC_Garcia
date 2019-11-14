@@ -13,7 +13,6 @@ namespace Dominio
 
         public Marca marca;
         public Categoria categoria;
-        public Tipo tipo;
         public Double stock { get; set; }
         public Double costo { get; set; }
         public DateTime fechaActualizacion { get; set; }

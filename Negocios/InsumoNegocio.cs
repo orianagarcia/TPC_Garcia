@@ -15,7 +15,7 @@ namespace Negocio
             List<Insumo> lista = new List <Insumo> ();
             try
             {
-                datos.setearQuery("SELECT id,nombre,stock,medida from insumos");
+                datos.setearQuery("SELECT id,nombre,stock,medida from insumos where estado = 1");
                 datos.ejecutarLector();
 
                 while (datos.lector.Read())
@@ -23,7 +23,7 @@ namespace Negocio
                     aux = new Insumo();
                     aux.id = datos.lector.GetInt64(0);
                     aux.nombre = datos.lector.GetString(1);
-                    aux.stock = datos.lector.GetInt32(2);
+                    aux.stock = datos.lector.GetDouble(2);
                     aux.medida = datos.lector.GetString(3);
                     lista.Add(aux);
                 }
@@ -45,7 +45,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into insumos values (@nombre,@stock, @Medida)");
+                datos.setearQuery("Insert into insumos values (@nombre,@stock, @Medida,1)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@stock", aux.stock);
                 datos.agregarParametro("Medida", aux.medida);
@@ -62,13 +62,15 @@ namespace Negocio
             }
         }
 
-        public void Eiminar(string cod)
+        public void ModificarEstado(long cod)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearQuery("update insumos set estado = 0 where codigo = '" + cod + "'");
+                datos.setearQuery("update insumos set estado = 0 where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@ID", cod);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -87,9 +89,9 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update ARTICULOS set nombre = @nombre where ID = @Id;update ARTICULOS set stock = @stock where ID = @Id;update ARTICULOS set Medida = @medida where ID = @Id");
+                datos.setearQuery("update insumos set nombre = @nombre, stock= @stock, Medida = @medida where ID = @Id");
                 datos.Clear();
-                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@Id",aux.id);
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@stock", aux.stock);
                 datos.agregarParametro("@medida", aux.medida);
