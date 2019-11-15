@@ -1,18 +1,31 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Productos.aspx.cs" Inherits="WebAplication.Productos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="WebAplication.Clientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     
     <div>
-        <h2 style= "color:Green ">Productos</h2>
+        <h2 style= "color:Green ">Clientes</h2>
     </div>
     <%--</div>--%>
     <div class="form-row ">
-        <asp:GridView ID="dgvProductos" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
-            OnRowCommand="dgvProductos_RowCommand" OnRowEditing="dgvProductos_RowEditing"
-            OnRowCancelingEdit="dgvProductos_RowCancelingEdit" OnRowUpdating="dgvProductos_RowUpdating"
-            OnRowDeleting="dgvProductos_RowDeleting">
+        <asp:GridView ID="dgvClientes" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+            OnRowCommand="dgvClientes_RowCommand" OnRowEditing="dgvClientes_RowEditing"
+            OnRowCancelingEdit="dgvClientes_RowCancelingEdit" OnRowUpdating="dgvClientes_RowUpdating"
+            OnRowDeleting="dgvClientes_RowDeleting">
             <columns>
+                  <%--<DNI>--%>
+                    <asp:TemplateField HeaderText="DNI">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("dni")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:TextBox runat="server" ID="txbdni" Text='<%# Eval("dni")%>' />  
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:TextBox runat="server" ID="txbdniFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
                  <%--<NOMBRE>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 
@@ -25,64 +38,52 @@
                          <asp:TextBox runat="server" ID="txbNombreFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
-               <%--<MARCA>--%>
-                    <asp:TemplateField HeaderText="Marca">
+                   <%--<APELLIDO>--%>
+                    <asp:TemplateField HeaderText="Apellido">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idMarca")%>' runat="server" />
+                        <asp:label text='<%# Eval("Apellido")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbMarca" Text='<%# Eval("idMarca")%>' />  
+                        <asp:TextBox runat="server" ID="txbApellido" Text='<%# Eval("Apellido")%>' />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbMarcaFooter" />
+                         <asp:TextBox runat="server" ID="txbApellidoFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
-               <%--<CATEGORIA>--%>
-                    <asp:TemplateField HeaderText="Categoria">
+               <%--<DIRECCION>--%>
+                    <asp:TemplateField HeaderText="Direccion">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idCategoria")%>' runat="server" />
+                        <asp:label text='<%# Eval("Direccion")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbCategoria" Text='<%# Eval("idCategoria")%>' />  
+                        <asp:TextBox runat="server" ID="txbDireccion" Text='<%# Eval("Direccion")%>' />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbCategoriaFooter" />
+                         <asp:TextBox runat="server" ID="txbDireccionFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
-                   <%--<STOCK>--%>
-                    <asp:TemplateField HeaderText="Stock">
+               <%--<LOCALIDAD>--%>
+                    <asp:TemplateField HeaderText="Localidad">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("Stock")%>' runat="server" />
+                        <asp:label text='<%# Eval("Localidad")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbStock" Text='<%# Eval("Stock")%>' />  
+                        <asp:TextBox runat="server" ID="txbLocalidad" Text='<%# Eval("Localidad")%>' />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbStockFooter" />
+                         <asp:TextBox runat="server" ID="txbLocalidadFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
-                    <%--<COSTO>--%>
-                <asp:TemplateField HeaderText="Costo">
+               <%--<TELEFONO>--%>
+                    <asp:TemplateField HeaderText="Telefono">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("Costo")%>' runat="server" />
+                        <asp:label text='<%# Eval("Telefono")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbCosto" Text='<%# Eval("Costo")%>' />  
+                        <asp:TextBox runat="server" ID="txbTelefono" Text='<%# Eval("Telefono")%>' />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbCostoFooter" />
-                    </FooterTemplate>
-                    </asp:TemplateField>
-                    <%--<PRECIO>--%>
-                    <asp:TemplateField HeaderText="Precio">
-                    <ItemTemplate> 
-                        <asp:label text='<%# Eval("PrecioVenta")%>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbPrecio" Text='<%# Eval("PrecioVenta")%>' />  
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbPrecioFooter" />
+                         <asp:TextBox runat="server" ID="txbTelefonoFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
@@ -108,4 +109,6 @@
         <br />
         <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
     </div>
+
+
 </asp:Content>

@@ -24,8 +24,7 @@ namespace Negocio
                     aux.idCompra = datos.lector.GetInt64(1);
                     aux.idInsumo = datos.lector.GetInt64(2);
                     aux.cantidad = datos.lector.GetInt32(3);
-                    aux.precioUnitario = datos.lector.GetFloat(4);
-                    aux.totalProducto = 0;
+                    aux.precioUnitario = datos.lector.GetDouble(4);
                     lista.Add(aux);
                 }
                 return lista;
@@ -47,7 +46,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idIns, @cant,@precioUnitario)");
+                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idIns, @cant,@precioUnitario,1)");
                 datos.agregarParametro("@idCompra", aux.idCompra);
                 datos.agregarParametro("@idIns", aux.idInsumo);
                 datos.agregarParametro("@cant", aux.cantidad);

@@ -22,8 +22,8 @@ namespace WebAplication
         {
             CompraNegocio compraNeg = new CompraNegocio();
             Compra compra = new Compra();
-            compra.Proveedor = cboProveedores.SelectedValue;
-            compra.estado = cboEstado.SelectedValue;
+            compra.Proveedor =cboProveedores.SelectedValue;
+            compra.estadoCompra = cboEstado.SelectedValue;
             compra.formaPago = cboPago.SelectedValue;
             compra.fechaCompra = DateTime.Now;
             compraNeg.agregar(compra);
@@ -67,6 +67,90 @@ namespace WebAplication
             cboCompra.DataTextField = "id";
             cboCompra.DataValueField = "id";
             cboCompra.DataBind();
+            List<DetalleCompra> list = new List<DetalleCompra>();
+            dgvDetalles.DataSource = new DetalleCompraNegocio().Listar();
+            dgvDetalles.DataBind(); 
+        }
+      
+        protected void dgvDetalles_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName.Equals("AddNew"))
+                {
+                    DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
+                    DetalleCompra detalle = new DetalleCompra();
+                    detalle.idInsumo = Convert.ToInt64((dgvDetalles.FooterRow.FindControl("txbNombreFooter") as TextBox).Text);
+                    detalle.cantidad = Convert.ToInt32((dgvDetalles.FooterRow.FindControl("txbStockFooter") as TextBox).Text);
+                    detalle.precioUnitario = Convert.ToDouble((dgvDetalles.FooterRow.FindControl("txbMedidaFooter") as TextBox).Text);
+                    DetallesNeg.Agregar(detalle);
+                    lblCorrecto.Text = "Agregado correctamente.";
+                    lblIncorrecto.Text = "";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+
+        }
+
+        protected void dgvDetalles_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            dgvDetalles.EditIndex = e.NewEditIndex;
+            CargarCombos();
+
+        }
+
+        protected void dgvDetalles_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            dgvDetalles.EditIndex = -1;
+            CargarCombos();
+        }
+
+        protected void dgvDetalles_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
+                DetalleCompra detalle = new DetalleCompra();
+                detalle.id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                detalle.idInsumo = Convert.ToInt64((dgvDetalles.Rows[e.RowIndex].FindControl("txbInsumo") as TextBox).Text);
+                detalle.cantidad = Convert.ToInt32((dgvDetalles.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
+                detalle.precioUnitario = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("txbPrecio") as TextBox).Text);
+                //DetallesNeg.Modificar(detalle);
+                lblCorrecto.Text = "Modificado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("compras.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+        }
+
+        protected void dgvDetalles_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
+                long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                //DetallesNeg.ModificarEstado(id);
+                lblCorrecto.Text = "Elminado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("compras.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
         }
     }
 }

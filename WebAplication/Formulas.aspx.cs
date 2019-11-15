@@ -13,29 +13,97 @@ namespace WebAplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            cboInsumos.DataSource = new InsumoNegocio().listar();
-            cboInsumos.SelectedIndex = -1; 
-            cboInsumos.DataTextField = "Nombre";
-            cboInsumos.DataValueField = "id";
-            cboInsumos.DataBind();
-            cboProductos.SelectedIndex = -1;
-            cboProductos.DataSource = new ProductoNegocio().Listar();
-            cboProductos.DataTextField = "Nombre";
-            cboProductos.DataValueField = "id";
-            cboProductos.DataBind();
-            List<Formula> lista = new FormulaNegocio().Listar();
+            if (!IsPostBack)
+            {
+                cargardgv();
+            }
+        }
+
+        void cargardgv()
+        {
+            List<Formula> lista = (new FormulaNegocio().Listar());
             dgvFormulas.DataSource = lista;
             dgvFormulas.DataBind();
         }
-        protected void BtnAgregar_Click(object sender, EventArgs e)
+        protected void dgvFormulas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            FormulaNegocio FormulaNegocio = new FormulaNegocio();
-            Formula formula = new Formula();
-            formula.idProducto = Convert.ToInt64(cboProductos.SelectedValue);
-            formula.idInsumo = Convert.ToInt64(cboInsumos.SelectedValue);
-            formula.cantidad = Convert.ToInt32(txbCantidad.Text);
-            FormulaNegocio.Agregar(formula);
+            try
+            {
+                if (e.CommandName.Equals("AddNew"))
+                {
+                    FormulaNegocio FormulaNeg = new FormulaNegocio();
+                    Formula formu= new Formula();
+                    formu.idInsumo = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("txbidInsumoFooter") as TextBox).Text);
+                    formu.idProducto = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("txbidProductoFooter") as TextBox).Text);
+                    formu.cantidad = Convert.ToInt32((dgvFormulas.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
+                    FormulaNeg.Agregar(formu);
+                    lblCorrecto.Text = "Agregado correctamente.";
+                    lblIncorrecto.Text = "";
+                    cargardgv();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
 
+            }
+
+        }
+
+        protected void dgvFormulas_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            dgvFormulas.EditIndex = e.NewEditIndex;
+            cargardgv();
+
+        }
+
+        protected void dgvFormulas_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            dgvFormulas.EditIndex = -1;
+            cargardgv();
+        }
+
+        protected void dgvFormulas_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                FormulaNegocio FormulaNeg = new FormulaNegocio();
+                Formula formu = new Formula();
+                formu.id = Convert.ToInt64(dgvFormulas.DataKeys[e.RowIndex].Value.ToString());
+                formu.idInsumo = Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("txbidInsumo") as TextBox).Text);
+                formu.idProducto= Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("txidProducto") as TextBox).Text);
+                formu.cantidad = Convert.ToInt32((dgvFormulas.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
+                FormulaNeg.Modificar(formu);
+                lblCorrecto.Text = "Modificado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("formulas.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+        }
+
+        protected void dgvFormulas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                FormulaNegocio FormulaNeg = new FormulaNegocio();
+                long id = Convert.ToInt64(dgvFormulas.DataKeys[e.RowIndex].Value.ToString());
+                FormulaNeg.ModificarEstado(id);
+                lblCorrecto.Text = "Elminado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("formulas.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
         }
     }
 }

@@ -10,16 +10,16 @@
 namespace WebAplication {
     
     
-    public partial class prueba {
+    public partial class Clientes {
         
         /// <summary>
-        /// Control dgvFormulas.
+        /// Control dgvClientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvFormulas;
+        protected global::System.Web.UI.WebControls.GridView dgvClientes;
         
         /// <summary>
         /// Control lblCorrecto.

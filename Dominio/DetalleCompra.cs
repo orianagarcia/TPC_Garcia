@@ -12,7 +12,8 @@ namespace Dominio
         public long idCompra { get; set; }
         public long idInsumo { get; set; }
         public int cantidad { get; set; }
-        public float precioUnitario { get; set; }
-        public float totalProducto { get; set; } 
+        public double precioUnitario { get; set; }
+        public double totalProducto { get; set; } 
+        public bool estado { get; set; }
     }
 }

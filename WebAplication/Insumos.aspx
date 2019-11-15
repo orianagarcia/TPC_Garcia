@@ -49,7 +49,7 @@
                         </asp:DropDownList>  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbMedidaFooter" />
+                         <asp:DropDownList runat="server" ID="ddlMedidaFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
@@ -69,7 +69,6 @@
                     </asp:TemplateField>
             </columns>
         </asp:GridView>
-
         <br />
         <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
         <br />

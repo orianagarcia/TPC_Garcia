@@ -10,9 +10,10 @@ namespace Dominio
     {
         public long id { get; set; }
         public string Proveedor { get; set; }
-        public decimal total { get; set; }
+        public double total { get; set; }
         public DateTime fechaCompra { get; set; }
-        public string estado  { get; set; }
+        public string estadoCompra  { get; set; }
         public string formaPago { get; set; }
+        public string estado { get; set; }
     }
 }

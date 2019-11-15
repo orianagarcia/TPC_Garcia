@@ -46,7 +46,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into formulas values (@idProducto,@idInsumo, @cantidad)");
+                datos.setearQuery("Insert into formulas values (@idProducto,@idInsumo, @cantidad,1)");
                 datos.agregarParametro("@idProducto", aux.idProducto);
                 datos.agregarParametro("@idInsumo", aux.idInsumo);
                 datos.agregarParametro("@cantidad", aux.cantidad);
@@ -62,7 +62,49 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void Modificar(Formula aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
-       
+            try
+            {
+                datos.setearQuery("update Formula set idInsumo = @idInsumo, idProducto=@idProducto, cantidad=@cantidad where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", aux.id);
+                datos.agregarParametro("@idInsumo", aux.idInsumo);
+                datos.agregarParametro("@idProducto", aux.idProducto);
+                datos.agregarParametro("@cantidad", aux.cantidad);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ModificarEstado(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update formulas set estado = 0 where ID = @Id");
+                datos.Clear();
+                datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

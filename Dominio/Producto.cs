@@ -11,8 +11,8 @@ namespace Dominio
         public long id { get; set; }
         public string nombre { get; set; }
 
-        public Marca marca;
-        public Categoria categoria;
+        public long idMarca { get; set; }
+        public long idCategoria { get; set; }
         public Double stock { get; set; }
         public Double costo { get; set; }
         public DateTime fechaActualizacion { get; set; }

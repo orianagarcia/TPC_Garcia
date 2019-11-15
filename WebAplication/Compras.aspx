@@ -43,10 +43,78 @@
       <div>  
           <asp:GridView ID="dgvCompras" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
           </asp:GridView>
-        <asp:GridView ID="dgvDetalles" runat=server  CssClass="table table-striped" Style="margin-top: 30px; margin-left: 30px;">
-          </asp:GridView>
+       
      </div>
+ <div>
+        <h2 style= "color:Green ">Detalle</h2>
+    </div>
+    <%--</div>--%>
+    <div class="form-row ">
+        <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+                       OnRowCommand="dgvDetalles_RowCommand" OnRowEditing="dgvDetalles_RowEditing"
+            OnRowCancelingEdit="dgvDetalles_RowCancelingEdit" OnRowUpdating="dgvDetalles_RowUpdating"
+            OnRowDeleting="dgvDetalles_RowDeleting" >
+            <columns>
+                 <%--<INSUMO>--%>
+                    <asp:TemplateField HeaderText="Nombre">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("IdInsumo")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:TextBox runat="server" ID="txbNombre" Text='<%# Eval("IdInsumo")%>' />  
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:TextBox runat="server" ID="txbNombreFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+               <%--<CANTIDAD>--%>
+                    <asp:TemplateField HeaderText="Cantidad">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("Cantidad")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:TextBox runat="server" ID="txbCantidad" Text='<%# Eval("Cantidad")%>' />  
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:TextBox runat="server" ID="txbCantidadFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+               <%--<PRECIO>--%>
+                    <asp:TemplateField HeaderText="Precio">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("PrecioUnitario")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+              <asp:TextBox runat="server" ID="txbPrecio" Text='<%# Eval("PrecioUnitario")%>' />   
+                       
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:TextBox runat="server" ID="txbPrecioFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+                   <%--<ACCIONES >--%>
+                    <asp:TemplateField >
+                    <ItemTemplate> 
+                        <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
+                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
+                        </ItemTemplate>
+                    <EditItemTemplate> 
+                       <asp:ImageButton ImageUrl="~/Images/guardar.png" runat="server" CommandName="Update" Tooltip="Update" width="20px" Height="20px"/>
+                       <asp:ImageButton ImageUrl="~/Images/cancelar.png" runat="server" CommandName="Cancel" Tooltip="Cancel" width="20px" Height="20px"/>
+                       
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:ImageButton ImageUrl="~/Images/agregar.png" runat="server" CommandName="AddNew" Tooltip="AddNew" width="20px" Height="20px"/>
+                    </FooterTemplate>
+                    </asp:TemplateField>
+            </columns>
+        </asp:GridView>
 
+        <br />
+        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
+        <br />
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+    </div>
 
 
 

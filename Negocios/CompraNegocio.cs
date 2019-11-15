@@ -15,7 +15,7 @@ namespace Negocio
             List<Compra> lista = new List<Compra>();
             try
             {
-                datos.setearQuery("select id,proveedor,fecha,total,formaPago,estado from compras");
+                datos.setearQuery("select id,proveedor,fecha,total,formaPago,estadoCompra from compras where estado=1");
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {
@@ -23,9 +23,9 @@ namespace Negocio
                     compra.id = datos.lector.GetInt64(0);
                     compra.Proveedor = datos.lector.GetString(1);
                     compra.fechaCompra = datos.lector.GetDateTime(2);
-                    compra.total = datos.lector.GetDecimal(3);
+                    compra.total = datos.lector.GetDouble(3);
                     compra.formaPago = datos.lector.GetString(4);
-                    compra.estado = datos.lector.GetString(5);
+                    compra.estadoCompra = datos.lector.GetString(5);
                     lista.Add(compra);
                 }
                 return lista;
@@ -46,12 +46,12 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into compras values (@Proveedor,@fecha,@total, @formaPago, @estado) ");
+                datos.setearQuery("Insert into compras values (@Proveedor,@fecha, @formaPago, @estado,@total,1) ");
                 datos.agregarParametro("@Proveedor", aux.Proveedor);
                 datos.agregarParametro("@fecha", DateTime.Now);
                 datos.agregarParametro("@total", 0);
                 datos.agregarParametro("@formaPago", aux.formaPago);
-                datos.agregarParametro("@estado", aux.estado);
+                datos.agregarParametro("@estado", aux.estadoCompra);
                 datos.ejecutarAccion();
 
             }

@@ -121,9 +121,9 @@ namespace WebAplication
                     InsumoNegocio insumoNeg = new InsumoNegocio();
                     List <Insumo> lista = new List<Insumo>();
                     lista = insumoNeg.listar();
-                    DropDownList1.DataBind();
-                    DropDownList1.DataSource = lista;
                    // DropDownList1 = (e.Row.FindControl("DropDownList1") as DropDownList);
+                    DropDownList1.DataSource = lista;
+                    DropDownList1.DataBind();
                     DropDownList1.DataValueField = "Id";
                     DropDownList1.DataTextField = "Nombre";
                     DropDownList1.SelectedIndex = -1;

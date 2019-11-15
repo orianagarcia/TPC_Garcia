@@ -15,37 +15,101 @@ namespace WebAplication
         {
             if(!IsPostBack)
             {
-                cboMarca.SelectedIndex = -1;
-                cboMarca.DataSource = new MarcaNegocio().Listar();
-                cboMarca.DataTextField = "Nombre";
-                cboMarca.DataValueField = "id";
-                cboMarca.DataBind();
-                cboCategoria.DataSource = new CategoriaNegocio().Listar();
-                cboCategoria.DataTextField = "Nombre";
-                cboCategoria.DataValueField = "id";
-                cboCategoria.DataBind();
-                
-                List<Producto> lista = (new ProductoNegocio().Listar());
-                dgvProductos.DataSource = lista;
-                dgvProductos.DataBind();
+                Cargardgv();
             }
         }
-        protected void BtnAgregar_Click(object sender, EventArgs e)
+
+        void Cargardgv()
         {
-            ProductoNegocio ProductoNeg = new ProductoNegocio();
-            Marca marca = new Marca();
-            Producto prod = new Producto();
-            prod.nombre = txbNombre.Text;
-            prod.marca = new Marca();
-            prod.marca.id = Convert.ToInt64(cboMarca.SelectedValue);
-            prod.categoria = new Categoria();
-            prod.categoria.id = Convert.ToInt64(cboCategoria.SelectedValue);
-            prod.stock = 0;
-            prod.costo = 0;
-            prod.precioVenta = float.Parse(txbPrecio.Text);
-            prod.fechaActualizacion = DateTime.Now;
-            prod.estado = true; 
-            ProductoNeg.Agregar(prod);
+            List<Producto> lista = (new ProductoNegocio().Listar());
+            dgvProductos.DataSource = lista;
+            dgvProductos.DataBind();
+        }
+        protected void dgvProductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName.Equals("AddNew"))
+                {
+                    ProductoNegocio ProductoNeg = new ProductoNegocio();
+                    Producto prod = new Producto();
+                    prod.nombre = (dgvProductos.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
+                    prod.idMarca = Convert.ToInt64((dgvProductos.FooterRow.FindControl("txbMarcaFooter") as TextBox).Text);
+                    prod.idCategoria = Convert.ToInt64((dgvProductos.FooterRow.FindControl("txbCategoriaFooter") as TextBox).Text);
+                    prod.stock = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbStockFooter") as TextBox).Text);
+                    prod.costo = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbCostoFooter") as TextBox).Text);
+                    prod.precioVenta = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbPrecioFooter") as TextBox).Text);
+                    ProductoNeg.Agregar(prod);
+                    lblCorrecto.Text = "Agregado correctamente.";
+                    lblIncorrecto.Text = "";
+                    Cargardgv();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+
+        }
+
+        protected void dgvProductos_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            dgvProductos.EditIndex = e.NewEditIndex;
+            Cargardgv();
+
+        }
+
+        protected void dgvProductos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            dgvProductos.EditIndex = -1;
+            Cargardgv();
+        }
+
+        protected void dgvProductos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                ProductoNegocio ProductoNeg = new ProductoNegocio();
+                Producto prod = new Producto();
+                prod.id = Convert.ToInt64(dgvProductos.DataKeys[e.RowIndex].Value.ToString());
+                prod.nombre = (dgvProductos.Rows[e.RowIndex].FindControl("txbNombre") as TextBox).Text;
+                prod.idMarca = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("txbMarca") as TextBox).Text);
+                prod.idCategoria = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("txbCategoria") as TextBox).Text);
+                prod.stock = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbStock") as TextBox).Text);
+                prod.costo = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbCosto") as TextBox).Text);
+                prod.precioVenta = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbPrecio") as TextBox).Text);
+                ProductoNeg.Modificar(prod);
+                lblCorrecto.Text = "Modificado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("productos.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
+        }
+
+        protected void dgvProductos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                ProductoNegocio ProductoNeg = new ProductoNegocio();
+                long id = Convert.ToInt64(dgvProductos.DataKeys[e.RowIndex].Value.ToString());
+                ProductoNeg.ModificarEstado(id);
+                lblCorrecto.Text = "Elminado correctamente.";
+                lblIncorrecto.Text = "";
+                Response.Redirect("productos.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+
+            }
         }
     }
 }
