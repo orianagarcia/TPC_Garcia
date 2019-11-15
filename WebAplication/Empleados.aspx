@@ -1,17 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="WebAplication.Clientes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Empleados.aspx.cs" Inherits="WebAplication.Empleados" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <div>
-        <h2 style= "color:Green ">Clientes</h2>
+      <div>
+        <h2 style= "color:Green ">Empleados</h2>
     </div>
     <%--</div>--%>
     <div class="form-row ">
-        <asp:GridView ID="dgvClientes" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
-            OnRowCommand="dgvClientes_RowCommand" OnRowEditing="dgvClientes_RowEditing"
-            OnRowCancelingEdit="dgvClientes_RowCancelingEdit" OnRowUpdating="dgvClientes_RowUpdating"
-            OnRowDeleting="dgvClientes_RowDeleting">
+        <asp:GridView ID="dgvEmpleados" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+            OnRowCommand="dgvEmpleados_RowCommand" OnRowEditing="dgvEmpleados_RowEditing"
+            OnRowCancelingEdit="dgvEmpleados_RowCancelingEdit" OnRowUpdating="dgvEmpleados_RowUpdating"
+            OnRowDeleting="dgvEmpleados_RowDeleting">
             <columns>
                   <%--<DNI>--%>
                     <asp:TemplateField HeaderText="DNI">
@@ -49,28 +48,16 @@
                          <asp:TextBox runat="server" ID="txbApellidoFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
-               <%--<DIRECCION>--%>
-                    <asp:TemplateField HeaderText="Direccion">
+                 <%--<CARGO>--%>
+                    <asp:TemplateField HeaderText="Cargo">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("Direccion")%>' runat="server" />
+                        <asp:label text='<%# Eval("Cargo")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbDireccion" Text='<%# Eval("Direccion")%>' />  
+                        <asp:TextBox runat="server" ID="txbCargo" Text='<%# Eval("Cargo")%>' />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbDireccionFooter" />
-                    </FooterTemplate>
-                    </asp:TemplateField>
-               <%--<LOCALIDAD>--%>
-                    <asp:TemplateField HeaderText="Localidad">
-                    <ItemTemplate> 
-                        <asp:label text='<%# Eval("Localidad")%>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbLocalidad" Text='<%# Eval("Localidad")%>' />  
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbLocalidadFooter" />
+                         <asp:TextBox runat="server" ID="txbCargoFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
                <%--<TELEFONO>--%>
@@ -108,6 +95,5 @@
         <br />
         <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
     </div>
-
 
 </asp:Content>

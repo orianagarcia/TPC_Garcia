@@ -107,7 +107,13 @@
                             <li><a href="Clientes.aspx" class="">Clientes</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Empleados</a></li>
+                    <li><a href="#">Empleados</a>
+                        <ul class="submenu">
+                            <li><a href="Empleados.aspx" class="">Empleados</a></li>
+                            <li><a href="Fabricaciones.aspx" class="">Fabricaciones</a></li>
+                            
+                        </ul>
+                    </li>
 
                 </ul>
                 <!-- end .menu -->

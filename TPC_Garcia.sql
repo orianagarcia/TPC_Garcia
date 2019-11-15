@@ -78,18 +78,20 @@ estado bit not null,
 create table empleados
 (
 id bigint not null primary key identity (1,1),
+dni int not null,
 nombre varchar (100) not null,
+apellido varchar (100) not null,
 telefono varchar(50) null,
-genero varchar (10) null,
+cargo varchar (50) null,
 estado bit not null,
 ) 
 
 create table fabricaciones
 ( id bigint not null primary key identity (1,1),
   idProducto bigint not null foreign key references productos(id),
-  cantidad int not null,
+  cantidad float not null,
   idEmpleado bigint not null foreign key references empleados(id),
-  estado bit not null,
+  estado bit null,
   )
 
 create table clientes

@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 using Dominio;
 namespace Negocio
 {
-    public class ClienteNegocio
+    public class EmpleadoNegocio
     {
-        public List<Cliente> Listar()
+        public List<Empleado> Listar()
         {
             AccesoDatos datos = new AccesoDatos();
-            Cliente aux;
-            List<Cliente> lista = new List<Cliente>();
+            Empleado aux;
+            List<Empleado> lista = new List<Empleado>();
             try
             {
-                datos.setearQuery("select id,dni,nombre,apellido,direccion,localidad,telefono from clientes where estado=1");
+                datos.setearQuery("select id,dni,nombre,apellido,cargo,telefono from Empleados where estado=1");
                 datos.ejecutarLector();
 
                 while (datos.lector.Read())
                 {
-                    aux = new Cliente();
+                    aux = new Empleado();
                     aux.id = datos.lector.GetInt64(0);
                     aux.dni = datos.lector.GetInt32(1);
                     aux.nombre = datos.lector.GetString(2);
                     aux.apellido = datos.lector.GetString(3);
-                    aux.direccion = datos.lector.GetString(4);
-                    aux.localidad = datos.lector.GetString(5);
-                    aux.telefono = datos.lector.GetString(6);
+                    aux.cargo = datos.lector.GetString(4);
+                    aux.telefono = datos.lector.GetString(5);
                     lista.Add(aux);
                 }
                 return lista;
@@ -42,17 +41,16 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void Agregar(Cliente aux)
+        public void Agregar(Empleado aux)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into clientes values (@dni,@nombre, @apellido, @direccion, @localidad, @telefono,1)");
+                datos.setearQuery("Insert into Empleados values (@dni,@nombre, @apellido, @telefono,@cargo,1)");
                 datos.agregarParametro("@dni", aux.dni);
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@apellido", aux.apellido);
-                datos.agregarParametro("@direccion", aux.direccion);
-                datos.agregarParametro("@localidad", aux.localidad);
+                datos.agregarParametro("@cargo", aux.cargo);
                 datos.agregarParametro("@telefono", aux.telefono);
                 datos.ejecutarAccion();
             }
@@ -66,19 +64,18 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void Modificar(Cliente aux)
+        public void Modificar(Empleado aux)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearQuery("update clientes set dni=@dni,nombre=@nombre, apellido=@apellido,direccion=@direccion, localidad=@localidad, telefono=@telefono where id=@id");
+                datos.setearQuery("update Empleados set dni=@dni,nombre=@nombre, apellido=@apellido,cargo=@cargo, telefono=@telefono where id=@id");
                 datos.agregarParametro("@id", aux.id);
                 datos.agregarParametro("@dni", aux.dni);
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@apellido", aux.apellido);
-                datos.agregarParametro("@direccion", aux.direccion);
-                datos.agregarParametro("@localidad", aux.localidad);
+                datos.agregarParametro("@cargo", aux.cargo);
                 datos.agregarParametro("@telefono", aux.telefono);
                 datos.ejecutarAccion();
             }
@@ -97,7 +94,7 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update clientes set estado = 0 where ID = @id");
+                datos.setearQuery("update Empleados set estado = 0 where ID = @id");
                 datos.Clear();
                 datos.agregarParametro("@id", id);
                 datos.ejecutarAccion();

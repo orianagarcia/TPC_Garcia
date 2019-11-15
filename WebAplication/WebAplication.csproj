@@ -70,6 +70,8 @@
     <Content Include="Categorias.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Compras.aspx" />
+    <Content Include="Empleados.aspx" />
+    <Content Include="Fabricaciones.aspx" />
     <Content Include="Images\agregar.png" />
     <Content Include="Images\borrar.png" />
     <Content Include="Images\cancelar.png" />
@@ -104,6 +106,20 @@
     </Compile>
     <Compile Include="Compras.aspx.designer.cs">
       <DependentUpon>Compras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleados.aspx.cs">
+      <DependentUpon>Empleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleados.aspx.designer.cs">
+      <DependentUpon>Empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fabricaciones.aspx.cs">
+      <DependentUpon>Fabricaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fabricaciones.aspx.designer.cs">
+      <DependentUpon>Fabricaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>

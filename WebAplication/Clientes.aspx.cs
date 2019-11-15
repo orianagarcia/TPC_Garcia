@@ -73,7 +73,7 @@ namespace WebAplication
             {
                 ClienteNegocio ClientesNeg = new ClienteNegocio();
                 Cliente cli = new Cliente();
-                cli.id= Convert.ToInt64(dgvClientes.DataKeys[e.RowIndex].Value.ToString());
+                cli.id = Convert.ToInt64(dgvClientes.DataKeys[e.RowIndex].Value.ToString());
                 cli.dni = Convert.ToInt32((dgvClientes.Rows[e.RowIndex].FindControl("txbdni") as TextBox).Text);
                 cli.nombre = (dgvClientes.Rows[e.RowIndex].FindControl("txbNombre") as TextBox).Text;
                 cli.apellido = (dgvClientes.Rows[e.RowIndex].FindControl("txbApellido") as TextBox).Text;
