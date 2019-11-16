@@ -45,7 +45,7 @@
                     </ItemTemplate>
                     <EditItemTemplate> 
               <%--<asp:TextBox runat="server" ID="txbMedida" Text='<%# Eval("Medida")%>' /> --%>  
-                      <asp:DropDownList ID="DropDownList1" runat="server" DataTextField="Nombre" DataValueField="ID">  
+                      <asp:DropDownList ID="ddlMedida" runat="server" DataTextField="nombre" DataValueField="id">  
                         </asp:DropDownList>  
                     </EditItemTemplate>
                     <FooterTemplate>

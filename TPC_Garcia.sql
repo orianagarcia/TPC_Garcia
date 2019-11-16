@@ -14,13 +14,13 @@ create table categorias
   estado bit not null,
 )
 
-
+SELECT id,nombre,stock,medida from insumos where estado = 1
 create table insumos
 (
 id bigint not null primary key identity (1,1),
 nombre varchar (100) not null,
 stock float not null,
-Medida varchar(50) not null 
+Medida varchar(50) not null,
 estado bit not null,
 )
 
@@ -63,8 +63,6 @@ estadoCompra varchar (50) not null,
 total float null,
 estado bit not null,
 )
-select*from detallecompra
-Insert into compras values (@Proveedor,@fecha,@total, @formaPago, @estado
 create table detalleCompra
 (
 id bigint not null primary key identity,
@@ -105,8 +103,11 @@ create table clientes
   telefono varchar(100) null,
   estado bit not null,
   )
+
+
   insert into insumos values('Harina',0,'Kilos'),('Azucar',0,'Gramos')
 
   insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420')
 
-  
+  insert into insumos values('Harina',0,1,1)
+  select*from insumos

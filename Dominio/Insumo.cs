@@ -11,7 +11,7 @@ namespace Dominio
         public long id { get; set; }
         public string nombre { get; set; }
         public double stock { get; set; }
-        public string medida { get; set; }
+        public string Medida { get; set; }
         public bool estado { get; set; }
     }
 }

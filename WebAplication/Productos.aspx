@@ -31,10 +31,11 @@
                         <asp:label text='<%# Eval("idMarca")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbMarca" Text='<%# Eval("idMarca")%>' />  
+                  <%--     <asp:TextBox runat="server" ID="txbMarca" Text='<%# Eval("idMarca")%>' />--%> 
+                        <asp:DropDownList ID="ddlMarca" runat="server" DataTextField="marca" DataValueField="id"></asp:DropDownList>
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbMarcaFooter" />
+                      <asp:DropDownList ID="ddlMarcaFooter" runat="server" DataTextField="marca" DataValueField="id"></asp:DropDownList>
                     </FooterTemplate>
                     </asp:TemplateField>
                <%--<CATEGORIA>--%>
@@ -43,7 +44,8 @@
                         <asp:label text='<%# Eval("idCategoria")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbCategoria" Text='<%# Eval("idCategoria")%>' />  
+                    <asp:DropDownList ID="ddlCategoria" runat="server" DataTextField="categoria" DataValueField="id"></asp:DropDownList>
+                      
                     </EditItemTemplate>
                     <FooterTemplate>
                          <asp:TextBox runat="server" ID="txbCategoriaFooter" />

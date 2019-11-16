@@ -9,14 +9,18 @@ namespace Negocio
 {
     public class ProductoNegocio
     {
-        public List<Producto> Listar()
+        public List<Producto> Listar(int id = 0)
         {
             AccesoDatos datos = new AccesoDatos();
             Producto aux;
             List<Producto> lista = new List<Producto>();
             try
             {
-                datos.setearQuery("  select id, nombre,idMarca as 'Marca',idCategoria as 'Categoria',stock,costo,precioVenta,ultimaActualizacion from productos");
+                string consulta = "select id, nombre,idMarca as 'Marca',idCategoria as 'Categoria',stock,costo,precioVenta,ultimaActualizacion from productos ";
+                if (id != 0)
+                    consulta = consulta + "where id=" + id.ToString();
+
+                datos.setearQuery(consulta);
                 datos.ejecutarLector();
 
                 while (datos.lector.Read())

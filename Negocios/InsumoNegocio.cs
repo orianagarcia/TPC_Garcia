@@ -24,7 +24,7 @@ namespace Negocio
                     aux.id = datos.lector.GetInt64(0);
                     aux.nombre = datos.lector.GetString(1);
                     aux.stock = datos.lector.GetDouble(2);
-                    aux.medida = datos.lector.GetString(3);
+                    aux.Medida = datos.lector.GetString(3);
                     lista.Add(aux);
                 }
                 return lista;
@@ -48,7 +48,7 @@ namespace Negocio
                 datos.setearQuery("Insert into insumos values (@nombre,@stock, @Medida,1)");
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@stock", aux.stock);
-                datos.agregarParametro("Medida", aux.medida);
+                datos.agregarParametro("Medida", aux.Medida);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace Negocio
                 datos.agregarParametro("@Id",aux.id);
                 datos.agregarParametro("@nombre", aux.nombre);
                 datos.agregarParametro("@stock", aux.stock);
-                datos.agregarParametro("@medida", aux.medida);
+                datos.agregarParametro("@medida", aux.Medida);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

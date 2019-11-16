@@ -102,7 +102,7 @@
                     </li>
                     <li><a href="#">Ventas</a>
                         <ul class="submenu">
-                            <li><a href="Pedidos.aspx" class="">Pedidos</a></li>
+                            <li><a href="#" class="">Pedidos</a></li>
                             <li><a href="#" class="">Ventas</a></li>
                             <li><a href="Clientes.aspx" class="">Clientes</a></li>
                         </ul>

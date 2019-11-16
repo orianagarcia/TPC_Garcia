@@ -17,7 +17,14 @@ namespace WebAplication
             if (!IsPostBack)
             {
                 Cargardgv();
+                
             }
+            InsumoNegocio insumoNeg = new InsumoNegocio();
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataValueField = "id";
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataTextField = "nombre";
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataSource = insumoNeg.listar();
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataBind();
+
         }
 
         void Cargardgv()
@@ -38,7 +45,7 @@ namespace WebAplication
                     Insumo ins = new Insumo();
                     ins.nombre = (dgvInsumos.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
                     ins.stock = Convert.ToInt32((dgvInsumos.FooterRow.FindControl("txbStockFooter") as TextBox).Text);
-                    ins.medida = (dgvInsumos.FooterRow.FindControl("txbMedidaFooter") as TextBox).Text;
+                    ins.Medida = (dgvInsumos.FooterRow.FindControl("ddlMedidaFooter") as DropDownList).Text;
                     InsumoNeg.agregar(ins);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";
@@ -58,7 +65,13 @@ namespace WebAplication
         {
             dgvInsumos.EditIndex = e.NewEditIndex;
             Cargardgv();
-
+            InsumoNegocio InsumoNeg = new InsumoNegocio();
+           // Convert.ToInt64(((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField);
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField = "id";
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataTextField = "nombre";
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataSource = InsumoNeg.listar();
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataBind();
+           
         }
 
         protected void dgvInsumos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -76,7 +89,7 @@ namespace WebAplication
                 ins.id = Convert.ToInt64(dgvInsumos.DataKeys[e.RowIndex].Value.ToString());
                 ins.nombre = (dgvInsumos.Rows[e.RowIndex].FindControl("txbNombre") as TextBox).Text;
                 ins.stock = Convert.ToInt32((dgvInsumos.Rows[e.RowIndex].FindControl("txbStock") as TextBox).Text);
-                ins.medida = (dgvInsumos.Rows[e.RowIndex].FindControl("txbMedida") as TextBox).Text;
+                ins.Medida =(dgvInsumos.Rows[e.RowIndex].FindControl("ddlMedida") as DropDownList).SelectedValue;
                 InsumoNeg.Modificar(ins);
                 lblCorrecto.Text = "Modificado correctamente.";
                 lblIncorrecto.Text = "";
@@ -112,27 +125,27 @@ namespace WebAplication
         protected void dgvInsumos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
-            DropDownList DropDownList1 = new DropDownList();
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
+            DropDownList dd = new DropDownList();
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
 
-                try
-                {
-                    InsumoNegocio insumoNeg = new InsumoNegocio();
-                    List <Insumo> lista = new List<Insumo>();
-                    lista = insumoNeg.listar();
-                   // DropDownList1 = (e.Row.FindControl("DropDownList1") as DropDownList);
-                    DropDownList1.DataSource = lista;
-                    DropDownList1.DataBind();
-                    DropDownList1.DataValueField = "Id";
-                    DropDownList1.DataTextField = "Nombre";
-                    DropDownList1.SelectedIndex = -1;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
+            //    try
+            //    {
+            //        InsumoNegocio insumoNeg = new InsumoNegocio();
+            //        List <Insumo> lista = new List<Insumo>();
+            //        lista = insumoNeg.listar();
+            //        dd = (e.Row.FindControl() as DropDownList);
+            //        //dd.DataValueField = "Id";
+            //        //dd.DataTextField = "Nombre";
+            //        dd.DataSource = lista;
+            //        dd.DataBind();
+            //        dd.SelectedIndex = -1;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw ex;
+            //    }
+            //}
         }
     }
 }
