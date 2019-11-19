@@ -19,10 +19,10 @@ namespace WebAplication
                 Cargardgv();
                 
             }
-            InsumoNegocio insumoNeg = new InsumoNegocio();
+            MedidaNegocio MedidaNeg = new MedidaNegocio();
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataValueField = "id";
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataSource = insumoNeg.listar();
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataSource = MedidaNeg.Listar();
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataBind();
 
         }
@@ -65,13 +65,17 @@ namespace WebAplication
         {
             dgvInsumos.EditIndex = e.NewEditIndex;
             Cargardgv();
-            InsumoNegocio InsumoNeg = new InsumoNegocio();
+            MedidaNegocio MedidaNeg = new MedidaNegocio();
+            InsumoNegocio insNegocio = new InsumoNegocio();
+            Insumo In = new Insumo();
            // Convert.ToInt64(((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField);
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField = "id";
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataTextField = "nombre";
-            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataSource = InsumoNeg.listar();
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataSource = MedidaNeg.Listar();
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataBind();
-           
+            In = (insNegocio.listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).Items.FindByValue(In.Medida).Selected = true;
+
         }
 
         protected void dgvInsumos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)

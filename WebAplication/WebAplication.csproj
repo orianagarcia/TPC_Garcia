@@ -75,6 +75,7 @@
     <Content Include="Images\agregar.png" />
     <Content Include="Images\borrar.png" />
     <Content Include="Images\cancelar.png" />
+    <Content Include="Images\Carrito.png" />
     <Content Include="Images\guardar.png" />
     <Content Include="Images\modificar.png" />
     <Content Include="Inicio.aspx" />

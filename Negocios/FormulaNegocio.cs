@@ -9,16 +9,20 @@ namespace Negocio
 {
     public class FormulaNegocio
     {
-        public List<Formula> Listar()
+        public List<Formula> Listar(int id = 0)
         {
             AccesoDatos datos = new AccesoDatos();
             Formula aux;
             List<Formula> lista = new List<Formula>();
             try
             {
-                datos.setearQuery("SELECT id,idProducto,idInsumo,cantidad from formulas group by id,idProducto,idInsumo,cantidad");
-                datos.ejecutarLector();
+                string consulta = "select id,idProducto,idInsumo,cantidad from formulas ";
+                if (id != 0)
+                    consulta = consulta + "where id=" + id.ToString();
 
+                datos.setearQuery(consulta);
+                datos.ejecutarLector();
+               
                 while (datos.lector.Read())
                 {
                     aux = new Formula();
@@ -68,7 +72,7 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update Formula set idInsumo = @idInsumo, idProducto=@idProducto, cantidad=@cantidad where ID = @Id");
+                datos.setearQuery("update Formulas set idInsumo = @idInsumo, idProducto=@idProducto, cantidad=@cantidad where ID = @Id");
                 datos.Clear();
                 datos.agregarParametro("@Id", aux.id);
                 datos.agregarParametro("@idInsumo", aux.idInsumo);

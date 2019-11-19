@@ -48,7 +48,7 @@
                       
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbCategoriaFooter" />
+                          <asp:DropDownList ID="ddlCategoriaFooter" runat="server" DataTextField="categoria" DataValueField="id"></asp:DropDownList>
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<STOCK>--%>

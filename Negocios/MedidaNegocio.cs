@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
-
 namespace Negocio
 {
-    public class EstadoNegocio
+    public class MedidaNegocio
     {
-        public List<Estado> Listar(int id = 0)
+        public List<Medida> Listar(int id = 0)
         {
             AccesoDatos datos = new AccesoDatos();
-            Estado aux;
-            List<Estado> lista = new List<Estado>();
+            Medida aux;
+            List<Medida> lista = new List<Medida>();
             try
             {
-                string consulta = "select id, nombre from Estados ";
+                string consulta = "select id, nombre from Medidas where estado=1";
                 if (id != 0)
                     consulta = consulta + "where id=" + id.ToString();
 
@@ -25,7 +24,7 @@ namespace Negocio
 
                 while (datos.lector.Read())
                 {
-                    aux = new Estado();
+                    aux = new Medida();
                     aux.id = datos.lector.GetInt64(0);
                     aux.nombre = datos.lector.GetString(1);
                     lista.Add(aux);

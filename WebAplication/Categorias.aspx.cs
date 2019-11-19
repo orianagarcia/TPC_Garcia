@@ -87,12 +87,22 @@ namespace WebAplication
         {
             try
             {
-                CategoriaNegocio CategoriaNeg = new CategoriaNegocio();
+
+                CategoriaNegocio CatNeg = new CategoriaNegocio();
                 long id = Convert.ToInt64(dgvCategorias.DataKeys[e.RowIndex].Value.ToString());
-                CategoriaNeg.ModificarEstado(id);
-                lblCorrecto.Text = "Elminado correctamente.";
-                lblIncorrecto.Text = "";
-                Response.Redirect("categorias.aspx");
+                if (CatNeg.ContarRegistros(Convert.ToInt32(id)) == true)
+                {
+                    lblCorrecto.Visible = true;
+                    lblCorrecto.Text = "NO SE PUEDE ELIMINAR LA CATEGORIA. TIENE PRODUCTOS ASIGNADOS. ";
+                    lblIncorrecto.Text = "";
+                }
+                else
+                {
+                    CatNeg.ModificarEstado(id);
+                    lblCorrecto.Text = "Elminado correctamente.";
+                    lblIncorrecto.Text = "";
+                    Cargardgv();
+                }
             }
             catch (Exception ex)
             {

@@ -99,5 +99,41 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool ContarRegistros (int id)
+        {
+            bool existe;
+            AccesoDatos datos = new AccesoDatos();
+            Marca marca;
+            List<Marca> lista = new List<Marca>();
+            try
+            {
+                datos.setearQuery("select m.id,m.nombre from marcas as m inner join productos as p on p.idMarca=m.id where p.idMarca=@id");
+                datos.agregarParametro("@id", id);
+                datos.ejecutarLector();
+                while (datos.lector.Read())
+                {
+                    marca = new Marca();
+                    marca.id = datos.lector.GetInt64(0);
+                    marca.nombre = datos.lector.GetString(1);
+                    lista.Add(marca);
+
+                }
+                if (lista.Count > 0) { existe = true; }
+
+                else { existe = false; }
+
+                return existe;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
 }

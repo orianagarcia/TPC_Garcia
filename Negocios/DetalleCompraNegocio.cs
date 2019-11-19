@@ -8,14 +8,19 @@ namespace Negocio
 {
     public class DetalleCompraNegocio
     {
-        public List<DetalleCompra> Listar()
+        public List<DetalleCompra> Listar(int id=0)
         {
             List<DetalleCompra> lista = new List<DetalleCompra>();
             AccesoDatos datos = new AccesoDatos();
             DetalleCompra aux;
+
             try
             {
-                datos.setearQuery("select * from detalleCompra");
+                string consulta = "select id, idcompra, idinsumo, cantidad, precioUnitario  from detalleCompra ";
+                if (id != 0)
+                    consulta = consulta + "where idCompra=" + id.ToString();
+
+                datos.setearQuery(consulta);
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {

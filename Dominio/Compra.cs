@@ -9,7 +9,7 @@ namespace Dominio
     public class Compra
     {
         public long id { get; set; }
-        public string Proveedor { get; set; }
+        public long idProveedor { get; set; }
         public double total { get; set; }
         public DateTime fechaCompra { get; set; }
         public string estadoCompra  { get; set; }

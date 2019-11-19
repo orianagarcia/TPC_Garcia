@@ -5,6 +5,12 @@
   <div>
         <h2 style= "color:Green ">Formulas</h2>
     </div>
+    <div class="form-row"Style="margin-top: 30px; margin-left: 30px;"> 
+        <asp:Label Text="BUSCAR FORMULA POR PRODUCTO" runat="server" />
+        <asp:DropDownList ID="cboBuscar" runat="server"> </asp:DropDownList>
+        <asp:Button CssClass="btn btn-success" ID="btnBuscar" Text="Buscar" runat="server" OnClick="btnBuscar_Click"/>
+        <asp:Button CssClass="btn btn-success" ID="btnCancelar" Text="Volver atras" runat="server" OnClick="btnCancelar_Click1" Visible="false"/>
+    </div>
     <%--</div>--%>
     <div class="form-row ">
         <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
@@ -12,28 +18,29 @@
             OnRowCancelingEdit="dgvFormulas_RowCancelingEdit" OnRowUpdating="dgvFormulas_RowUpdating"
             OnRowDeleting="dgvFormulas_RowDeleting">
             <columns>
-                 <%--<INSUMO>--%>
-                    <asp:TemplateField HeaderText="Insumo">
-                    <ItemTemplate> 
-                        <asp:label text='<%# Eval("idInsumo")%>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbidInsumo" Text='<%# Eval("idInsumo")%>' />  
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbidInsumoFooter" />
-                    </FooterTemplate>
-                    </asp:TemplateField>
+                
                <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Producto">
                     <ItemTemplate> 
                         <asp:label text='<%# Eval("idProducto")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbidProducto" Text='<%# Eval("idProducto")%>' />  
+                        <asp:DropDownList ID="ddlProductos" runat="server" DataTextField="producto.nombre" DataValueField="producto.id"></asp:DropDownList>
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbidProductoFooter" />
+                       <asp:DropDownList ID="ddlProductosFooter" runat="server" DataTextField="producto.nombre" DataValueField="producto.id"></asp:DropDownList>
+                    </FooterTemplate>
+                    </asp:TemplateField>
+                 <%--<INSUMO>--%>
+                    <asp:TemplateField HeaderText="Insumo">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("idInsumo")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:DropDownList ID="ddlInsumos" runat="server" DataTextField="insumo" DataValueField="id"></asp:DropDownList>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:DropDownList ID="ddlInsumosFooter" runat="server" DataTextField="insumo" DataValueField="id"></asp:DropDownList>
                     </FooterTemplate>
                     </asp:TemplateField>
                  <%--<CANTIDAD>--%>

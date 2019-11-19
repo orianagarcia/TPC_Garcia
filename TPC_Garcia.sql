@@ -14,7 +14,18 @@ create table categorias
   estado bit not null,
 )
 
-SELECT id,nombre,stock,medida from insumos where estado = 1
+create table estados
+(
+id bigint not null primary key identity(1,1),
+nombre varchar(50),
+estado bit not null,
+)
+create table medidas
+(
+id bigint not null primary key identity(1,1),
+nombre varchar(50),
+estado bit not null,
+)
 create table insumos
 (
 id bigint not null primary key identity (1,1),
@@ -53,16 +64,18 @@ create table formulas
   cantidad int not null,
   estado bit not null,
 )
+
 create table compras
 (
 id bigint not null primary key identity (1,1),
-Proveedor varchar(100) not null,
+idProveedor bigint not null foreign key references proveedores(id),
 fecha datetime not null,
 formaPago varchar(50) not null,
 estadoCompra varchar (50) not null,
 total float null,
 estado bit not null,
 )
+select*from compras
 create table detalleCompra
 (
 id bigint not null primary key identity,
@@ -110,4 +123,19 @@ create table clientes
   insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420')
 
   insert into insumos values('Harina',0,1,1)
-  select*from insumos
+UPDATE INSUMOS SET MEDIDA = 4 WHERE ID =3
+  insert into medidas values 
+  ('Kilos',1),
+  ('Gramos',1),
+  ('Miligramos',1),
+  ('Litros',1),
+  ('Mililitros',1)
+
+	SELECT id,nombre,stock,medida from insumos where estado = 1				
+	
+	select i.nombre,i.stock,m.nombre as 'Medida' from insumos as i inner join medidas as m on i.medida=m.id where i.id=1
+
+select* from detallecompra
+insert into estados values ('Entregado',1),('Pedido',1),('Devolucion',1)
+update compras set estadoCompra= 4
+

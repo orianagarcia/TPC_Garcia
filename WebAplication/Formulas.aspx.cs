@@ -24,6 +24,23 @@ namespace WebAplication
             List<Formula> lista = (new FormulaNegocio().Listar());
             dgvFormulas.DataSource = lista;
             dgvFormulas.DataBind();
+            
+            cboBuscar.DataSource = new ProductoNegocio().Listar();
+            cboBuscar.DataTextField = "Nombre";
+            cboBuscar.DataValueField = "id";
+            cboBuscar.DataBind();
+
+            InsumoNegocio InsumoNeg = new InsumoNegocio();
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
+
+            ProductoNegocio prodNeg = new ProductoNegocio();
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataSource = prodNeg.Listar();
+            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataBind();
         }
         protected void dgvFormulas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -33,8 +50,8 @@ namespace WebAplication
                 {
                     FormulaNegocio FormulaNeg = new FormulaNegocio();
                     Formula formu= new Formula();
-                    formu.idInsumo = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("txbidInsumoFooter") as TextBox).Text);
-                    formu.idProducto = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("txbidProductoFooter") as TextBox).Text);
+                    formu.idInsumo = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).Text);
+                    formu.idProducto = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlProductosFooter") as DropDownList).Text);
                     formu.cantidad = Convert.ToInt32((dgvFormulas.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
                     FormulaNeg.Agregar(formu);
                     lblCorrecto.Text = "Agregado correctamente.";
@@ -55,6 +72,22 @@ namespace WebAplication
         {
             dgvFormulas.EditIndex = e.NewEditIndex;
             cargardgv();
+            InsumoNegocio InsumoNeg = new InsumoNegocio();
+            FormulaNegocio formulaNeg = new FormulaNegocio();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataSource = InsumoNeg.listar();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataBind();
+            Formula formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).Items.FindByValue(formu.idInsumo.ToString()).Selected = true;
+
+            ProductoNegocio ProdNeg = new ProductoNegocio();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = ProdNeg.Listar();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
+            formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(formu.idProducto.ToString()).Selected = true;
 
         }
 
@@ -71,13 +104,13 @@ namespace WebAplication
                 FormulaNegocio FormulaNeg = new FormulaNegocio();
                 Formula formu = new Formula();
                 formu.id = Convert.ToInt64(dgvFormulas.DataKeys[e.RowIndex].Value.ToString());
-                formu.idInsumo = Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("txbidInsumo") as TextBox).Text);
-                formu.idProducto= Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("txidProducto") as TextBox).Text);
+                formu.idInsumo = Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlInsumos") as DropDownList).Text);
+                formu.idProducto= Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).Text);
                 formu.cantidad = Convert.ToInt32((dgvFormulas.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
                 FormulaNeg.Modificar(formu);
                 lblCorrecto.Text = "Modificado correctamente.";
                 lblIncorrecto.Text = "";
-                Response.Redirect("formulas.aspx");
+                cargardgv();
             }
             catch (Exception ex)
             {
@@ -96,7 +129,7 @@ namespace WebAplication
                 FormulaNeg.ModificarEstado(id);
                 lblCorrecto.Text = "Elminado correctamente.";
                 lblIncorrecto.Text = "";
-                Response.Redirect("formulas.aspx");
+                cargardgv();
             }
             catch (Exception ex)
             {
@@ -104,6 +137,20 @@ namespace WebAplication
                 lblIncorrecto.Text = ex.Message;
 
             }
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            FormulaNegocio forNegocio = new FormulaNegocio();
+            Formula formula = new Formula();
+            
+            dgvFormulas.DataSource= forNegocio.Listar(Convert.ToInt32(cboBuscar.SelectedValue));
+            dgvFormulas.DataBind();
+            btnCancelar.Visible = true;
+        }
+        protected void btnCancelar_Click1(object sender, EventArgs e)
+        {
+            cargardgv();
+
         }
     }
 }

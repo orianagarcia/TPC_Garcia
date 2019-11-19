@@ -8,14 +8,18 @@ namespace Negocio
 {
     public class InsumoNegocio
     {
-        public List<Insumo> listar()
+        public List<Insumo> listar(int id = 0)
         {
             AccesoDatos datos = new AccesoDatos();
             Insumo aux;
             List<Insumo> lista = new List <Insumo> ();
             try
             {
-                datos.setearQuery("SELECT id,nombre,stock,medida from insumos where estado = 1");
+                string consulta = "SELECT id,nombre,stock,medida from insumos ";
+                if (id != 0)
+                    consulta = consulta + "where id=" + id.ToString();
+
+                datos.setearQuery(consulta);
                 datos.ejecutarLector();
 
                 while (datos.lector.Read())
