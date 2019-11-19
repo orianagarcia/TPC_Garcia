@@ -44,7 +44,7 @@ namespace WebAplication
             List<Compra> lista = (new CompraNegocio().listar());
             dgvCompras.DataSource = lista;
             dgvCompras.DataBind();
-            dgvCompras.Columns[0].Visible=false;
+            //dgvCompras.Columns[0].Visible=false;
         }
       
         protected void dgvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -155,9 +155,9 @@ namespace WebAplication
         protected void btn_Detalle_Click(object sender, EventArgs e)
         {
             DetalleCompraNegocio detNegocio = new DetalleCompraNegocio();
-            
-            //int id= Convert.ToInt32(dgvCompras.SelectedRow.Cells[0].Text);
-            dgvDetalles.DataSource = detNegocio.Listar();
+            GridViewRow gr = dgvCompras.SelectedRow;
+            int id= Convert.ToInt32(gr.Cells[0].Text);
+            dgvDetalles.DataSource = detNegocio.Listar(id);
             dgvDetalles.DataBind();
             dgvDetalles.Visible = true;
         }

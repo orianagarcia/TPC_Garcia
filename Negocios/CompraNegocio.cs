@@ -49,12 +49,12 @@ namespace Negocio
             {
                 datos.setearQuery("Insert into compras values (@Proveedor,@fecha, @formaPago, @estado,@total,1) ");
                 datos.agregarParametro("@Proveedor", aux.idProveedor);
-                datos.agregarParametro("@fecha", DateTime.Now);
+                datos.agregarParametro("@fecha", aux.fechaCompra);
                 datos.agregarParametro("@total", aux.total);
                 datos.agregarParametro("@formaPago", aux.formaPago);
                 datos.agregarParametro("@estado", aux.estadoCompra);
                 datos.ejecutarAccion();
-
+                
             }
             catch (Exception ex )
             {
@@ -98,6 +98,27 @@ namespace Negocio
                 datos.setearQuery("update compras set estado = 0 where ID = @Id");
                 datos.Clear();
                 datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void agregarProductosXCompra(long IDCompra, long IDInsumo, int Cantidad,double precioUnitario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("INSERT INTO detalleCompra VALUES(@Compra, @idIns, @cant,@precioUnitario,1)");
+                datos.agregarParametro("@idCompra", IDCompra);
+                datos.agregarParametro("@idIns", IDInsumo);
+                datos.agregarParametro("@cant", Cantidad);
+                datos.agregarParametro("@precioUnitario", precioUnitario);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

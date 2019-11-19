@@ -8,11 +8,11 @@ namespace Negocio
 {
     public class DetalleCompraNegocio
     {
-        public List<DetalleCompra> Listar(int id=0)
+        public List<Detallecompra> Listar(int id=0)
         {
-            List<DetalleCompra> lista = new List<DetalleCompra>();
+            List<Detallecompra> lista = new List<Detallecompra>();
             AccesoDatos datos = new AccesoDatos();
-            DetalleCompra aux;
+            Detallecompra aux;
 
             try
             {
@@ -24,7 +24,7 @@ namespace Negocio
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {
-                    aux = new DetalleCompra();
+                    aux = new Detallecompra();
                     aux.id = datos.lector.GetInt64(0);
                     aux.idCompra = datos.lector.GetInt64(1);
                     aux.idInsumo = datos.lector.GetInt64(2);
@@ -46,7 +46,7 @@ namespace Negocio
             }
         }
 
-        public void Agregar(DetalleCompra aux)
+        public void Agregar(Detallecompra aux)
         {
             AccesoDatos datos = new AccesoDatos();
             try

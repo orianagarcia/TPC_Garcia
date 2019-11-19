@@ -21,6 +21,19 @@ namespace Negocio
             comando = new SqlCommand();
             comando.Connection = conexion;
         }
+
+        public int ejecutarAccionReturn()
+        {
+            try
+            {
+                comando.Connection = conexion;
+                return Convert.ToInt32(comando.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void setearQuery(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;

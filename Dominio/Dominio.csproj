@@ -47,7 +47,7 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Compra.cs" />
-    <Compile Include="DetalleCompra.cs" />
+    <Compile Include="Detallecompra.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="Formula.cs" />

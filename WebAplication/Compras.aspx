@@ -20,7 +20,7 @@
                  <%--<PROVEEDOR>--%>
                     <asp:TemplateField HeaderText="Proveedor">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("IdProveedor")%>' runat="server" />
+                        <asp:label text='<%# Eval("idProveedor")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                        <asp:DropDownList ID="ddlProveedor" runat="server" DataTextField="Proveedor" DataValueField="id"></asp:DropDownList> 
@@ -76,12 +76,17 @@
         </asp:GridView>
 
         <br />
-        <asp:Label ID="Label1" Text="" runat="server" forecolor="Green"/>
+        <asp:Label ID="lblCorrecto2" Text="" runat="server" forecolor="Green"/>
         <br />
-        <asp:Label ID="Label2" Text="" runat="server" forecolor="Red"/>
+        <asp:Label ID="lblIncorrecto2" Text="" runat="server" forecolor="Red"/>
     </div>
     <%--</div>--%>
     <div class="form-row ">
+        <asp:DropDownList runat="server">
+            <asp:ListItem Text="Entregado" Value="Entregado" />
+            <asp:ListItem Text="Pedido" Value="Pedido"/>
+            <asp:ListItem Text="Devolucion" Value="Devolucion"/>
+        </asp:DropDownList>
         <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
             Visible="false" ShowHeaderWhenEmpty="true"> 
                     

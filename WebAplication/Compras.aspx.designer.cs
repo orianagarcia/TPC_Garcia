@@ -22,22 +22,22 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.GridView dgvCompras;
         
         /// <summary>
-        /// Control Label1.
+        /// Control lblCorrecto2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblCorrecto2;
         
         /// <summary>
-        /// Control Label2.
+        /// Control lblIncorrecto2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblIncorrecto2;
         
         /// <summary>
         /// Control dgvDetalles.
