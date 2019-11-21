@@ -16,27 +16,6 @@ namespace WebAplication
             if(!IsPostBack)
             {
                 CargarCombos();
-                ProveedorNegocio provNeg = new ProveedorNegocio();
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedorFooter")).DataValueField = "id";
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedorFooter")).DataTextField = "nombre";
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedorFooter")).DataSource = provNeg.listar();
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedorFooter")).DataBind();
-
-                EstadoNegocio estadoNeg = new EstadoNegocio();
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlEstadoFooter")).DataValueField = "nombre";
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlEstadoFooter")).DataTextField = "nombre";
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlEstadoFooter")).DataSource = estadoNeg.Listar();
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlEstadoFooter")).DataBind();
-
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).SelectedIndex = -1;
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).SelectedValue = null;
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Mercado pago");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Efectivo");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Tarjeta de Credito");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Tarjeta de Debito");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Transferencia");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).Items.Add("Cuenta corriente");
-                ((DropDownList)dgvCompras.FooterRow.FindControl("ddlPagoFooter")).DataBind();
             }
         }
         protected void CargarCombos()
@@ -49,59 +28,32 @@ namespace WebAplication
       
         protected void dgvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            try
-            {
-                if (e.CommandName.Equals("AddNew"))
-                {
-                    CompraNegocio comprasNeg = new CompraNegocio();
-                    Compra compra = new Compra();
-                    compra.idProveedor = Convert.ToInt64((dgvCompras.FooterRow.FindControl("ddlProveedorFooter") as DropDownList).Text);
-                    compra.estadoCompra = (dgvCompras.FooterRow.FindControl("ddlEstadoFooter") as DropDownList).Text;
-                    compra.formaPago = (dgvCompras.FooterRow.FindControl("ddlPagoFooter") as DropDownList).Text;
-                    comprasNeg.agregar(compra);
-                    lblCorrecto.Text = "Agregado correctamente.";
-                    lblIncorrecto.Text = "";
-                    CargarCombos();
-
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                lblCorrecto.Text = "";
-                lblIncorrecto.Text = ex.Message;
-
-            }
 
         }
 
         protected void dgvCompras_RowEditing(object sender, GridViewEditEventArgs e)
         {
             dgvCompras.EditIndex = e.NewEditIndex;
-            CargarCombos();
-            //ProveedorNegocio provNeg = new ProveedorNegocio();
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedor")).DataValueField = "id";
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedor")).DataTextField = "nombre";
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedor")).DataSource = provNeg.listar();
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlProveedor")).DataBind();
+            ProveedorNegocio provNeg = new ProveedorNegocio();
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataValueField = "id";
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataTextField = "nombre";
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataSource = provNeg.listar();
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataBind();
 
-            //EstadoNegocio estadoNeg = new EstadoNegocio();
-            //((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataValueField = "id";
-            //((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataTextField = "nombre";
-            //((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataSource = estadoNeg.Listar();
-            //((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataBind();
-            //  Estado estado = (estadoNeg.Listar(e.NewEditIndex + 1))[0];
-            //((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).SelectedValue = null;
+            EstadoNegocio estadoNeg = new EstadoNegocio();
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataValueField = "id";
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataTextField = "nombre";
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataSource = estadoNeg.Listar();
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataBind();
+            Estado estado = (estadoNeg.Listar(e.NewEditIndex + 1))[0];
 
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).SelectedIndex = -1;
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).SelectedValue = null;
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Mercado pago");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Efectivo");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Tarjeta de Credito");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Tarjeta de Debito");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Transferencia");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).Items.Add("Cuenta corriente");
-            //((DropDownList)dgvCompras.FooterRow.FindControl("ddlPago")).DataBind();
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Mercado pago");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Efectivo");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Credito");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Debito");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Transferencia");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Cuenta corriente");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).DataBind();
 
         }
 

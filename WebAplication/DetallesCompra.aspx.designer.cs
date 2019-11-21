@@ -13,6 +13,15 @@ namespace WebAplication {
     public partial class DetalleCompra {
         
         /// <summary>
+        /// Control BtnListar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnListar;
+        
+        /// <summary>
         /// Control txbFecha.
         /// </summary>
         /// <remarks>
@@ -157,13 +166,13 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.Label lbltxtTotal;
         
         /// <summary>
-        /// Control lblTotal.
+        /// Control txbTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotal;
+        protected global::System.Web.UI.WebControls.TextBox txbTotal;
         
         /// <summary>
         /// Control btnGuardarFactura.

@@ -89,8 +89,13 @@
                         <ul class="submenu">
                             <li><a href="insumos.aspx" class="">Insumos </a></li>
                             <li><a href="Proveedores.aspx" class="">Proveedores </a></li>
-                            <li><a href="DetallesCompra.aspx" class="">Compras</a></li>
-                        </ul>
+                       </ul>
+                    </li>
+                    <li><a href="#">Compras</a>
+                        <ul class="submenu">
+                            <li><a href="DetallesCompra.aspx" class="">Agregar Compra</a></li>
+                            <li><a href="Compras.aspx" class="">Listar Compras </a></li>
+                             </ul>
                     </li>
                     <li><a href="#">Productos</a>
                         <ul class="submenu">

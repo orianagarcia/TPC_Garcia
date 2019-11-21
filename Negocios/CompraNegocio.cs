@@ -15,7 +15,10 @@ namespace Negocio
             List<Compra> lista = new List<Compra>();
             try
             {
-                string consulta = "select id,idproveedor,fecha,total,formaPago,estadoCompra from compras where estado=1";
+                string consulta = "select id,idproveedor,fecha,total,formaPago,estadoCompra from compras ";
+                if (id != 0)
+                    consulta = consulta + "where id=" + id.ToString();
+                
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
                 while(datos.lector.Read())
@@ -114,7 +117,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("INSERT INTO detalleCompra VALUES(@Compra, @idIns, @cant,@precioUnitario,1)");
+                datos.setearQuery("INSERT INTO detalleCompra VALUES(@idCompra, @idIns, @cant,@precioUnitario,1)");
                 datos.agregarParametro("@idCompra", IDCompra);
                 datos.agregarParametro("@idIns", IDInsumo);
                 datos.agregarParametro("@cant", Cantidad);
@@ -123,6 +126,51 @@ namespace Negocio
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void AgregarStock(long id,int cant )
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("update insumos set stock= stock+@cant where id=@id");
+                datos.agregarParametro("@cant", cant);
+                datos.agregarParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public long BuscarIDCompra()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            long id=0;
+            try
+            {
+                datos.setearQuery("SELECT TOP 1 ID FROM COMPRAS ORDER BY ID DESC");
+                datos.ejecutarLector();
+                while(datos.lector.Read())
+                {
+                    id = datos.lector.GetInt64(0);
+                }
+                return id;
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally

@@ -23,11 +23,8 @@
                         <asp:label text='<%# Eval("idProveedor")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                       <asp:DropDownList ID="ddlProveedor" runat="server" DataTextField="Proveedor" DataValueField="id"></asp:DropDownList> 
+                       <asp:DropDownList ID="ddlProveedor" runat="server"></asp:DropDownList> 
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList ID="ddlProveedorFooter" runat="server" DataTextField="Proveedor" DataValueField="id"></asp:DropDownList>
-                    </FooterTemplate>
                     </asp:TemplateField>
                <%--<ESTADO>--%>
                     <asp:TemplateField HeaderText="Estado">
@@ -35,11 +32,10 @@
                         <asp:label text='<%# Eval("EstadoCompra")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:DropDownList runat="server" ID="ddlEstado" Text='<%# Eval("EstadoCompra")%>' />  
+                               <asp:DropDownList runat="server" ID="ddlEstados">
+                          
+                       </asp:DropDownList>
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList runat="server" ID="ddlEstadoFooter" />
-                    </FooterTemplate>
                     </asp:TemplateField>
                <%--<FORMA DE PAGO>--%>
                     <asp:TemplateField HeaderText="Forma de Pago">
@@ -48,12 +44,8 @@
                     </ItemTemplate>
                     <EditItemTemplate> 
               <asp:DropDownList runat="server" ID="ddlPago" Text='<%# Eval("FormaPago")%>' />   
-                       
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList runat="server" ID="ddlPagoFooter" />
-                    </FooterTemplate>
-                    </asp:TemplateField>
+                   </asp:TemplateField>
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 

@@ -75,11 +75,10 @@ estadoCompra varchar (50) not null,
 total float null,
 estado bit not null,
 )
-select*from compras
 create table detalleCompra
 (
 id bigint not null primary key identity,
-idCompra bigint not null foreign key references compras(id),
+idCompra bigint not null ,
 idInsumo bigint not null foreign key references insumos(id),
 cantidad int not null,
 precioUnitario float not null,
@@ -118,12 +117,10 @@ create table clientes
   )
 
 
-  insert into insumos values('Harina',0,'Kilos'),('Azucar',0,'Gramos')
+  insert into insumos values('Harina',0,'Kilos',1),('Azucar',0,'Gramos',1)
 
-  insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420')
+  insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420',1),('Chino',454785,'Brasil 1036',1)
 
-  insert into insumos values('Harina',0,1,1)
-UPDATE INSUMOS SET MEDIDA = 4 WHERE ID =3
   insert into medidas values 
   ('Kilos',1),
   ('Gramos',1),
@@ -131,11 +128,8 @@ UPDATE INSUMOS SET MEDIDA = 4 WHERE ID =3
   ('Litros',1),
   ('Mililitros',1)
 
-	SELECT id,nombre,stock,medida from insumos where estado = 1				
-	
-	select i.nombre,i.stock,m.nombre as 'Medida' from insumos as i inner join medidas as m on i.medida=m.id where i.id=1
-
-select* from detallecompra
 insert into estados values ('Entregado',1),('Pedido',1),('Devolucion',1)
-update compras set estadoCompra= 4
 
+insert into compras values (1,GETDATE(),'Mercado Pago','Entregado',1000,1)
+
+insert into detalleCompra values (1,1,50,1),(1,2,10,1)
