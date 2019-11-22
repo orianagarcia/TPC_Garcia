@@ -24,7 +24,6 @@ namespace WebAplication
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataTextField = "nombre";
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataSource = MedidaNeg.Listar();
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataBind();
-
         }
 
         void Cargardgv()
@@ -46,6 +45,7 @@ namespace WebAplication
                     ins.nombre = (dgvInsumos.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
                     ins.stock = Convert.ToInt32((dgvInsumos.FooterRow.FindControl("txbStockFooter") as TextBox).Text);
                     ins.Medida = (dgvInsumos.FooterRow.FindControl("ddlMedidaFooter") as DropDownList).Text;
+
                     InsumoNeg.agregar(ins);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";

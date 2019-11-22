@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-        <asp:Button cssClass="btn btn-success" ID="BtnListar" runat="server" Text="Listar Compras" OnClick="BtnListar_Click1"/>
+       
     <asp:Label Text="Fecha" runat="server" />
     <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" />  
         <br />
@@ -20,7 +20,6 @@
         <asp:DropDownList runat="server" ID="ddlFormaPago">
             <asp:ListItem Text="Mercado Pago" Value="Mercado Pago"/>
             <asp:ListItem Text="Efectivo"  Value="Efectivo"/>
-            <asp:ListItem Text="Tarjeta de Debito" Value="Tarjeta de Debito"/>
             <asp:ListItem Text="Tarjeta de Credito" Value="Tarjeta de Credito" />
             <asp:ListItem Text="Transferencia" Value="Transferencia" />
         </asp:DropDownList>
@@ -37,7 +36,7 @@
         <asp:Button cssClass="btn btn-success" ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar Producto" />
         <br />
         </div>
-    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" AutoGenerateSelectButton="true" AutoGenerateColumns="true" ShowFooter="true" DataKeyNames="ID" 
             Visible="false"  OnRowEditing="dgvDetalles_RowEditing"
             OnRowCancelingEdit="dgvDetalles_RowCancelingEdit" OnRowUpdating="dgvDetalles_RowUpdating"
             OnRowDeleting="dgvDetalles_RowDeleting"> 

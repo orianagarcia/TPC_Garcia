@@ -17,19 +17,6 @@ namespace WebAplication
             {
                 cargardgv();
             }
-        }
-
-        void cargardgv()
-        {
-            List<Formula> lista = (new FormulaNegocio().Listar());
-            dgvFormulas.DataSource = lista;
-            dgvFormulas.DataBind();
-            
-            cboBuscar.DataSource = new ProductoNegocio().Listar();
-            cboBuscar.DataTextField = "Nombre";
-            cboBuscar.DataValueField = "id";
-            cboBuscar.DataBind();
-
             InsumoNegocio InsumoNeg = new InsumoNegocio();
             ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
             ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
@@ -41,6 +28,20 @@ namespace WebAplication
             ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataTextField = "nombre";
             ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataSource = prodNeg.Listar();
             ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataBind();
+
+            cboBuscar.DataSource = new ProductoNegocio().Listar();
+            cboBuscar.DataTextField = "Nombre";
+            cboBuscar.DataValueField = "id";
+            cboBuscar.DataBind();
+        }
+
+        void cargardgv()
+        {
+            List<Formula> lista = (new FormulaNegocio().Listar());
+            dgvFormulas.DataSource = lista;
+            dgvFormulas.DataBind();
+           
+          
         }
         protected void dgvFormulas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -56,7 +57,8 @@ namespace WebAplication
                     FormulaNeg.Agregar(formu);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";
-                    cargardgv();
+                    // cargardgv();
+                    Response.Redirect("formulas.aspx");
                 }
             }
             catch (Exception ex)

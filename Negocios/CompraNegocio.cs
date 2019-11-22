@@ -17,8 +17,9 @@ namespace Negocio
             {
                 string consulta = "select id,idproveedor,fecha,total,formaPago,estadoCompra from compras ";
                 if (id != 0)
-                    consulta = consulta + "where id=" + id.ToString();
-                
+                    consulta = consulta + "where id=" + id.ToString()+ " and estado = 1";
+                else
+                    consulta = consulta + "where estado = 1";
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
                 while(datos.lector.Read())
@@ -75,9 +76,9 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update compras set idproveedor=@Proveedor,fecha=@fecha, formaPago=@formaPago, estadoCompra=@estado,total=@total) ");
+                datos.setearQuery("update compras set idproveedor=@Proveedor,formaPago=@formaPago, estadoCompra=@estado,total=@total where id= @id");
+                datos.agregarParametro("@id", aux.id);
                 datos.agregarParametro("@Proveedor", aux.idProveedor);
-                datos.agregarParametro("@fecha", DateTime.Now);
                 datos.agregarParametro("@total", aux.total);
                 datos.agregarParametro("@formaPago", aux.formaPago);
                 datos.agregarParametro("@estado", aux.estadoCompra);

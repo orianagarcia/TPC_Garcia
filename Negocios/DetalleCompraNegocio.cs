@@ -72,5 +72,48 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void Modificar(Detallecompra aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update detallecompra set idInsumo=@idIns,cantidad=@cant , precioUnitario=@precio  where id= @id");
+                datos.agregarParametro("@id", aux.id);
+                datos.agregarParametro("@idIns", aux.idInsumo);
+                datos.agregarParametro("@cant", aux.cantidad);
+                datos.agregarParametro("@precio", aux.precioUnitario);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void AgregarStock(long id, int cant)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("update insumos set stock= stock+@cant where id=@id");
+                datos.agregarParametro("@cant", cant);
+                datos.agregarParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

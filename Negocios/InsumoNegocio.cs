@@ -17,7 +17,14 @@ namespace Negocio
             {
                 string consulta = "SELECT id,nombre,stock,medida from insumos ";
                 if (id != 0)
-                    consulta = consulta + "where id=" + id.ToString();
+                    {
+                    consulta = consulta + "where id=" + id.ToString() + " and estado=1";
+                }
+                else
+                {
+                    consulta = consulta + "where estado=1";
+                }
+                   
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();

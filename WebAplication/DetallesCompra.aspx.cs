@@ -157,9 +157,6 @@ namespace WebAplication
             }
         }
 
-        protected void BtnListar_Click1(object sender, EventArgs e)
-        {
-            Response.Redirect("Compras.aspx");
-        }
+       
     }
     }
