@@ -86,9 +86,9 @@ namespace WebAplication
         {
             try
             {
-                MarcaNegocio MarcaNeg = new MarcaNegocio();
+                InsumoNegocio insNeg = new InsumoNegocio();
                 long id = Convert.ToInt64(dgvMarcas.DataKeys[e.RowIndex].Value.ToString());
-               if( MarcaNeg.ContarRegistros(Convert.ToInt32(id))==true)
+               if( insNeg.ContarRegistros(id)==true)
                 {
                     lblCorrecto.Visible = true;
                     lblCorrecto.Text = "NO SE PUEDE ELIMINAR LA MARCA. TIENE PRODUCTOS ASIGNADOS. ";
@@ -96,7 +96,7 @@ namespace WebAplication
                 }
                 else
                 {
-                    MarcaNeg.ModificarEstado(id);
+                    insNeg.ModificarEstado(id);
                     lblCorrecto.Text = "Elminado correctamente.";
                     lblIncorrecto.Text = "";
                     Cargardgv();

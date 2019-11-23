@@ -10,7 +10,16 @@
 namespace WebAplication {
     
     
-    public partial class Fabricaciones {
+    public partial class AltaFormula {
+        
+        /// <summary>
+        /// Control txbFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbFecha;
         
         /// <summary>
         /// Control lblProducto.
@@ -40,13 +49,13 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.Label lblInsumo;
         
         /// <summary>
-        /// Control ddlEmpleados.
+        /// Control ddlInsumos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmpleados;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInsumos;
         
         /// <summary>
         /// Control lblCantidad.
@@ -67,40 +76,40 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.TextBox txbCantidad;
         
         /// <summary>
-        /// Control lblEstados.
+        /// Control Medida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstados;
+        protected global::System.Web.UI.WebControls.Label Medida;
         
         /// <summary>
-        /// Control ddlEstados.
+        /// Control btnAgregarInsumo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstados;
+        protected global::System.Web.UI.WebControls.Button btnAgregarInsumo;
         
         /// <summary>
-        /// Control btnAgregar.
+        /// Control dgvFormulas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.GridView dgvFormulas;
         
         /// <summary>
-        /// Control dgvFabricaciones.
+        /// Control btnGuardarFormula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvFabricaciones;
+        protected global::System.Web.UI.WebControls.Button btnGuardarFormula;
         
         /// <summary>
         /// Control lblCorrecto.

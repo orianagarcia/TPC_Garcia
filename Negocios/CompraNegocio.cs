@@ -99,7 +99,7 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update compras set estado = 0 where ID = @Id");
+                datos.setearQuery("update compras set estadoCompra = 'Devolucion' where ID = @Id");
                 datos.Clear();
                 datos.agregarParametro("@Id", id);
                 datos.ejecutarAccion();
@@ -168,6 +168,28 @@ namespace Negocio
                     id = datos.lector.GetInt64(0);
                 }
                 return id;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void DisminuirStock(long id, int cant)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("update insumos set stock= stock-@cant where id=@id");
+                datos.agregarParametro("@cant", cant);
+                datos.agregarParametro("@id", id);
+                datos.ejecutarAccion();
+
             }
             catch (Exception ex)
             {

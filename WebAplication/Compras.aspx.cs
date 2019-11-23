@@ -16,13 +16,8 @@ namespace WebAplication
             if(!IsPostBack)
             {
                 CargarCombos();
-                //InsumoNegocio insNeg = new InsumoNegocio();
-                //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumoFooter")).DataSource = insNeg.listar();
-                //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumoFooter")).DataValueField = "id";
-                //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumoFooter")).DataTextField = "nombre";
-                //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumoFooter")).DataBind();
+               
             }
-            
 
         }
         protected void CargarCombos()
@@ -76,17 +71,18 @@ namespace WebAplication
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataTextField = "nombre";
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataSource = estadoNeg.Listar();
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataBind();
-             //estado = (estadoNeg.Listar(1))[0];
-          //  ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).Items.FindByValue(compra.estadoCompra).Selected = true;
+            compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
+          ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).Items.FindByValue(compra.estadoCompra).Selected = true;
 
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Mercado pago");
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Mercado Pago");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Efectivo");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Credito");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Debito");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Transferencia");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Cuenta corriente");
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).DataBind();
-          //  ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.FindByValue(compra.formaPago).Selected = true;
+            compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.FindByValue(compra.formaPago).Selected = true;
         }
 
         protected void dgvCompras_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -124,11 +120,22 @@ namespace WebAplication
             try
             {
                 CompraNegocio ComprasNeg = new CompraNegocio();
+                DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
                 ComprasNeg.ModificarEstado(id);
-                lblCorrecto.Text = "Elminado correctamente.";
+                Compra compra = new Compra();
+                ComprasNeg = new CompraNegocio();
+                compra.detalle = new List<Detallecompra>();
+                compra = ComprasNeg.listar(Convert.ToInt32(id))[0];
+                compra.detalle = detNeg.Listar(Convert.ToInt32(id)); 
+                foreach (Detallecompra Item in compra.detalle)
+                {
+                    compra.detalle = new List<Detallecompra>();
+                    ComprasNeg = new CompraNegocio();
+                    ComprasNeg.DisminuirStock(Item.idInsumo, Item.cantidad);
+                }
+                lblCorrecto.Text = "Compra devuelta.";
                 lblIncorrecto.Text = "";
-                Response.Redirect("compras.aspx");
             }
             catch (Exception ex)
             {
@@ -160,12 +167,12 @@ namespace WebAplication
             dgvCompras.DataSource = comNeg.listar(id);
             dgvCompras.DataBind();
             Session["idCompra"] = id;
-            InsumoNegocio InsumoNeg = new InsumoNegocio();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = null;
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
+            CargarDetalle(id); 
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = null;
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
             btnAtras.Visible = true;
         }
 

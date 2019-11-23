@@ -5,35 +5,49 @@
           <div>
         <h2 style= "color:Green ">Fabricaciones</h2>
     </div>
+    <div>
+     <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>
+    <asp:DropDownList ID="ddlProductos" runat="server" > </asp:DropDownList>
+
+       <asp:Label ID="lblInsumo" runat="server" Text="Empleados"></asp:Label>
+    <asp:DropDownList ID="ddlEmpleados" runat="server" > </asp:DropDownList>
+           
+     <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
+     <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
+
+ <asp:Label ID="lblEstados" runat="server" Text="Estado"></asp:Label>
+    <asp:DropDownList ID="ddlEstados" runat="server" > </asp:DropDownList>
+        <asp:Button ID="btnAgregar" Text="Agregar" runat="server" OnClick="btnAgregar_Click"/>
+    </div>
     <%--</div>--%>
     <div class="form-row ">
-        <asp:GridView ID="dgvFabricaciones" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+        <asp:GridView ID="dgvFabricaciones" CssClass="table table-striped" runat="server" AutoGenerateColumns="false"  DataKeyNames="ID" 
             OnRowCommand="dgvFabricaciones_RowCommand" OnRowEditing="dgvFabricaciones_RowEditing"
             OnRowCancelingEdit="dgvFabricaciones_RowCancelingEdit" OnRowUpdating="dgvFabricaciones_RowUpdating"
             OnRowDeleting="dgvFabricaciones_RowDeleting">
             <columns>
                   <%--<idProducto>--%>
-                    <asp:TemplateField HeaderText="idProducto">
+                    <asp:TemplateField HeaderText="Producto">
                     <ItemTemplate> 
                         <asp:label text='<%# Eval("idProducto")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbidProducto" Text='<%# Eval("idProducto")%>' />  
+                        <asp:DropDownList runat="server" ID="ddlProductos" />  
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbidProductoFooter" />
+                         <asp:DropDownList runat="server" ID="ddlProductosFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
                  <%--<idEmpleado>--%>
-                    <asp:TemplateField HeaderText="idEmpleado">
+                    <asp:TemplateField HeaderText="Empleado">
                     <ItemTemplate> 
                         <asp:label text='<%# Eval("idEmpleado")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:TextBox runat="server" ID="txbidEmpleado" Text='<%# Eval("idEmpleado")%>' />  
+                        <asp:DropDownList runat="server" ID="ddlEmpleados" /> 
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbidEmpleadoFooter" />
+                         <asp:DropDownList runat="server" ID="ddlEmpleadosFooter" />
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<Cantidad>--%>
@@ -46,6 +60,18 @@
                     </EditItemTemplate>
                     <FooterTemplate>
                          <asp:TextBox runat="server" ID="txbCantidadFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+                 <%--<ESTADO>--%>
+                    <asp:TemplateField HeaderText="Estado">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("estadoFab")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:DropDownList runat="server" ID="ddlEstados" />  
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:DropDownList runat="server" ID="ddlEstadosFooter" /> 
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>

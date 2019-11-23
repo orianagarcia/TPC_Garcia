@@ -16,28 +16,18 @@ namespace WebAplication
             if (!IsPostBack)
             {
                 cargardgv();
+                cboBuscar.DataSource = new ProductoNegocio().Listar();
+                cboBuscar.DataTextField = "Nombre";
+                cboBuscar.DataValueField = "id";
+                cboBuscar.DataBind();
             }
-            InsumoNegocio InsumoNeg = new InsumoNegocio();
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
 
-            ProductoNegocio prodNeg = new ProductoNegocio();
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataValueField = "id";
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataSource = prodNeg.Listar();
-            ((DropDownList)dgvFormulas.FooterRow.FindControl("ddlProductosFooter")).DataBind();
 
-            cboBuscar.DataSource = new ProductoNegocio().Listar();
-            cboBuscar.DataTextField = "Nombre";
-            cboBuscar.DataValueField = "id";
-            cboBuscar.DataBind();
         }
 
         void cargardgv()
         {
-            List<Formula> lista = (new FormulaNegocio().Listar());
+            List<Formula> lista = new List<Formula>(); //(new FormulaNegocio().Listar());
             dgvFormulas.DataSource = lista;
             dgvFormulas.DataBind();
            
@@ -76,20 +66,21 @@ namespace WebAplication
             cargardgv();
             InsumoNegocio InsumoNeg = new InsumoNegocio();
             FormulaNegocio formulaNeg = new FormulaNegocio();
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataValueField = "id";
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataTextField = "nombre";
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataSource = InsumoNeg.listar();
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataBind();
-            Formula formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).Items.FindByValue(formu.idInsumo.ToString()).Selected = true;
+            //int id = Convert.ToInt32(dgvFormulas.SelectedDataKey.Value.ToString());
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataValueField = "id";
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataTextField = "nombre";
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataSource = InsumoNeg.listar();
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataBind();
+            //Formula formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).Items.FindByValue(formu.idInsumo.ToString()).Selected = true;
 
-            ProductoNegocio ProdNeg = new ProductoNegocio();
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataValueField = "id";
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = ProdNeg.Listar();
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
-            formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(formu.idProducto.ToString()).Selected = true;
+            //ProductoNegocio ProdNeg = new ProductoNegocio();
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataValueField = "id";
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = ProdNeg.Listar();
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
+            //formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(formu.idProducto.ToString()).Selected = true;
 
         }
 
@@ -144,15 +135,16 @@ namespace WebAplication
         {
             FormulaNegocio forNegocio = new FormulaNegocio();
             Formula formula = new Formula();
-            
-            dgvFormulas.DataSource= forNegocio.Listar(Convert.ToInt32(cboBuscar.SelectedValue));
+            var algo = cboBuscar.SelectedValue.ToString();
+            dgvFormulas.DataSource= forNegocio.Listar(Convert.ToInt32(cboBuscar.SelectedValue.ToString()));
             dgvFormulas.DataBind();
             btnCancelar.Visible = true;
         }
         protected void btnCancelar_Click1(object sender, EventArgs e)
         {
-            cargardgv();
-
+            Response.Redirect("formulas.aspx");
         }
+
+      
     }
 }

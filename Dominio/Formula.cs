@@ -13,6 +13,6 @@ namespace Dominio
 
         //public Producto Producto;
         public long idInsumo { get; set; }
-        public float cantidad { get; set; }
+        public double cantidad { get; set; }
     }
 }

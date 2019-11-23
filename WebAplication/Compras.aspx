@@ -10,7 +10,7 @@
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
                        OnRowCommand="dgvCompras_RowCommand" OnRowEditing="dgvCompras_RowEditing"
             OnRowCancelingEdit="dgvCompras_RowCancelingEdit" OnRowUpdating="dgvCompras_RowUpdating" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
-            OnRowDeleting="dgvCompras_RowDeleting" >
+            OnRowDeleting="dgvCompras_RowDeleting" ShowFooter="false" >
             <columns>
                  <%--<ID>--%>
                     <asp:TemplateField HeaderText="ID">
@@ -140,7 +140,7 @@
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 
-                        <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
+          <%--<asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>--%>    
                         <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
                         </ItemTemplate>
                     <EditItemTemplate> 

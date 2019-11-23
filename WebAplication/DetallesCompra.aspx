@@ -14,7 +14,7 @@
         <asp:DropDownList runat="server" ID="ddlEstados">
             <asp:ListItem Text="Entregado" Value="Entregado" />
             <asp:ListItem Text="Pedido" Value="Pedido"/>
-            <asp:ListItem Text="Devolucion" Value="Devolucion" />
+            
         </asp:DropDownList>
         <asp:Label ID="Label2" runat="server" Text="Forma de pago"></asp:Label>
         <asp:DropDownList runat="server" ID="ddlFormaPago">
@@ -36,7 +36,7 @@
         <asp:Button cssClass="btn btn-success" ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar Producto" />
         <br />
         </div>
-    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" AutoGenerateSelectButton="true" AutoGenerateColumns="true" ShowFooter="true" DataKeyNames="ID" 
+    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" 
             Visible="false"  OnRowEditing="dgvDetalles_RowEditing"
             OnRowCancelingEdit="dgvDetalles_RowCancelingEdit" OnRowUpdating="dgvDetalles_RowUpdating"
             OnRowDeleting="dgvDetalles_RowDeleting"> 

@@ -104,5 +104,41 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool ContarRegistros(int id)
+        {
+            bool existe;
+            AccesoDatos datos = new AccesoDatos();
+            Proveedor prov;
+            List<Proveedor> lista = new List<Proveedor>();
+            try
+            {
+                datos.setearQuery("select p.id, p.nombre from proveedores as p inner join compras as c on c.idProveedor=p.id where c.idProveedor=@id");
+                datos.agregarParametro("@id", id);
+                datos.ejecutarLector();
+                while (datos.lector.Read())
+                {
+                    prov = new Proveedor();
+                    prov.id = datos.lector.GetInt64(0);
+                    prov.nombre = datos.lector.GetString(1);
+                    lista.Add(prov);
+
+                }
+                if (lista.Count > 0) { existe = true; }
+
+                else { existe = false; }
+
+                return existe;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
 }

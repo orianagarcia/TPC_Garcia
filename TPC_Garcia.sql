@@ -65,7 +65,7 @@ create table formulas
   estado bit not null,
 )
 
-create table compras
+CREATE table compras
 (
 id bigint not null primary key identity (1,1),
 idProveedor bigint not null foreign key references proveedores(id),
@@ -75,7 +75,7 @@ estadoCompra varchar (50) not null,
 total float null,
 estado bit not null,
 )
-create table detalleCompra
+CREATE table detalleCompra
 (
 id bigint not null primary key identity,
 idCompra bigint not null ,
@@ -95,15 +95,15 @@ telefono varchar(50) null,
 cargo varchar (50) null,
 estado bit not null,
 ) 
-
+insert into fabricca
 create table fabricaciones
 ( id bigint not null primary key identity (1,1),
   idProducto bigint not null foreign key references productos(id),
   cantidad float not null,
   idEmpleado bigint not null foreign key references empleados(id),
+  estadoFabricacion varchar(50),
   estado bit null,
   )
-
 create table clientes
   (
   id bigint not null primary key identity(1,1),

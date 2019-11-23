@@ -94,10 +94,19 @@ namespace WebAplication
             {
                 ProveedorNegocio proveedorNeg = new ProveedorNegocio();
                 long id = Convert.ToInt64(dgvProveedores.DataKeys[e.RowIndex].Value.ToString());
-                proveedorNeg.ModificarEstado(id);
-                lblCorrecto.Text = "Elminado correctamente.";
-                lblIncorrecto.Text = "";
-                Response.Redirect("proveedores.aspx");
+                if (proveedorNeg.ContarRegistros(Convert.ToInt32(id)) == true)
+                {
+                    lblCorrecto.Visible = true;
+                    lblCorrecto.Text = "NO SE PUEDE ELIMINAR EL PROVEEDOR. TIENE COMPRAS ASIGNADAS. ";
+                    lblIncorrecto.Text = "";
+                }
+                else
+                {
+                    proveedorNeg.ModificarEstado(id);
+                    lblCorrecto.Text = "Elminado correctamente.";
+                    lblIncorrecto.Text = "";
+                }
+
             }
             catch (Exception ex)
             {

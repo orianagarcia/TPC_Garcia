@@ -18,9 +18,7 @@ namespace Negocio
             {
                 string consulta = "select id,idProducto,idInsumo,cantidad from formulas ";
                 if (id != 0)
-                    consulta = consulta + "where idProducto=" + id.ToString()+ "and estado=1" ;
-                else
-                    consulta = consulta + "where estado=1"; 
+                    consulta = consulta + "where idProducto=" + id.ToString() ; 
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();

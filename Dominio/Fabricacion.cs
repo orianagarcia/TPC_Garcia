@@ -12,6 +12,7 @@ namespace Dominio
         public long idProducto { get; set; }
         public long idEmpleado { get; set;  }
         public double cantidad { get; set; }
+        public string estadoFab { get; set; }
         public bool estado { get; set; }
             
     }
