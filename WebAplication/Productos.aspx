@@ -28,7 +28,7 @@
                <%--<MARCA>--%>
                     <asp:TemplateField HeaderText="Marca">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idMarca")%>' runat="server" />
+                        <asp:label text='<%# Eval("marca.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                   <%--     <asp:TextBox runat="server" ID="txbMarca" Text='<%# Eval("idMarca")%>' />--%> 
@@ -41,7 +41,7 @@
                <%--<CATEGORIA>--%>
                     <asp:TemplateField HeaderText="Categoria">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idCategoria")%>' runat="server" />
+                        <asp:label text='<%# Eval("categoria.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                     <asp:DropDownList ID="ddlCategoria" runat="server" DataTextField="categoria" DataValueField="id"></asp:DropDownList>

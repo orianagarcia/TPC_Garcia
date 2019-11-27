@@ -116,7 +116,11 @@ create table clientes
   estado bit not null,
   )
 
-
+  create table comentariosXcompra
+  ( id bigint not null identity (1,1),
+    idCompra bigint not null foreign key references compras(id),
+    descripcion varchar(100)null,
+)
   insert into insumos values('Harina',0,'Kilos',1),('Azucar',0,'Gramos',1)
 
   insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420',1),('Chino',454785,'Brasil 1036',1)

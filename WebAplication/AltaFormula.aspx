@@ -18,24 +18,24 @@
            
      <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
      <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
-         <asp:Label ID="Medida" Text="" runat="server" />
+         <asp:Label ID="lblMedida" Text="" runat="server" />
         <asp:Button cssClass="btn btn-success" ID="btnAgregarInsumo" runat="server" OnClick="btnAgregarInsumo_Click" Text="Agregar Insumo" />
         <br />
         </div>
-    <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID">
+    <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" OnRowDeleting="dgvFormulas_RowDeleting">
                     
             <columns>
                  
                  <%--<Producto>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idProducto")%>' runat="server" />
+                        <asp:label text='<%# Eval("producto.nombre")%>' runat="server" />
                     </ItemTemplate>
                     </asp:TemplateField>
                <%--<INSUMO>--%>
                     <asp:TemplateField HeaderText="Insumo">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idInsumo")%>' runat="server" />
+                        <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     </asp:TemplateField>
                <%--<CANTIDAD>--%>

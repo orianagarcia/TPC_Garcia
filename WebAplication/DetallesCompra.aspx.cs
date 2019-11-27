@@ -80,7 +80,8 @@ namespace WebAplication
         {
             Compra compra = new Compra();
             CompraNegocio compraNegocio = new CompraNegocio();
-            compra.idProveedor = Convert.ToInt64(ddlProveedores.SelectedValue);
+            compra.proveedor = new Proveedor();
+            compra.proveedor.id = Convert.ToInt64(ddlProveedores.SelectedValue);
             compra.fechaCompra = Convert.ToDateTime(txbFecha.Text);
             compra.estadoCompra = (ddlEstados.SelectedValue).ToString();
             compra.formaPago = (ddlFormaPago.SelectedValue).ToString();
@@ -137,7 +138,6 @@ namespace WebAplication
             {
                 DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
-                long AYUDA = id;
                 int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
                 List<Detallecompra> lista = new List<Detallecompra>();
                 lista = (Session["DetalleCompra"] as List<Detallecompra>);

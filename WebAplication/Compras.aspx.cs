@@ -64,7 +64,7 @@ namespace WebAplication
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataTextField = "nombre";
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataBind();
             compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).Items.FindByValue(compra.idProveedor.ToString()).Selected = true;
+            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).Items.FindByValue(compra.proveedor.id.ToString()).Selected = true;
 
             EstadoNegocio estadoNeg = new EstadoNegocio();
             ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataValueField = "nombre";
@@ -97,8 +97,9 @@ namespace WebAplication
             {
                 CompraNegocio ComprasNeg = new CompraNegocio();
                 Compra compra = new Compra();
+                compra.proveedor = new Proveedor();
                 compra.id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
-                compra.idProveedor = Convert.ToInt64((dgvCompras.Rows[e.RowIndex].FindControl("ddlProveedor") as DropDownList).Text);
+                compra.proveedor.id = Convert.ToInt64((dgvCompras.Rows[e.RowIndex].FindControl("ddlProveedor") as DropDownList).Text);
                 compra.estadoCompra = (dgvCompras.Rows[e.RowIndex].FindControl("ddlEstado") as DropDownList).Text;
                 compra.formaPago = (dgvCompras.Rows[e.RowIndex].FindControl("ddlPago") as DropDownList).Text;
                 compra.total = Convert.ToDouble((dgvCompras.Rows[e.RowIndex].FindControl("txbTotal") as TextBox).Text);
@@ -238,7 +239,6 @@ namespace WebAplication
             {
                 DetalleCompraNegocio DetallecompraNeg = new DetalleCompraNegocio();
                 Detallecompra det = new Detallecompra();
-                det.id = 25;
                 det.idCompra = Convert.ToInt64(Session["idCompra"]);
                 det.idInsumo = Convert.ToInt64((dgvDetalles.Rows[e.RowIndex].FindControl("ddlInsumo") as DropDownList).Text);
                 det.cantidad = Convert.ToInt32((dgvDetalles.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
@@ -262,6 +262,10 @@ namespace WebAplication
             {
                 DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                txbDescripcion.Visible = true;
+                string descripcion = txbDescripcion.Text;
+                long idCompra = Convert.ToInt64(Session["idCompra"]) ; 
+                detNeg.AgregarComentario(idCompra,descripcion);
                 //detNeg.ModificarEstado(id);
                 //detNeg.EliminarStock(idInsumo);
                 lblCorrecto.Text = "Elminado correctamente.";

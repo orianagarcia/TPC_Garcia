@@ -45,8 +45,12 @@ namespace WebAplication
                     ProductoNegocio ProductoNeg = new ProductoNegocio();
                     Producto prod = new Producto();
                     prod.nombre = (dgvProductos.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
-                    prod.idMarca = Convert.ToInt64((dgvProductos.FooterRow.FindControl("ddlMarcaFooter") as DropDownList).Text);
-                    prod.idCategoria = Convert.ToInt64((dgvProductos.FooterRow.FindControl("ddlCategoriaFooter") as DropDownList).Text);
+                    prod.marca = new Marca();
+                    prod.marca.id = Convert.ToInt64((dgvProductos.FooterRow.FindControl("ddlMarcaFooter") as DropDownList).Text);
+                    prod.marca.nombre = (dgvProductos.FooterRow.FindControl("ddlMarcaFooter") as DropDownList).SelectedItem.ToString();
+                    prod.categoria = new Categoria();
+                    prod.categoria.id = Convert.ToInt64((dgvProductos.FooterRow.FindControl("ddlCategoriaFooter") as DropDownList).Text);
+                    prod.categoria.nombre = (dgvProductos.FooterRow.FindControl("ddlCategoriaFooter") as DropDownList).SelectedItem.ToString();
                     prod.stock = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbStockFooter") as TextBox).Text);
                     prod.costo = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbCostoFooter") as TextBox).Text);
                     prod.precioVenta = Convert.ToDouble((dgvProductos.FooterRow.FindControl("txbPrecioFooter") as TextBox).Text);
@@ -77,21 +81,21 @@ namespace WebAplication
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlMarca")).DataSource = marcaNeg.Listar();
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlMarca")).DataBind();
             Producto pr = (prodNeg.Listar(e.NewEditIndex+1))[0];
-            ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlMarca")).Items.FindByValue(pr.idMarca.ToString()).Selected=true;
+            ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlMarca")).Items.FindByValue(pr.marca.id.ToString()).Selected=true;
            CategoriaNegocio catNeg = new CategoriaNegocio();
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).DataValueField = "id";
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).DataTextField = "nombre";
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).DataSource = catNeg.Listar();
             ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).DataBind();
              pr = (prodNeg.Listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).Items.FindByValue(pr.idCategoria.ToString()).Selected = true;
+            ((DropDownList)dgvProductos.Rows[e.NewEditIndex].FindControl("ddlCategoria")).Items.FindByValue(pr.categoria.id.ToString()).Selected = true;
 
         }
 
         protected void dgvProductos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             dgvProductos.EditIndex = -1;
-            Cargardgv();
+            Response.Redirect("productos.aspx");
         }
 
         protected void dgvProductos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -102,8 +106,12 @@ namespace WebAplication
                 Producto prod = new Producto();
                 prod.id = Convert.ToInt64(dgvProductos.DataKeys[e.RowIndex].Value.ToString());
                 prod.nombre = (dgvProductos.Rows[e.RowIndex].FindControl("txbNombre") as TextBox).Text;
-                prod.idMarca = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("ddlMarca") as DropDownList).Text);
-                prod.idCategoria = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("ddlCategoria") as DropDownList).Text);
+                prod.marca = new Marca();
+                prod.marca.id = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("ddlMarca") as DropDownList).Text);
+                prod.marca.nombre = (dgvProductos.Rows[e.RowIndex].FindControl("ddlMarca") as DropDownList).SelectedItem.ToString();
+                prod.categoria = new Categoria();
+                prod.categoria.id = Convert.ToInt64((dgvProductos.Rows[e.RowIndex].FindControl("ddlCategoria") as DropDownList).Text);
+                prod.categoria.nombre = (dgvProductos.Rows[e.RowIndex].FindControl("ddlCategoria") as DropDownList).SelectedItem.ToString();
                 prod.stock = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbStock") as TextBox).Text);
                 prod.costo = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbCosto") as TextBox).Text);
                 prod.precioVenta = Convert.ToDouble((dgvProductos.Rows[e.RowIndex].FindControl("txbPrecio") as TextBox).Text);

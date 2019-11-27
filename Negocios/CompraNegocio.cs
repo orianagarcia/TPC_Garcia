@@ -15,22 +15,22 @@ namespace Negocio
             List<Compra> lista = new List<Compra>();
             try
             {
-                string consulta = "select id,idproveedor,fecha,total,formaPago,estadoCompra from compras ";
+                string consulta = "select compras.id,idproveedor,p.nombre,fecha,total,formaPago,estadoCompra from compras inner join proveedores as p on p.id=compras.idProveedor";
                 if (id != 0)
-                    consulta = consulta + "where id=" + id.ToString()+ " and estado = 1";
-                else
-                    consulta = consulta + "where estado = 1";
+                    consulta = consulta + " where compras.id=" + id.ToString();
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
                 while(datos.lector.Read())
                 {
                     compra = new Compra();
                     compra.id = datos.lector.GetInt64(0);
-                    compra.idProveedor = datos.lector.GetInt64(1);
-                    compra.fechaCompra = datos.lector.GetDateTime(2);
-                    compra.total = datos.lector.GetDouble(3);
-                    compra.formaPago = datos.lector.GetString(4);
-                    compra.estadoCompra = datos.lector.GetString(5);
+                    compra.proveedor = new Proveedor();
+                    compra.proveedor.id = datos.lector.GetInt64(1);
+                    compra.proveedor.nombre = datos.lector.GetString(2);
+                    compra.fechaCompra = datos.lector.GetDateTime(3);
+                    compra.total = datos.lector.GetDouble(4);
+                    compra.formaPago = datos.lector.GetString(5);
+                    compra.estadoCompra = datos.lector.GetString(6);
                     lista.Add(compra);
                 }
                 return lista;
@@ -52,7 +52,7 @@ namespace Negocio
             try
             {
                 datos.setearQuery("Insert into compras values (@Proveedor,@fecha, @formaPago, @estado,@total,1) ");
-                datos.agregarParametro("@Proveedor", aux.idProveedor);
+                datos.agregarParametro("@Proveedor", aux.proveedor.id);
                 datos.agregarParametro("@fecha", aux.fechaCompra);
                 datos.agregarParametro("@total", aux.total);
                 datos.agregarParametro("@formaPago", aux.formaPago);
@@ -78,7 +78,7 @@ namespace Negocio
             {
                 datos.setearQuery("update compras set idproveedor=@Proveedor,formaPago=@formaPago, estadoCompra=@estado,total=@total where id= @id");
                 datos.agregarParametro("@id", aux.id);
-                datos.agregarParametro("@Proveedor", aux.idProveedor);
+                datos.agregarParametro("@Proveedor", aux.proveedor.id);
                 datos.agregarParametro("@total", aux.total);
                 datos.agregarParametro("@formaPago", aux.formaPago);
                 datos.agregarParametro("@estado", aux.estadoCompra);

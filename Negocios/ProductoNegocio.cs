@@ -16,9 +16,9 @@ namespace Negocio
             List<Producto> lista = new List<Producto>();
             try
             {
-                string consulta = "select id, nombre,idMarca as 'Marca',idCategoria as 'Categoria',stock,costo,precioVenta,ultimaActualizacion from productos ";
+                string consulta = "select p.id,p.nombre,m.id,m.nombre,c.id,c.nombre,p.stock,p.costo, p.precioVenta,p.ultimaActualizacion from productos as p inner join marcas as m on p.idMarca = m.id inner join categorias as c on c.id= p.idCategoria ";
                 if (id != 0)
-                    consulta = consulta + "where id=" + id.ToString();
+                    consulta = consulta + "where p.id=" + id.ToString();
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
@@ -28,12 +28,16 @@ namespace Negocio
                     aux = new Producto();
                     aux.id = datos.lector.GetInt64(0);
                     aux.nombre = datos.lector.GetString(1);
-                    aux.idMarca = datos.lector.GetInt64(2);
-                    aux.idCategoria = datos.lector.GetInt64(3);
-                    aux.stock = datos.lector.GetDouble(4);
-                    aux.costo = datos.lector.GetDouble(5);
-                    aux.precioVenta = datos.lector.GetDouble(6);
-                    aux.fechaActualizacion = datos.lector.GetDateTime(7);
+                    aux.marca = new Marca();
+                    aux.marca.id = datos.lector.GetInt64(2);
+                    aux.marca.nombre = datos.lector.GetString(3);
+                    aux.categoria = new Categoria(); 
+                    aux.categoria.id = datos.lector.GetInt64(4);
+                    aux.categoria.nombre = datos.lector.GetString(5);
+                    aux.stock = datos.lector.GetDouble(6);
+                    aux.costo = datos.lector.GetDouble(7);
+                    aux.precioVenta = datos.lector.GetDouble(8);
+                    aux.fechaActualizacion = datos.lector.GetDateTime(9);
                     lista.Add(aux);
                 }
                 return lista;
@@ -55,8 +59,8 @@ namespace Negocio
             {
                 datos.setearQuery("Insert into productos values (@nombreProd,@marca, @categoria, @stock, @costo, @precioVenta,@fecha, @estado)");
                 datos.agregarParametro("@nombreProd", aux.nombre);
-                datos.agregarParametro("@marca", aux.idMarca);
-                datos.agregarParametro("@categoria", aux.idCategoria);
+                datos.agregarParametro("@marca", aux.marca.id);
+                datos.agregarParametro("@categoria", aux.categoria.id);
                 datos.agregarParametro("@stock", aux.stock);
                 datos.agregarParametro("@costo", aux.costo);
                 datos.agregarParametro("@precioVenta", aux.precioVenta);
@@ -84,8 +88,8 @@ namespace Negocio
                 datos.Clear();
                 datos.agregarParametro("@Id", aux.id);
                 datos.agregarParametro("@nombre", aux.nombre);
-                datos.agregarParametro("@idMarca", aux.idMarca);
-                datos.agregarParametro("@idCategoria", aux.idCategoria);
+                datos.agregarParametro("@idMarca", aux.marca.id);
+                datos.agregarParametro("@idCategoria", aux.categoria.id);
                 datos.agregarParametro("@stock", aux.stock);
                 datos.agregarParametro("@costo", aux.costo);
                 datos.agregarParametro("@precio", aux.precioVenta);

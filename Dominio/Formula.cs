@@ -9,10 +9,9 @@ namespace Dominio
     public class Formula
     {
         public long id { get; set; }
-         public long idProducto { get; set; }
-
-        //public Producto Producto;
-        public long idInsumo { get; set; }
+         
+        public Producto producto { get; set; }
+        public Insumo insumo { get; set; }
         public double cantidad { get; set; }
     }
 }

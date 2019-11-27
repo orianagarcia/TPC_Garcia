@@ -22,7 +22,7 @@
                <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Producto">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idProducto")%>' runat="server" />
+                        <asp:label text='<%# Eval("producto.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                         <asp:DropDownList ID="ddlProductos" runat="server" DataTextField="producto.nombre" DataValueField="producto.id"></asp:DropDownList>
@@ -34,7 +34,7 @@
                  <%--<INSUMO>--%>
                     <asp:TemplateField HeaderText="Insumo">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idInsumo")%>' runat="server" />
+                        <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                         <asp:DropDownList ID="ddlInsumos" runat="server" DataTextField="insumo" DataValueField="id"></asp:DropDownList>

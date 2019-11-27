@@ -154,5 +154,27 @@ namespace Negocio
             }
 
         }
+
+        public string BuscarMedida(string id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                string medida=""; 
+                datos.setearQuery("select m.nombre from insumos as i inner join medidas as m on m.id=i.Medida where i.id=@id");
+                datos.agregarParametro("@id", id);
+                datos.ejecutarLector();
+                while(datos.lector.Read())
+                {
+                    medida = datos.lector.GetString(0);
+                }
+                return medida;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

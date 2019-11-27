@@ -6,7 +6,7 @@
 
      <div> <asp:Button ID="btnAtras" cssClass="btn btn-success" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
 <div class="form-row ">
-   
+    <asp:TextBox id="txbDescripcion" runat="server" Visible="false" />  
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
                        OnRowCommand="dgvCompras_RowCommand" OnRowEditing="dgvCompras_RowEditing"
             OnRowCancelingEdit="dgvCompras_RowCancelingEdit" OnRowUpdating="dgvCompras_RowUpdating" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
@@ -22,7 +22,7 @@
                  <%--<PROVEEDOR>--%>
                     <asp:TemplateField HeaderText="Proveedor">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idProveedor")%>' runat="server" />
+                        <asp:label text='<%# Eval("proveedor.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                        <asp:DropDownList ID="ddlProveedor" runat="server"></asp:DropDownList> 

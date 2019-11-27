@@ -41,8 +41,12 @@ namespace WebAplication
                 {
                     FormulaNegocio FormulaNeg = new FormulaNegocio();
                     Formula formu= new Formula();
-                    formu.idInsumo = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).Text);
-                    formu.idProducto = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlProductosFooter") as DropDownList).Text);
+                    formu.insumo = new Insumo();
+                    formu.insumo.id = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).Text);
+                    formu.insumo.nombre = (dgvFormulas.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).SelectedItem.ToString();
+                    formu.producto = new Producto();
+                    formu.producto.id = Convert.ToInt64((dgvFormulas.FooterRow.FindControl("ddlProductosFooter") as DropDownList).Text);
+                    formu.producto.nombre = (dgvFormulas.FooterRow.FindControl("ddlProductosFooter") as DropDownList).SelectedItem.ToString();
                     formu.cantidad = Convert.ToInt32((dgvFormulas.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
                     FormulaNeg.Agregar(formu);
                     lblCorrecto.Text = "Agregado correctamente.";
@@ -66,21 +70,21 @@ namespace WebAplication
             cargardgv();
             InsumoNegocio InsumoNeg = new InsumoNegocio();
             FormulaNegocio formulaNeg = new FormulaNegocio();
-            //int id = Convert.ToInt32(dgvFormulas.SelectedDataKey.Value.ToString());
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataValueField = "id";
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataTextField = "nombre";
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataSource = InsumoNeg.listar();
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataBind();
-            //Formula formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).Items.FindByValue(formu.idInsumo.ToString()).Selected = true;
+            int id = Convert.ToInt32(dgvFormulas.SelectedDataKey.Value.ToString());
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataSource = InsumoNeg.listar();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).DataBind();
+            Formula formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlInsumos")).Items.FindByValue(formu.insumo.id.ToString()).Selected = true;
 
-            //ProductoNegocio ProdNeg = new ProductoNegocio();
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataValueField = "id";
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = ProdNeg.Listar();
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
-            //formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
-            //((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(formu.idProducto.ToString()).Selected = true;
+            ProductoNegocio ProdNeg = new ProductoNegocio();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataValueField = "id";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = ProdNeg.Listar();
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
+            formu = (formulaNeg.Listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvFormulas.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(formu.producto.id.ToString()).Selected = true;
 
         }
 
@@ -97,8 +101,12 @@ namespace WebAplication
                 FormulaNegocio FormulaNeg = new FormulaNegocio();
                 Formula formu = new Formula();
                 formu.id = Convert.ToInt64(dgvFormulas.DataKeys[e.RowIndex].Value.ToString());
-                formu.idInsumo = Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlInsumos") as DropDownList).Text);
-                formu.idProducto= Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).Text);
+                formu.insumo = new Insumo();
+                formu.insumo.id = Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlInsumos") as DropDownList).Text);
+                formu.insumo.nombre = (dgvFormulas.Rows[e.RowIndex].FindControl("ddlInsumos") as DropDownList).SelectedItem.ToString();
+                formu.producto = new Producto();
+                formu.producto.id= Convert.ToInt64((dgvFormulas.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).Text);
+                formu.producto.nombre = (dgvFormulas.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).SelectedItem.ToString();
                 formu.cantidad = Convert.ToInt32((dgvFormulas.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
                 FormulaNeg.Modificar(formu);
                 lblCorrecto.Text = "Modificado correctamente.";

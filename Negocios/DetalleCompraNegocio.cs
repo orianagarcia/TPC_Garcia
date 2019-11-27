@@ -115,5 +115,21 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void AgregarComentario(long id,string desc)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("insert into comentariosXcompra values (@id,@desc) ");
+                datos.agregarParametro("@id", id);
+                datos.agregarParametro("@desc", desc);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
