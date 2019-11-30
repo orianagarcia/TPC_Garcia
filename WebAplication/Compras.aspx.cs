@@ -33,10 +33,10 @@ namespace WebAplication
             dgvDetalles.DataSource = lista;
             dgvDetalles.DataBind();
             InsumoNegocio InsumoNeg = new InsumoNegocio();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
+            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
         }
 
         protected void dgvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -96,6 +96,7 @@ namespace WebAplication
             try
             {
                 CompraNegocio ComprasNeg = new CompraNegocio();
+                DetalleCompraNegocio detallesNeg = new DetalleCompraNegocio();
                 Compra compra = new Compra();
                 compra.proveedor = new Proveedor();
                 compra.id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
@@ -103,6 +104,22 @@ namespace WebAplication
                 compra.estadoCompra = (dgvCompras.Rows[e.RowIndex].FindControl("ddlEstado") as DropDownList).Text;
                 compra.formaPago = (dgvCompras.Rows[e.RowIndex].FindControl("ddlPago") as DropDownList).Text;
                 compra.total = Convert.ToDouble((dgvCompras.Rows[e.RowIndex].FindControl("txbTotal") as TextBox).Text);
+                compra.detalle = detallesNeg.Listar(Convert.ToInt32(compra.id));
+                if (compra.estadoCompra.Equals("Devolucion"))
+                {
+                    foreach (Detallecompra item in compra.detalle)
+                    {
+                        detallesNeg.EliminarStock(item);
+                    }
+
+                }
+                else if(compra.estadoCompra.Equals("Entregado"))
+                {
+                    foreach (Detallecompra item in compra.detalle)
+                    {
+                        detallesNeg.AgregarStock(item.id,item.cantidad);
+                    }
+                }
                 ComprasNeg.Modificar(compra);
                 lblCorrecto.Text = "Modificado correctamente.";
                 lblIncorrecto.Text = "";
@@ -116,35 +133,35 @@ namespace WebAplication
             }
         }
 
-        protected void dgvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            try
-            {
-                CompraNegocio ComprasNeg = new CompraNegocio();
-                DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
-                long id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
-                ComprasNeg.ModificarEstado(id);
-                Compra compra = new Compra();
-                ComprasNeg = new CompraNegocio();
-                compra.detalle = new List<Detallecompra>();
-                compra = ComprasNeg.listar(Convert.ToInt32(id))[0];
-                compra.detalle = detNeg.Listar(Convert.ToInt32(id)); 
-                foreach (Detallecompra Item in compra.detalle)
-                {
-                    compra.detalle = new List<Detallecompra>();
-                    ComprasNeg = new CompraNegocio();
-                    ComprasNeg.DisminuirStock(Item.idInsumo, Item.cantidad);
-                }
-                lblCorrecto.Text = "Compra devuelta.";
-                lblIncorrecto.Text = "";
-            }
-            catch (Exception ex)
-            {
-                lblCorrecto.Text = "";
-                lblIncorrecto.Text = ex.Message;
+        //protected void dgvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    try
+        //    {
+        //        CompraNegocio ComprasNeg = new CompraNegocio();
+        //        DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
+        //        long id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
+        //        ComprasNeg.ModificarEstado(id);
+        //        Compra compra = new Compra();
+        //        ComprasNeg = new CompraNegocio();
+        //        compra.detalle = new List<Detallecompra>();
+        //        compra = ComprasNeg.listar(Convert.ToInt32(id))[0];
+        //        compra.detalle = detNeg.Listar(Convert.ToInt32(id)); 
+        //        foreach (Detallecompra Item in compra.detalle)
+        //        {
+        //            compra.detalle = new List<Detallecompra>();
+        //            ComprasNeg = new CompraNegocio();
+        //            ComprasNeg.DisminuirStock(Item.insumo.id, Item.cantidad);
+        //        }
+        //        lblCorrecto.Text = "Compra devuelta.";
+        //        lblIncorrecto.Text = "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblCorrecto.Text = "";
+        //        lblIncorrecto.Text = ex.Message;
 
-            }
-        }
+        //    }
+        //}
         protected void btn_Detalle_Click(object sender, EventArgs e)
         {
             DetalleCompraNegocio detNegocio = new DetalleCompraNegocio();
@@ -168,12 +185,12 @@ namespace WebAplication
             dgvCompras.DataSource = comNeg.listar(id);
             dgvCompras.DataBind();
             Session["idCompra"] = id;
-            CargarDetalle(id); 
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = null;
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
+            CargarDetalle(id);
+            InsumoNegocio insumoNegocio = new InsumoNegocio();
+            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = insumoNegocio.listar();
+            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
+            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
+            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
             btnAtras.Visible = true;
         }
 
@@ -190,16 +207,21 @@ namespace WebAplication
                     DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
                     Detallecompra det = new Detallecompra();
                     CompraNegocio cn = new CompraNegocio();
-                    det.idInsumo = Convert.ToInt64((dgvDetalles.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).Text);
-                    det.cantidad = Convert.ToInt32((dgvDetalles.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
+                    det.insumo = new Insumo();
+                    det.insumo.id = Convert.ToInt64((dgvDetalles.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).Text);
+                    det.insumo.nombre = (dgvDetalles.FooterRow.FindControl("ddlInsumosFooter") as DropDownList).SelectedItem.ToString();                    det.cantidad = Convert.ToInt32((dgvDetalles.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
                     det.precioUnitario = Convert.ToDouble((dgvDetalles.FooterRow.FindControl("txbPrecioFooter") as TextBox).Text);
-                    det.idCompra = Convert.ToInt64(Session["idCompra"].ToString());
+                    det.cantidad = Convert.ToInt32((dgvDetalles.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
+                    det.totalProducto = det.precioUnitario * det.cantidad;
+                    det.compra = new Compra();
+                    det.compra.id = Convert.ToInt64(Session["idCompra"].ToString());
                     detNeg.Agregar(det);
-                    cn.AgregarStock(det.idInsumo,det.cantidad);
+                    cn.AgregarStock(det.insumo.id,det.cantidad);
+                    cn.ModificarTotal(det.compra.id, det.totalProducto);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";
 
-                    CargarDetalle(Convert.ToInt32(det.idCompra));
+                    CargarDetalle(Convert.ToInt32(det.compra.id));
                 }
             }
             catch (Exception ex)
@@ -222,7 +244,7 @@ namespace WebAplication
             ((DropDownList)dgvDetalles.Rows[e.NewEditIndex].FindControl("ddlInsumo")).DataTextField = "nombre";
             ((DropDownList)dgvDetalles.Rows[e.NewEditIndex].FindControl("ddlInsumo")).DataBind();
             Detallecompra det = (detNeg.Listar(e.NewEditIndex +1))[0];
-            ((DropDownList)dgvDetalles.Rows[e.NewEditIndex].FindControl("ddlInsumo")).Items.FindByValue(det.idInsumo.ToString()).Selected = true;
+            ((DropDownList)dgvDetalles.Rows[e.NewEditIndex].FindControl("ddlInsumo")).Items.FindByValue(det.insumo.id.ToString()).Selected = true;
 
 
         }
@@ -239,14 +261,17 @@ namespace WebAplication
             {
                 DetalleCompraNegocio DetallecompraNeg = new DetalleCompraNegocio();
                 Detallecompra det = new Detallecompra();
-                det.idCompra = Convert.ToInt64(Session["idCompra"]);
-                det.idInsumo = Convert.ToInt64((dgvDetalles.Rows[e.RowIndex].FindControl("ddlInsumo") as DropDownList).Text);
+                det.compra = new Compra();
+                det.insumo = new Insumo();
+                det.compra.id = Convert.ToInt64(Session["idCompra"]);
+                det.insumo.id = Convert.ToInt64((dgvDetalles.Rows[e.RowIndex].FindControl("ddlInsumo") as DropDownList).Text);
+                det.insumo.nombre = (dgvDetalles.Rows[e.RowIndex].FindControl("ddlInsumo") as DropDownList).Text.ToString();
                 det.cantidad = Convert.ToInt32((dgvDetalles.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
                 det.precioUnitario = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("txbPrecio") as TextBox).Text);
                 DetallecompraNeg.Modificar(det);
                 lblCorrecto.Text = "Modificado correctamente.";
                 lblIncorrecto.Text = "";
-                CargarDetalle(Convert.ToInt32(det.idCompra));
+                CargarDetalle(Convert.ToInt32(det.compra.id));
             }
             catch (Exception ex)
             {
@@ -262,15 +287,9 @@ namespace WebAplication
             {
                 DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                Session["idDetalle"] = id;
                 txbDescripcion.Visible = true;
-                string descripcion = txbDescripcion.Text;
-                long idCompra = Convert.ToInt64(Session["idCompra"]) ; 
-                detNeg.AgregarComentario(idCompra,descripcion);
-                //detNeg.ModificarEstado(id);
-                //detNeg.EliminarStock(idInsumo);
-                lblCorrecto.Text = "Elminado correctamente.";
-                lblIncorrecto.Text = "";
-                CargarDetalle(Convert.ToInt32(Session["idCompra"]));
+                btnAgregarDesc.Visible = true; 
             }
             catch (Exception ex)
             {
@@ -278,6 +297,34 @@ namespace WebAplication
                 lblIncorrecto.Text = ex.Message;
 
             }
+        }
+
+        protected void btnAgregarDesc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
+                Detallecompra detalle = new Detallecompra();
+                string descripcion = txbDescripcion.Text;
+                if (descripcion != "")
+                {
+                    long idCompra = Convert.ToInt64(Session["idCompra"]);
+                    long idDetalle = Convert.ToInt64(Session["idDetalle"]);
+                    detNeg.AgregarComentario(idCompra, descripcion);
+                    CargarDetalle(Convert.ToInt32(Session["idCompra"]));
+                    detNeg.ModificarEstado(idDetalle);
+                    detalle = detNeg.BuscarDetalle(Convert.ToInt32(idDetalle));
+                    detNeg.EliminarStock(detalle);
+                    lblCorrecto.Text = "Elminado correctamente.";
+                    lblIncorrecto.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto2.Text = "";
+                lblIncorrecto2.Text = ex.Message;
+            }
+         
         }
     }
 }

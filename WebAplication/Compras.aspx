@@ -6,11 +6,10 @@
 
      <div> <asp:Button ID="btnAtras" cssClass="btn btn-success" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
 <div class="form-row ">
-    <asp:TextBox id="txbDescripcion" runat="server" Visible="false" />  
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
                        OnRowCommand="dgvCompras_RowCommand" OnRowEditing="dgvCompras_RowEditing"
             OnRowCancelingEdit="dgvCompras_RowCancelingEdit" OnRowUpdating="dgvCompras_RowUpdating" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
-            OnRowDeleting="dgvCompras_RowDeleting" ShowFooter="false" >
+             ShowFooter="false" >
             <columns>
                  <%--<ID>--%>
                     <asp:TemplateField HeaderText="ID">
@@ -69,7 +68,7 @@
                     <asp:TemplateField >
                     <ItemTemplate> 
                         <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
-                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
+                        
                         <asp:ImageButton ImageUrl="~/Images/Carrito.png" runat="server" CommandName="Select" Tooltip="select" width="20px" Height="20px"/>
                        
                         
@@ -83,12 +82,16 @@
                     </asp:TemplateField>
             </columns>
         </asp:GridView>
-
+     </div>
         <br />
-        <asp:Label ID="lblCorrecto2" Text="" runat="server" forecolor="Green"/>
-        <br />
+    <div class="form-row" >
+    <asp:TextBox id="txbDescripcion" runat="server" Visible="false" Height="50px" Width="300px" MaxLength="100"  />  
+        <asp:Button ID="btnAgregarDesc" runat="server" Visible="false" Text="AgregarComentario" OnClick="btnAgregarDesc_Click"/>
+   </div>
+    <br />
         <asp:Label ID="lblIncorrecto2" Text="" runat="server" forecolor="Red"/>
-    </div>
+        <asp:Label ID="lblCorrecto2" Text="" runat="server" forecolor="Green"/>
+   
     <%--</div>--%>
 
     <div class="form-row ">
@@ -103,7 +106,7 @@
                  <%--<INSUMO>--%>
                     <asp:TemplateField HeaderText="Insumo">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idInsumo")%>' runat="server" />
+                        <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                         <asp:DropDownList runat="server" ID="ddlInsumo" />
@@ -135,6 +138,19 @@
                     </EditItemTemplate>
                     <FooterTemplate>
                          <asp:TextBox runat="server" ID="txbPrecioFooter" />
+                    </FooterTemplate>
+                    </asp:TemplateField>
+             <%--<TOTAL POR PRODUCTO>--%>
+                    <asp:TemplateField HeaderText="Parcial por producto">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("totalProducto")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+               <asp:Label runat="server" ID="txbParcial" enabled="false"/>
+                       
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                         <asp:Label runat="server" ID="txbParcialFooter" enabled="false"/>
                     </FooterTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>

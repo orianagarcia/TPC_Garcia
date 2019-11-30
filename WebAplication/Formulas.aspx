@@ -13,8 +13,8 @@
     </div>
     <%--</div>--%>
     <div class="form-row ">
-        <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" 
-            OnRowEditing="dgvFormulas_RowEditing" OnRowCommand="dgvFormulas_RowCommand"
+        <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="ID" 
+            OnRowEditing="dgvFormulas_RowEditing" OnRowCommand="dgvFormulas_RowCommand" 
             OnRowCancelingEdit="dgvFormulas_RowCancelingEdit" OnRowUpdating="dgvFormulas_RowUpdating"
             OnRowDeleting="dgvFormulas_RowDeleting">
             <columns>
@@ -25,10 +25,10 @@
                         <asp:label text='<%# Eval("producto.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:DropDownList ID="ddlProductos" runat="server" DataTextField="producto.nombre" DataValueField="producto.id"></asp:DropDownList>
+                        <asp:TextBox ID="txbProductos" runat="server" Enabled="false"></asp:TextBox>
                     </EditItemTemplate>
                     <FooterTemplate>
-                       <asp:DropDownList ID="ddlProductosFooter" runat="server" DataTextField="producto.nombre" DataValueField="producto.id"></asp:DropDownList>
+                       <asp:TextBox ID="txbProductosFooter" runat="server" Enabled="false"></asp:TextBox>
                     </FooterTemplate>
                     </asp:TemplateField>
                  <%--<INSUMO>--%>
@@ -37,10 +37,10 @@
                         <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:DropDownList ID="ddlInsumos" runat="server" DataTextField="insumo" DataValueField="id"></asp:DropDownList>
+                          <asp:TextBox ID="txbInsumos" runat="server" Enabled="false"></asp:TextBox>
                     </EditItemTemplate>
                     <FooterTemplate>
-                         <asp:DropDownList ID="ddlInsumosFooter" runat="server" DataTextField="insumo" DataValueField="id"></asp:DropDownList>
+                         <asp:DropDownList ID="ddlInsumosFooter" runat="server" DataTextField="insumo.nombre" DataValueField="insumo.id"></asp:DropDownList>
                     </FooterTemplate>
                     </asp:TemplateField>
                  <%--<CANTIDAD>--%>
@@ -58,8 +58,8 @@
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 
-                <%--       <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/> --%>
-                <%--       <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/> --%>
+                       <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
+                      <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
                         </ItemTemplate>
                     <EditItemTemplate> 
                        <asp:ImageButton ImageUrl="~/Images/guardar.png" runat="server" CommandName="Update" Tooltip="Update" width="20px" Height="20px"/>

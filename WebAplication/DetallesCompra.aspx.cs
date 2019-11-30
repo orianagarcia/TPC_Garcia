@@ -43,8 +43,9 @@ namespace WebAplication
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
             Detallecompra aux = new Detallecompra();
-
-            aux.idInsumo = Convert.ToInt64(ddlProductos.SelectedValue);
+            aux.insumo = new Insumo();
+            aux.insumo.id = Convert.ToInt64(ddlProductos.SelectedValue);
+            aux.insumo.nombre = ddlProductos.SelectedItem.ToString(); 
             aux.cantidad = Convert.ToInt32(txbCantidad.Text);
             aux.precioUnitario = Convert.ToDouble(txbPrecioU.Text);
             aux.totalProducto = Convert.ToDouble(aux.precioUnitario * aux.cantidad);
@@ -59,20 +60,18 @@ namespace WebAplication
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.Visible = true;
                 dgvDetalles.DataBind();
-                Session["Total"] = aux.totalProducto;
+                lblTotal.Text = aux.totalProducto.ToString();
             }
             else
             {
                 lista = (Session["DetalleCompra"] as List<Detallecompra>);
                 lista.Add(aux);
-                //PrecioAux = Convert.ToDouble(Session["Total"]);
-                //PrecioAux += aux.totalProducto;
-                //Session["Total"] = PrecioAux;
-
+                Double PrecioAux = Convert.ToInt64(lblTotal.Text);
+                PrecioAux += aux.totalProducto;
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.Visible = true;
                 dgvDetalles.DataBind();
-                //lblTotal.Text = PrecioAux.ToString();
+                lblTotal.Text = PrecioAux.ToString();
             }
 
         }
@@ -92,12 +91,12 @@ namespace WebAplication
             compraNegocio.agregar(compra);
             foreach (Detallecompra item in compra.detalle)
             {
-                compraNegocio.agregarProductosXCompra(compraNegocio.BuscarIDCompra(), item.idInsumo, item.cantidad, item.precioUnitario);
-                compraNegocio.AgregarStock(item.idInsumo, item.cantidad);
+                compraNegocio.agregarProductosXCompra(compraNegocio.BuscarIDCompra(), item.insumo.id, item.cantidad, item.precioUnitario);
+                compraNegocio.AgregarStock(item.insumo.id, item.cantidad);
 
             }
             Session["DetalleCompra"] = null;
-            //Session["Total"] = null;
+            Session["Total"] = null;
             Response.Redirect("DetallesCompra.aspx");
         }
 
@@ -144,10 +143,11 @@ namespace WebAplication
                 lista.RemoveAt(index);
                 Session["DetalleCompra"] = lista;
                 dgvDetalles.DataSource = lista;
-                dgvDetalles.DataBind();
-                //Double PrecioAux;
-                //PrecioAux = Convert.ToDouble(Session["Total"]);
+                //dgvDetalles.DataBind();
+                //Double PrecioAux = Convert.ToDouble(Session["Total"]);
+                //PrecioAux -= totalProducto;
                 //Session["Total"] = PrecioAux;
+
             }
             catch (Exception ex)
             {

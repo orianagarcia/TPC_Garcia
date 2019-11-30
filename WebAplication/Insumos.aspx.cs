@@ -29,7 +29,7 @@ namespace WebAplication
             dgvInsumos.DataSource = lista;
             dgvInsumos.DataBind();
             MedidaNegocio MedidaNeg = new MedidaNegocio();
-            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataValueField = "id";
+            ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataValueField = "nombre";
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataTextField = "nombre";
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataSource = MedidaNeg.Listar();
             ((DropDownList)dgvInsumos.FooterRow.FindControl("ddlMedidaFooter")).DataBind();
@@ -71,12 +71,12 @@ namespace WebAplication
             Insumo In = new Insumo();
            //int id = Convert.ToInt32(dgvInsumos.SelectedDataKey.Value.ToString());
             // Convert.ToInt64(((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField);
-            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField = "id";
+            ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataValueField = "nombre";
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataTextField = "nombre";
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataSource = MedidaNeg.Listar();
             ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).DataBind();
-            //In = (insNegocio.listar(id))[0];
-           //((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).Items.FindByValue(In.Medida).Selected = true;
+           In = (insNegocio.listar(e.NewEditIndex+1))[0];
+           ((DropDownList)dgvInsumos.Rows[e.NewEditIndex].FindControl("ddlMedida")).Items.FindByValue(In.Medida).Selected = true;
 
         }
 

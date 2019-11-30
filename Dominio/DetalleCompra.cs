@@ -9,8 +9,8 @@ namespace Dominio
     public class Detallecompra
     {
         public long id { get; set; }
-        public long idCompra { get; set; }
-        public long idInsumo { get; set; }
+        public Compra compra { get; set; }
+        public Insumo insumo { get; set; }
         public int cantidad { get; set; }
         public double precioUnitario { get; set; }
         public double totalProducto { get; set; } 

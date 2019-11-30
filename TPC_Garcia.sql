@@ -65,23 +65,24 @@ create table formulas
   estado bit not null,
 )
 
-CREATE table compras
+create table compras
 (
 id bigint not null primary key identity (1,1),
 idProveedor bigint not null foreign key references proveedores(id),
-fecha datetime not null,
+fecha date not null,
 formaPago varchar(50) not null,
 estadoCompra varchar (50) not null,
 total float null,
 estado bit not null,
 )
-CREATE table detalleCompra
+create table detalleCompra
 (
 id bigint not null primary key identity,
 idCompra bigint not null ,
 idInsumo bigint not null foreign key references insumos(id),
 cantidad int not null,
 precioUnitario float not null,
+TotalProducto float null,
 estado bit not null,
 )
 
@@ -95,7 +96,6 @@ telefono varchar(50) null,
 cargo varchar (50) null,
 estado bit not null,
 ) 
-insert into fabricca
 create table fabricaciones
 ( id bigint not null primary key identity (1,1),
   idProducto bigint not null foreign key references productos(id),
@@ -116,10 +116,11 @@ create table clientes
   estado bit not null,
   )
 
-  create table comentariosXcompra
+create table comentariosXcompra
   ( id bigint not null identity (1,1),
     idCompra bigint not null foreign key references compras(id),
     descripcion varchar(100)null,
+	fecha datetime not null,
 )
   insert into insumos values('Harina',0,'Kilos',1),('Azucar',0,'Gramos',1)
 

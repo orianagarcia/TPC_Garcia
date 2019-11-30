@@ -16,9 +16,9 @@ namespace Negocio
 
             try
             {
-                string consulta = "select id, idcompra, idinsumo, cantidad, precioUnitario  from detalleCompra ";
+                string consulta = "select d.id, d.idcompra,d.idInsumo,i.nombre, d.cantidad, d.precioUnitario, d.totalProducto  from detalleCompra as d inner join compras as c on c.id=d.idCompra inner join insumos as i on i.id=d.idinsumo where d.estado=1 ";
                 if (id != 0)
-                    consulta = consulta + "where idCompra=" + id.ToString();
+                    consulta = consulta + " and idCompra=" + id.ToString();
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
@@ -26,10 +26,14 @@ namespace Negocio
                 {
                     aux = new Detallecompra();
                     aux.id = datos.lector.GetInt64(0);
-                    aux.idCompra = datos.lector.GetInt64(1);
-                    aux.idInsumo = datos.lector.GetInt64(2);
-                    aux.cantidad = datos.lector.GetInt32(3);
-                    aux.precioUnitario = datos.lector.GetDouble(4);
+                    aux.compra = new Compra();
+                    aux.compra.id = datos.lector.GetInt64(1);
+                    aux.insumo = new Insumo();
+                    aux.insumo.id = datos.lector.GetInt64(2);
+                    aux.insumo.nombre = datos.lector.GetString(3);
+                    aux.cantidad = datos.lector.GetInt32(4);
+                    aux.precioUnitario = datos.lector.GetDouble(5);
+                    aux.totalProducto = datos.lector.GetDouble(6);
                     lista.Add(aux);
                 }
                 return lista;
@@ -51,15 +55,16 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idIns, @cant,@precioUnitario,1)");
-                datos.agregarParametro("@idCompra", aux.idCompra);
-                datos.agregarParametro("@idIns", aux.idInsumo);
+                datos.setearQuery("Insert into detalleCompra values (@idCompra,@idIns, @cant,@precioUnitario,@totalProducto,1)");
+                datos.agregarParametro("@idCompra", aux.compra.id);
+                datos.agregarParametro("@idIns", aux.insumo.id);
                 datos.agregarParametro("@cant", aux.cantidad);
                 datos.agregarParametro("@precioUnitario", aux.precioUnitario);
+                datos.agregarParametro("@totalProducto", aux.totalProducto); 
                 datos.ejecutarAccion();
                 datos.setearQuery("update insumos set stock=@cantidad where id=@idInsumo ");
                 datos.agregarParametro("@cantidad", aux.cantidad);
-                datos.agregarParametro("@idInsumo", aux.idInsumo);
+                datos.agregarParametro("@idInsumo", aux.insumo.id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -78,11 +83,12 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update detallecompra set idInsumo=@idIns,cantidad=@cant , precioUnitario=@precio  where id= @id");
+                datos.setearQuery("update detallecompra set idInsumo=@idIns,cantidad=@cant , precioUnitario=@precio, totalProducto=@totalProducto where id= @id");
                 datos.agregarParametro("@id", aux.id);
-                datos.agregarParametro("@idIns", aux.idInsumo);
+                datos.agregarParametro("@idIns", aux.insumo.id);
                 datos.agregarParametro("@cant", aux.cantidad);
                 datos.agregarParametro("@precio", aux.precioUnitario);
+                datos.agregarParametro("@totalProducto", aux.totalProducto);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -120,15 +126,90 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("insert into comentariosXcompra values (@id,@desc) ");
+                datos.setearQuery("insert into comentariosXcompra values (@id,@desc,@dia) ");
                 datos.agregarParametro("@id", id);
                 datos.agregarParametro("@desc", desc);
+                datos.agregarParametro("@dia", DateTime.Now);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
 
                 throw ex;
+            }
+        }
+        
+        public void EliminarStock(Detallecompra aux)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearQuery("update insumos set stock=stock-@cant where id=@id ");
+                datos.agregarParametro("@cant", aux.cantidad);
+                datos.agregarParametro("@id", aux.insumo.id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
+
+        }
+        public void ModificarEstado(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update detallecompra set estado=0 where id= @id");
+                datos.agregarParametro("@id",id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public Detallecompra BuscarDetalle(int id)
+        {
+             AccesoDatos datos = new AccesoDatos();
+             Detallecompra aux =  new Detallecompra(); ;
+
+            try
+            {
+                string consulta = "select d.id, d.idcompra,d.idInsumo,i.nombre, d.cantidad, d.precioUnitario, d.totalProducto  from detalleCompra as d inner join compras as c on c.id=d.idCompra inner join insumos as i on i.id=d.idinsumo where d.id=@id";
+                datos.agregarParametro("@id", id);
+                datos.setearQuery(consulta);
+                datos.ejecutarLector();
+                while (datos.lector.Read())
+                {
+                    aux.id = datos.lector.GetInt64(0);
+                    aux.compra = new Compra();
+                    aux.compra.id = datos.lector.GetInt64(1);
+                    aux.insumo = new Insumo();
+                    aux.insumo.id = datos.lector.GetInt64(2);
+                    aux.insumo.nombre = datos.lector.GetString(3);
+                    aux.cantidad = datos.lector.GetInt32(4);
+                    aux.precioUnitario = datos.lector.GetDouble(5);
+                    aux.totalProducto = datos.lector.GetDouble(6);
+                }
+                return aux;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

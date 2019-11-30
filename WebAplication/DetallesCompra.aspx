@@ -46,7 +46,7 @@
                  <%--<INSUMO>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("IdInsumo")%>' runat="server" />
+                        <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                        <%//<asp:TextBox runat="server" ID="txbNombre" Text='<%# Eval("IdInsumo")%>' />   %>
@@ -69,7 +69,16 @@
                     <EditItemTemplate> 
               <asp:TextBox runat="server" ID="txbPrecio" Text='<%# Eval("PrecioUnitario")%>' />   
                     </EditItemTemplate>
-                    
+                             </asp:TemplateField>
+             <%--<TOTAL POR PRODUCTO>--%>
+                    <asp:TemplateField HeaderText="Parcial por producto">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("totalProducto")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+              <asp:TextBox runat="server" ID="txbParcial" Text='<%# Eval("totalProducto")%>' />   
+                       
+                    </EditItemTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
@@ -80,7 +89,7 @@
             </columns>
         </asp:GridView>
 
-        <asp:Label ID="lbltxtTotal" runat="server" Text="Total:"></asp:Label>
+        <asp:Label ID="lblTotal" runat="server" Text="Total:"></asp:Label>
         <asp:TextBox ID="txbTotal" runat="server" Text="0"></asp:TextBox>
 
         <br />

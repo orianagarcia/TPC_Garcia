@@ -93,6 +93,26 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void ModificarTotal(long id,double aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update compras set total=total+@aux where id=@id"); 
+                datos.agregarParametro("@aux",aux);
+                datos.agregarParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void ModificarEstado(long id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -118,11 +138,12 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("INSERT INTO detalleCompra VALUES(@idCompra, @idIns, @cant,@precioUnitario,1)");
+                datos.setearQuery("INSERT INTO detalleCompra VALUES(@idCompra, @idIns, @cant,@precioUnitario,@totalProducto,1)");
                 datos.agregarParametro("@idCompra", IDCompra);
                 datos.agregarParametro("@idIns", IDInsumo);
                 datos.agregarParametro("@cant", Cantidad);
                 datos.agregarParametro("@precioUnitario", precioUnitario);
+                datos.agregarParametro("@totalProducto", Cantidad * precioUnitario);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

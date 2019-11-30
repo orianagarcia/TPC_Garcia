@@ -16,9 +16,9 @@ namespace Negocio
             List<Formula> lista = new List<Formula>();
             try
             {
-                string consulta = "select f.id,p.id,p.nombre,i.id,i.nombre,cantidad from formulas as f inner join productos as p on p.id = f.idProducto inner join insumos as i on f.idInsumo = i.id ";
+                string consulta = "select f.id,p.id,p.nombre,i.id,i.nombre,cantidad from formulas as f inner join productos as p on p.id = f.idProducto inner join insumos as i on f.idInsumo = i.id where f.estado=1 ";
                 if (id != 0)
-                    consulta = consulta + " where f.idProducto=" + id.ToString() ; 
+                    consulta = consulta + " and f.idProducto=" + id.ToString() ; 
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
@@ -48,13 +48,14 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
+        
         public void Agregar(Formula aux)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearQuery("Insert into formulas values (@idProducto,@idInsumo, @cantidad,1)");
+                datos.Clear();
                 datos.agregarParametro("@idProducto", aux.producto.id);
                 datos.agregarParametro("@idInsumo", aux.insumo.id);
                 datos.agregarParametro("@cantidad", aux.cantidad);
@@ -76,11 +77,10 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update Formulas set idInsumo = @idInsumo, idProducto=@idProducto, cantidad=@cantidad where ID = @Id");
+                datos.setearQuery("update Formulas set idInsumo = @idInsumo, cantidad=@cantidad where ID = @Id");
                 datos.Clear();
                 datos.agregarParametro("@Id", aux.id);
                 datos.agregarParametro("@idInsumo", aux.insumo.id);
-                datos.agregarParametro("@idProducto", aux.producto.id);
                 datos.agregarParametro("@cantidad", aux.cantidad);
                 datos.ejecutarAccion();
             }
