@@ -16,7 +16,11 @@
      <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
 
  <asp:Label ID="lblEstados" runat="server" Text="Estado"></asp:Label>
-    <asp:DropDownList ID="ddlEstados" runat="server" > </asp:DropDownList>
+        <asp:DropDownList runat="server" ID="ddlEstados">
+            <asp:ListItem Text="Completado" />
+            <asp:ListItem Text="Pendiente" />
+             <asp:ListItem Text="Cancelado" />
+        </asp:DropDownList>
         <asp:Button ID="btnAgregar" Text="Agregar" runat="server" OnClick="btnAgregar_Click"/>
     </div>
     <%--</div>--%>
@@ -29,26 +33,20 @@
                   <%--<idProducto>--%>
                     <asp:TemplateField HeaderText="Producto">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idProducto")%>' runat="server" />
+                        <asp:label text='<%# Eval("producto.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                         <asp:DropDownList runat="server" ID="ddlProductos" />  
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList runat="server" ID="ddlProductosFooter" />
-                    </FooterTemplate>
-                    </asp:TemplateField>
+                     </asp:TemplateField>
                  <%--<idEmpleado>--%>
                     <asp:TemplateField HeaderText="Empleado">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("idEmpleado")%>' runat="server" />
+                        <asp:label text='<%# Eval("empleado.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                         <asp:DropDownList runat="server" ID="ddlEmpleados" /> 
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList runat="server" ID="ddlEmpleadosFooter" />
-                    </FooterTemplate>
                     </asp:TemplateField>
                    <%--<Cantidad>--%>
                     <asp:TemplateField HeaderText="Cantidad">
@@ -58,9 +56,6 @@
                     <EditItemTemplate> 
                         <asp:TextBox runat="server" ID="txbCantidad" Text='<%# Eval("Cantidad")%>' />  
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox runat="server" ID="txbCantidadFooter" />
-                    </FooterTemplate>
                     </asp:TemplateField>
                  <%--<ESTADO>--%>
                     <asp:TemplateField HeaderText="Estado">
@@ -68,27 +63,24 @@
                         <asp:label text='<%# Eval("estadoFab")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                        <asp:DropDownList runat="server" ID="ddlEstados" />  
+                        <asp:DropDownList runat="server" ID="ddlEstadoEdit">
+                            <asp:ListItem Text="Completado" />
+                            <asp:ListItem Text="Pendiente" />
+                            <asp:ListItem Text="Cancelado" />
+                        </asp:DropDownList>
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:DropDownList runat="server" ID="ddlEstadosFooter" /> 
-                    </FooterTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 
                         <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
-                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
-                        </ItemTemplate>
+                         </ItemTemplate>
                     <EditItemTemplate> 
                        <asp:ImageButton ImageUrl="~/Images/guardar.png" runat="server" CommandName="Update" Tooltip="Update" width="20px" Height="20px"/>
                        <asp:ImageButton ImageUrl="~/Images/cancelar.png" runat="server" CommandName="Cancel" Tooltip="Cancel" width="20px" Height="20px"/>
                        
                     </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:ImageButton ImageUrl="~/Images/agregar.png" runat="server" CommandName="AddNew" Tooltip="AddNew" width="20px" Height="20px"/>
-                    </FooterTemplate>
-                    </asp:TemplateField>
+                      </asp:TemplateField>
             </columns>
         </asp:GridView>
 

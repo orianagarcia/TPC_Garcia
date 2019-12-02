@@ -13,6 +13,7 @@ namespace WebAplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 Cargardgv();
@@ -35,11 +36,6 @@ namespace WebAplication
             ddlEmpleados.DataTextField = "nombre";
             ddlEmpleados.DataSource = EmpleadoNeg.Listar();
             ddlEmpleados.DataBind();
-
-            ddlEstados.Items.Add("Pendiente");
-            ddlEstados.Items.Add("En Fabricacion");
-            ddlEstados.Items.Add("Completado");
-            ddlEstados.DataBind();
         }
         protected void dgvFabricaciones_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -49,12 +45,14 @@ namespace WebAplication
                 {
                     FabricacionNegocio FabricacionesNeg = new FabricacionNegocio();
                     Fabricacion fab = new Fabricacion();
-                    fab.idProducto = Convert.ToInt64((dgvFabricaciones.FooterRow.FindControl("ddlProductosFooter") as DropDownList).Text);
-                    fab.idEmpleado = Convert.ToInt64((dgvFabricaciones.FooterRow.FindControl("ddlEmpleadosFooter") as DropDownList).Text);
+                    fab.producto = new Producto();
+                    fab.empleado = new Empleado();
+                    fab.producto.id = Convert.ToInt64((dgvFabricaciones.FooterRow.FindControl("ddlProductosFooter") as DropDownList).Text);
+                    fab.empleado.id = Convert.ToInt64((dgvFabricaciones.FooterRow.FindControl("ddlEmpleadosFooter") as DropDownList).Text);
                     fab.cantidad = Convert.ToDouble((dgvFabricaciones.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
                     fab.estadoFab = ((dgvFabricaciones.FooterRow.FindControl("ddlEstadosFooter") as DropDownList).Text);
                     FabricacionesNeg.Agregar(fab);
-                    FabricacionesNeg.AgregarStock(fab.idProducto, fab.cantidad);
+                    FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";
                     Cargardgv();
@@ -79,8 +77,9 @@ namespace WebAplication
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataTextField = "nombre";
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataSource = prodNeg.Listar();
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlProductos")).DataBind();
-            //Producto pr = (prodNeg.Listar(e.NewEditIndex + 1))[0];
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(pr.id.ToString()).Selected = true;
+            Producto pr = (prodNeg.Listar(e.NewEditIndex + 1))[0];
+            Fabricacion fab = (fabNeg.Listar(e.NewEditIndex + 1))[0];
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlProductos")).Items.FindByValue(fab.producto.id.ToString()).Selected = true;
              fabNeg = new FabricacionNegocio();
             EmpleadoNegocio empNeg = new EmpleadoNegocio();
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).DataValueField = "id";
@@ -88,12 +87,12 @@ namespace WebAplication
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).DataSource = empNeg.Listar();
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).DataBind();
             //Fabricacion fab = (fabNeg.Listar(e.NewEditIndex + 1))[0];               
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).Items.FindByValue(fab.idEmpleado.ToString()).Selected = true;
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).Items.FindByValue(fab.empleado.id.ToString()).Selected = true;
 
-            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstados")).Items.Add("Pendiente");
-            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstados")).Items.Add("Completado");
-            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstados")).Items.Add("Cancelado");
-            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstados")).DataBind();
+            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Pendiente");
+            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Completado");
+            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Cancelado");
+            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).DataBind();
             
         }
 
@@ -109,29 +108,38 @@ namespace WebAplication
             {
                 FabricacionNegocio FabricacionesNeg = new FabricacionNegocio();
                 Fabricacion fab = new Fabricacion();
+                fab.producto = new Producto();
+                fab.empleado = new Empleado();
                 fab.id = Convert.ToInt64(dgvFabricaciones.DataKeys[e.RowIndex].Value.ToString());
-                fab.idProducto = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).Text);
-                fab.idEmpleado = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEmpleados") as DropDownList).Text);
+                fab.producto.id = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlProductos") as DropDownList).Text);
+                fab.empleado.id = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEmpleados") as DropDownList).Text);
                 fab.cantidad = Convert.ToDouble((dgvFabricaciones.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
-                fab.estadoFab = (dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEstados") as DropDownList).Text;
+                fab.estadoFab = (dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEstadoEdit") as DropDownList).Text;
                 if(fab.estadoFab.Equals("Completado"))
                 {
-                    int cant = FabricacionesNeg.ContarInsumosXProd(fab.idProducto);
-                    if (FabricacionesNeg.VerificarStock(fab.idProducto, cant, fab.cantidad))
+                    int cant = FabricacionesNeg.ContarInsumosXProd(fab.producto.id);
+                    if (FabricacionesNeg.VerificarStock(fab.producto.id, cant, fab.cantidad))
                     {
-                        FabricacionesNeg.AgregarStock(fab.idProducto, fab.cantidad);
+                        FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                         FabricacionesNeg.Modificar(fab);
                         lblCorrecto.Text = "Modificado correctamente.";
                         lblIncorrecto.Text = "";
-                        Cargardgv();
+                        Response.Redirect("Fabricaciones.aspx");
                     }
+                    else
+                    {
+                        Cargardgv();
+                        lblCorrecto.Text = "";
+                        lblIncorrecto.Text = "No se modifico";
+                        Response.Redirect("Fabricaciones.aspx");
+                    }
+                    
                 }
-                else
+                else if (fab.estadoFab.Equals("Cancelado"))
                 {
-                    lblCorrecto.Text = "";
-                    lblIncorrecto.Text = "No se modifico";
+                    FabricacionesNeg.Modificar(fab);
+                    Response.Redirect("Fabricaciones.aspx");
                 }
-
             }
             catch (Exception ex)
             {
@@ -164,17 +172,18 @@ namespace WebAplication
         {
             FabricacionNegocio FabricacionesNeg = new FabricacionNegocio();
             Fabricacion fab = new Fabricacion();
-            fab.idProducto = Convert.ToInt64(ddlProductos.SelectedValue);
-            fab.idEmpleado = Convert.ToInt64(ddlEmpleados.SelectedValue);
+            fab.producto = new Producto();
+            fab.empleado = new Empleado();
+            fab.producto.id = Convert.ToInt64(ddlProductos.SelectedValue);
+            fab.empleado.id = Convert.ToInt64(ddlEmpleados.SelectedValue);
             fab.cantidad = Convert.ToDouble(txbCantidad.Text);
             fab.estadoFab = ddlEstados.SelectedValue;
-            FabricacionesNeg.Agregar(fab);
             if(fab.estadoFab.Equals("Completado"))
             {
-                int cant = FabricacionesNeg.ContarInsumosXProd(fab.idProducto);
-                if (FabricacionesNeg.VerificarStock(fab.idProducto, cant, fab.cantidad))
+                int cant = FabricacionesNeg.ContarInsumosXProd(fab.producto.id);
+                if (FabricacionesNeg.VerificarStock(fab.producto.id, cant, fab.cantidad))
                 {
-                    FabricacionesNeg.AgregarStock(fab.idProducto, fab.cantidad);
+                    FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                     lblCorrecto.Text = "Tenemos los insumos!";
                     lblIncorrecto.Text = " "; 
                 }
@@ -189,8 +198,8 @@ namespace WebAplication
             }
             else if(fab.estadoFab.Equals("Pendiente"))
             {
-                int cant = FabricacionesNeg.ContarInsumosXProd(fab.idProducto);
-               if( FabricacionesNeg.VerificarStock(fab.idProducto, cant,fab.cantidad))
+                int cant = FabricacionesNeg.ContarInsumosXProd(fab.producto.id);
+               if( FabricacionesNeg.VerificarStock(fab.producto.id, cant,fab.cantidad))
                 {
                     lblCorrecto.Text = "Tenemos los insumos!";
                     lblIncorrecto.Text = " "; 

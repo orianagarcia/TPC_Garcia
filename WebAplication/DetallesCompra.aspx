@@ -73,7 +73,7 @@
              <%--<TOTAL POR PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Parcial por producto">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("totalProducto")%>' runat="server" />
+                        <asp:label ID="LblTprod" text='<%# Eval("totalProducto")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
               <asp:TextBox runat="server" ID="txbParcial" Text='<%# Eval("totalProducto")%>' />   

@@ -103,7 +103,8 @@ create table fabricaciones
   idEmpleado bigint not null foreign key references empleados(id),
   estadoFabricacion varchar(50),
   estado bit null,
-  )
+)
+
 create table clientes
   (
   id bigint not null primary key identity(1,1),
@@ -121,6 +122,20 @@ create table comentariosXcompra
     idCompra bigint not null foreign key references compras(id),
     descripcion varchar(100)null,
 	fecha datetime not null,
+)
+
+create table ventas
+(
+id bigint not null identity(1,1),
+descripcion varchar(50) null,
+idCliente bigint foreign key references clientes(id),
+idEmpleado bigint foreign key references empleados(id),
+fechaPedido datetime null,
+fechaEntrega datetime null,
+total float null,
+seña float null,
+estadoVenta varchar(50) not null,
+formaPago varchar(50) null,
 )
   insert into insumos values('Harina',0,'Kilos',1),('Azucar',0,'Gramos',1)
 

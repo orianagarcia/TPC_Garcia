@@ -17,6 +17,7 @@ namespace WebAplication
             if (!IsPostBack)
             {
                 CargarDGV();
+                Session["TotalCompra"] = 0;
                 List<Detallecompra> Detalle = new List<Detallecompra>();
                 dgvDetalles.DataSource = Detalle;
             }
@@ -49,29 +50,35 @@ namespace WebAplication
             aux.cantidad = Convert.ToInt32(txbCantidad.Text);
             aux.precioUnitario = Convert.ToDouble(txbPrecioU.Text);
             aux.totalProducto = Convert.ToDouble(aux.precioUnitario * aux.cantidad);
-            //double PrecioAux;
-            //lblTotal.Text = Session["PrecioFinal"].ToString();
             List<Detallecompra> lista;
+            List<double> listaPrecio= new List<double>();
             if (Session["DetalleCompra"] == null)
             {
                 lista = new List<Detallecompra>();
+                listaPrecio = new List<double>();
                 lista.Add(aux);
                 Session["DetalleCompra"] = lista;
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.Visible = true;
                 dgvDetalles.DataBind();
-                lblTotal.Text = aux.totalProducto.ToString();
+                txbTotal.Text = aux.totalProducto.ToString();
+                txbTotal.DataBind();
+                Session["TotalCompra"] = aux.totalProducto;
             }
             else
             {
                 lista = (Session["DetalleCompra"] as List<Detallecompra>);
+                //listaPrecio = (Session["TotalCompra"] as List<Double>);
                 lista.Add(aux);
-                Double PrecioAux = Convert.ToInt64(lblTotal.Text);
+                Double PrecioAux = Convert.ToDouble(txbTotal.Text);
                 PrecioAux += aux.totalProducto;
+                //txbTotal.Text = PrecioAux.ToString();
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.Visible = true;
                 dgvDetalles.DataBind();
-                lblTotal.Text = PrecioAux.ToString();
+                double Total = Convert.ToDouble(Session["TotalCompra"]);
+                Session["TotalCompra"] = Total + aux.totalProducto;
+                txbTotal.Text = Session["TotalCompra"].ToString();
             }
 
         }
@@ -89,12 +96,22 @@ namespace WebAplication
             DetalleCompraNegocio det = new DetalleCompraNegocio();
 
             compraNegocio.agregar(compra);
-            foreach (Detallecompra item in compra.detalle)
+            if(compra.estadoCompra.Equals("Entregado"))
             {
-                compraNegocio.agregarProductosXCompra(compraNegocio.BuscarIDCompra(), item.insumo.id, item.cantidad, item.precioUnitario);
-                compraNegocio.AgregarStock(item.insumo.id, item.cantidad);
-
+                foreach (Detallecompra item in compra.detalle)
+                {
+                    compraNegocio.agregarProductosXCompra(compraNegocio.BuscarIDCompra(), item.insumo.id, item.cantidad, item.precioUnitario);
+                    compraNegocio.AgregarStock(item.insumo.id, item.cantidad);
+                }
             }
+            else
+            {
+                foreach (Detallecompra item in compra.detalle)
+                {
+                    compraNegocio.agregarProductosXCompra(compraNegocio.BuscarIDCompra(), item.insumo.id, item.cantidad, item.precioUnitario);
+                }
+            }
+            
             Session["DetalleCompra"] = null;
             Session["Total"] = null;
             Response.Redirect("DetallesCompra.aspx");
@@ -138,22 +155,22 @@ namespace WebAplication
                 DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
                 int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
+                double Total = Convert.ToDouble(Session["TotalCompra"]);
+                Session["TotalCompra"] = Total - PU;
                 List<Detallecompra> lista = new List<Detallecompra>();
                 lista = (Session["DetalleCompra"] as List<Detallecompra>);
                 lista.RemoveAt(index);
                 Session["DetalleCompra"] = lista;
                 dgvDetalles.DataSource = lista;
-                //dgvDetalles.DataBind();
-                //Double PrecioAux = Convert.ToDouble(Session["Total"]);
-                //PrecioAux -= totalProducto;
-                //Session["Total"] = PrecioAux;
-
+                dgvDetalles.DataBind();
+                txbTotal.Text = Session["TotalCompra"].ToString(); 
+                //Session["TotalCompra"];
             }
             catch (Exception ex)
             {
                 lblCorrecto.Text = "";
                 lblIncorrecto.Text = ex.Message;
-
             }
         }
 

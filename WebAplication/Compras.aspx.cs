@@ -117,7 +117,7 @@ namespace WebAplication
                 {
                     foreach (Detallecompra item in compra.detalle)
                     {
-                        detallesNeg.AgregarStock(item.id,item.cantidad);
+                        detallesNeg.AgregarStock(item.insumo.id,item.cantidad);
                     }
                 }
                 ComprasNeg.Modificar(compra);
@@ -216,7 +216,7 @@ namespace WebAplication
                     det.compra = new Compra();
                     det.compra.id = Convert.ToInt64(Session["idCompra"].ToString());
                     detNeg.Agregar(det);
-                    cn.AgregarStock(det.insumo.id,det.cantidad);
+                    detNeg.AgregarStock(det.insumo.id,det.cantidad);
                     cn.ModificarTotal(det.compra.id, det.totalProducto);
                     lblCorrecto.Text = "Agregado correctamente.";
                     lblIncorrecto.Text = "";
