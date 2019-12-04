@@ -137,6 +137,20 @@ seña float null,
 estadoVenta varchar(50) not null,
 formaPago varchar(50) null,
 )
+
+create table detalleVenta
+(
+id bigint not null identity (1,1),
+idVenta bigint not null ,
+idProducto bigint not null foreign key references productos(id),
+cantidad float not null,
+precio float not null,
+totalProducto float not null,
+estado bit,
+)
+
+
+
   insert into insumos values('Harina',0,'Kilos',1),('Azucar',0,'Gramos',1)
 
   insert into proveedores values ('Vital','1167485968','Hipolito Yrigoyen 2420',1),('Chino',454785,'Brasil 1036',1)

@@ -11,12 +11,12 @@ namespace Dominio
         public long id { get; set; }
         public string descripcion { get; set; }
         public Cliente cliente { get; set; }
-        public Empleado empeado { get; set; }
+        public Empleado empleado { get; set; }
         public DateTime fechaEntrega { get; set; }
-        public DateTime fechaSolicitud { get; set; }
+        public DateTime fechaPedido { get; set; }
         public List<DetalleVenta> detalle { get; set; }
-        public decimal Total { get; set; }
-        public decimal seña { get; set; }
+        public double total { get; set; }
+        public double seña { get; set; }
         public string formaPago { get; set; }
         public string estado { get; set; }
     }

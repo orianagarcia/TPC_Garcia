@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
     <div>
-        <h2 style= "color:Green ">Productos</h2>
+        <h2  class="btn btn-info" style = color: " White">Productos</h2>
     </div>
     <%--</div>--%>
     <div class="form-row ">

@@ -3,9 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-       
+       <div>
+        <h2 class="btn btn-info" style = color: " White">Nueva Compra</h2>
+    </div>
     <asp:Label Text="Fecha" runat="server" />
-    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" />  
+    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" TextMode="DateTime" />  
         <br />
         <br />
     <asp:Label ID="lblProveedor" runat="server" Text="Proveedor"></asp:Label>
@@ -33,7 +35,7 @@
         <asp:TextBox ID="txbPrecioU" Text= "0" runat="server"></asp:TextBox>
         <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
         <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
-        <asp:Button cssClass="btn btn-success" ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar Producto" />
+        <asp:Button cssClass="btn btn-info" ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar Producto" />
         <br />
         </div>
     <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" 
@@ -94,7 +96,7 @@
 
         <br />
         <br />
-        <asp:Button cssClass="btn btn-success" ID="btnGuardarFactura" runat="server" Text="Guardar Compra" OnClick="btnGuardarFactura_Click"/>
+        <asp:Button cssClass="btn btn-info" ID="btnGuardarFactura" runat="server" Text="Guardar Compra" OnClick="btnGuardarFactura_Click"/>
 
         <br />
         <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>

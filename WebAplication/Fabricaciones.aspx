@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
           <div>
-        <h2 style= "color:Green ">Fabricaciones</h2>
+        <h2 class="btn btn-info" style = color: " White">Fabricaciones</h2>
     </div>
     <div>
      <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>

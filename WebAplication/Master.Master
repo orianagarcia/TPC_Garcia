@@ -29,7 +29,7 @@
 
         .navbar {
             width: 100%;
-            background: lightgreen;
+            background: red;
         }
 
             .navbar ul { /*CADA UL DELTRO DE MI NAVBAR*/
@@ -44,14 +44,14 @@
             .menu > li a {
                 display: block;
                 padding: 15px 20px; /*ESPACIO */
-                color: black;
+                color: white;
                 font-size: 16px;
-                font-family: 'Calibri';
+                font-family: Gadugi;
                 text-decoration: none;
             }
 
         .menu li a:hover {
-            color: green; /*color en el menu al desplazarme */
+            color: white; /*color en el menu al desplazarme */
             border: 1px solid #808080;
         }
 
@@ -66,8 +66,8 @@
             .submenu li a {
                 display: block block;
                 padding: 15px; /*15px a todos los lados, espacio*/
-                color: black;
-                font-family: Calibri;
+                color:white;
+                font-family:Gadugi;
                 font-size: 16px;
                 text-decoration: none; /*SIN SUBRAYADO EL ENLACE*/
             }
@@ -83,44 +83,44 @@
     <form id="form1" runat="server">
         <div>
 
-            <nav class="navbar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="menu">
-                    <li><a href="#">Insumos</a>
+                    <li><a class="btn btn-primary dropdown-toggle"  href="#">Insumos</a>
                         <ul class="submenu">
-                            <li><a href="insumos.aspx" class="">Insumos </a></li>
-                            <li><a href="Proveedores.aspx" class="">Proveedores </a></li>
+                            <li><a class="btn btn-primary" href="insumos.aspx">Insumos </a></li>
+                            <li><a class="btn btn-primary" href="Proveedores.aspx" >Proveedores </a></li>
                        </ul>
                     </li>
-                    <li><a href="#">Compras</a>
+                    <li><a class="btn btn-primary dropdown-toggle" href="#">Compras</a>
                         <ul class="submenu">
-                            <li><a href="DetallesCompra.aspx" class="">Agregar Compra</a></li>
-                            <li><a href="Compras.aspx" class="">Listar Compras </a></li>
+                            <li><a href="DetallesCompra.aspx" class="btn btn-primary">Nueva Compra</a></li>
+                            <li><a href="Compras.aspx" class="btn btn-primary">Listado Compras </a></li>
                              </ul>
                     </li>
-                    <li><a href="#">Productos</a>
+                    <li><a class="btn btn-primary dropdown-toggle"  href="#">Productos</a>
                         <ul class="submenu">
-                            <li><a href="Productos.aspx" class="">Productos</a></li>
-                            <li><a href="Marcas.aspx" class="">Marcas</a></li>
-                            <li><a href="Categorias.aspx" class="">Categorias</a></li>
+                            <li><a href="Productos.aspx" class="btn btn-primary">Productos</a></li>
+                            <li><a href="Marcas.aspx" class="btn btn-primary">Marcas</a></li>
+                            <li><a href="Categorias.aspx" class="btn btn-primary">Categorias</a></li>
                               </ul>
                     </li>
-                    <li><a href="#">Formulas</a>
+                    <li><a class="btn btn-primary dropdown-toggle"  href="#">Formulas</a>
                         <ul class="submenu">
-                             <li><a href="AltaFormula.aspx" class="">Agregar Formula</a></li>
-                            <li><a href="Formulas.aspx" class="">Listar Formulas </a></li>
+                             <li><a href="AltaFormula.aspx" class="btn btn-primary">Nueva Formula</a></li>
+                            <li><a href="Formulas.aspx" class="btn btn-primary">Listado Formulas </a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Ventas</a>
+                    <li><a class="btn btn-primary dropdown-toggle" href="#">Ventas</a>
                         <ul class="submenu">
-                            <li><a href="#" class="">Pedidos</a></li>
-                            <li><a href="#" class="">Ventas</a></li>
-                            <li><a href="Clientes.aspx" class="">Clientes</a></li>
+                             <li><a href="NuevaVenta.aspx" class="btn btn-primary">Nueva Venta</a></li>
+                            <li><a href="Ventas.aspx" class="btn btn-primary"> Listado Ventas</a></li>
+                            <li><a href="Clientes.aspx" class="btn btn-primary">Clientes</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Empleados</a>
+                    <li><a class="btn btn-primary dropdown-toggle" href="#">Empleados</a>
                         <ul class="submenu">
-                            <li><a href="Empleados.aspx" class="">Empleados</a></li>
-                            <li><a href="Fabricaciones.aspx" class="">Fabricaciones</a></li>
+                            <li><a class="btn btn-primary" href="Empleados.aspx" >Empleados</a></li>
+                            <li><a class="btn btn-primary" href="Fabricaciones.aspx" >Fabricaciones</a></li>
                             
                         </ul>
                     </li>

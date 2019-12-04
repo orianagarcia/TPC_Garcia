@@ -53,6 +53,7 @@ namespace WebAplication
 
         protected void dgvCompras_RowEditing(object sender, GridViewEditEventArgs e)
         {
+
             dgvCompras.EditIndex = e.NewEditIndex;
             CargarCombos();
             ProveedorNegocio provNeg = new ProveedorNegocio();

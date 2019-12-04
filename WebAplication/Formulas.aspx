@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   <div>
-        <h2 style= "color: Green" >Formulas</h2>
+        <h2 class="btn btn-info" style = color: " White" >Formulas</h2>
     </div>
      <div class="form-row"   Style="margin-top: 30px; margin-left: 30px;"> 
         <h5>BUSCAR FORMULA POR PRODUCTO </h5>

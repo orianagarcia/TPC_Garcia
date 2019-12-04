@@ -3,13 +3,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div>
-       
+       <asp:Label ID="lbl" runat="server" Text="Nueva Formula" class="btn btn-info"></asp:Label>
+          <br />
     <asp:Label Text="Fecha" runat="server" />
-    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" />  
+    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" TextMode="DateTime" />  
         <br />
         <br />
    
-    
     <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>
     <asp:DropDownList ID="ddlProductos" runat="server" > </asp:DropDownList>
 

@@ -12,14 +12,13 @@ namespace WebAplication
 {
     public partial class DetalleCompra : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarDGV();
                 Session["TotalCompra"] = 0;
-                List<Detallecompra> Detalle = new List<Detallecompra>();
-                dgvDetalles.DataSource = Detalle;
             }
         }
 
@@ -62,7 +61,6 @@ namespace WebAplication
                 dgvDetalles.Visible = true;
                 dgvDetalles.DataBind();
                 txbTotal.Text = aux.totalProducto.ToString();
-                txbTotal.DataBind();
                 Session["TotalCompra"] = aux.totalProducto;
             }
             else
