@@ -48,9 +48,24 @@ namespace WebAplication
             txbTotal.Text = venta.total.ToString();
             txbSeña.Text = venta.seña.ToString();
             txbDesc.Text = venta.descripcion;
+            double deuda = venta.total - venta.seña; 
+            txbAdeuda.Text = deuda.ToString();
             dgvDetalles.DataSource = detNeg.Listar(Convert.ToInt32(idVenta));
             dgvDetalles.DataBind();
         }
 
+        protected void btnModVenta_Click(object sender, EventArgs e)
+        {
+            VentaNegocio ventaNeg = new VentaNegocio();
+            Venta venta = new Venta();
+            venta.fechaEntrega = Convert.ToDateTime(txbEntrega.Text);
+            venta.fechaPedido = Convert.ToDateTime(txbPedido.Text);
+            venta.formaPago = ddlFormaPago.SelectedValue;
+            venta.empleado = new Empleado();
+            venta.empleado.id = Convert.ToInt64(ddlEmpleados.SelectedValue);
+            venta.cliente = new Cliente();
+            venta.cliente.id = Convert.ToInt64(ddlClientes.SelectedValue);
+
+        }
     }
 }

@@ -211,6 +211,42 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.TextBox txbSeña;
         
         /// <summary>
+        /// Control lblAdeuda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdeuda;
+        
+        /// <summary>
+        /// Control txbAdeuda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbAdeuda;
+        
+        /// <summary>
+        /// Control lblNuevoP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNuevoP;
+        
+        /// <summary>
+        /// Control txbNuevoPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbNuevoPago;
+        
+        /// <summary>
         /// Control lblDesc.
         /// </summary>
         /// <remarks>

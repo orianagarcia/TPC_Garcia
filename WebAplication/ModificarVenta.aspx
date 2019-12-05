@@ -5,7 +5,7 @@
 
     <div>
      <div>
-        <h2 class="btn btn-info" style = color: " White">Nueva Venta </h2>
+        <h2 class="btn btn-info" style = color: " White">Modificacion Venta </h2>
     </div>   
     <asp:Label ID="lblCliente" runat="server" Text="Cliente" class="btn btn-info"></asp:Label>
     <asp:DropDownList ID="ddlClientes" runat="server" class="btn btn-secondary dropdown-toggle"> </asp:DropDownList>
@@ -40,8 +40,9 @@
         <asp:Label ID="lblCantidad" runat="server" Text="Cantidad" class="btn btn-info"></asp:Label>
         <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
         <asp:Button cssClass="btn btn-info" ID="btnAgregarProducto"   runat="server" Text="Agregar Producto" />
-        <br />
+        
         </div>
+    <br />
     <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" >
                     
             <columns>
@@ -49,7 +50,7 @@
                  <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("producto.nombre")%>' runat="server" />
+                        <asp:label  text='<%# Eval("producto.nombre")%>' runat="server" />
                     </ItemTemplate>
                     </asp:TemplateField>
                    <%--<PRECIO>--%>
@@ -95,17 +96,21 @@
         
         <asp:Label ID="lblSeña" runat="server" Text="Seña:" class="btn btn-info"></asp:Label>
         <asp:TextBox ID="txbSeña" runat="server" Text="0"></asp:TextBox>
-    <br />
-        <br />
+
+    <asp:Label ID="lblAdeuda" runat="server" Text="Adeuda:" class="btn btn-info"></asp:Label>
+        <asp:TextBox ID="txbAdeuda" runat="server"></asp:TextBox>
+        <asp:Label ID="lblNuevoP" runat="server" Text="Nuevo Pago:" class="btn btn-info"></asp:Label>
+        <asp:TextBox ID="txbNuevoPago" runat="server" Text="0"></asp:TextBox>
+    <br /> <br />
     <asp:Label ID="lblDesc" runat="server" Text="Descripcion:" class="btn btn-info"></asp:Label>
         <asp:TextBox ID="txbDesc" runat="server" ></asp:TextBox>
         <br /> <br />
-        <asp:Button cssClass="btn btn-info" ID="btnModVenta" runat="server" Text="Modificar Venta" />
+        <asp:Button cssClass="btn btn-info" ID="btnModVenta" runat="server" Text="Modificar Venta" OnClick="btnModVenta_Click"/>
 
         <br />
-        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
+        <asp:Label cssClass="btn btn-info" ID="lblCorrecto" Text="" runat="server" forecolor="white"/>
         <br />
-        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+        <asp:Label  cssClass="btn btn-info" ID="lblIncorrecto" Text="" runat="server" forecolor="white"/>
 
 
 

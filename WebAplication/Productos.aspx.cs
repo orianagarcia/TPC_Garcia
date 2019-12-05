@@ -134,10 +134,19 @@ namespace WebAplication
             {
                 ProductoNegocio ProductoNeg = new ProductoNegocio();
                 long id = Convert.ToInt64(dgvProductos.DataKeys[e.RowIndex].Value.ToString());
-                ProductoNeg.ModificarEstado(id);
-                lblCorrecto.Text = "Elminado correctamente.";
-                lblIncorrecto.Text = "";
-                Response.Redirect("productos.aspx");
+                if (ProductoNeg.ContarRegistros(id) == true)
+                {
+                    lblCorrecto.Visible = true;
+                    lblCorrecto.Text = "NO SE PUEDE ELIMINAR EL PRODUCTO. TIENE FABRICACIONES ASIGNADAS. ";
+                    lblIncorrecto.Text = "";
+                }
+                else
+                {
+                    ProductoNeg.ModificarEstado(id);
+                    lblCorrecto.Text = "Elminado correctamente.";
+                    lblIncorrecto.Text = "";
+                    Cargardgv();
+                }
             }
             catch (Exception ex)
             {

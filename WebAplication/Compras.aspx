@@ -6,7 +6,7 @@
      <div>
         <h2 class="btn btn-info" style = color: " White">Compras</h2>
     </div>
-     <div> <asp:Button ID="btnAtras" cssClass="btn btn-success" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
+     <div> <asp:Button ID="btnAtras" cssClass="btn btn-info" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
 <div class="form-row ">
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
                        OnRowCommand="dgvCompras_RowCommand" OnRowEditing="dgvCompras_RowEditing"
@@ -71,7 +71,7 @@
                     <ItemTemplate> 
                         <asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>
                         
-                        <asp:ImageButton ImageUrl="~/Images/Carrito.png" runat="server" CommandName="Select" Tooltip="select" width="20px" Height="20px"/>
+                        <asp:ImageButton ImageUrl="~/Images/Carrito.png" runat="server" CommandName="Select" Tooltip="Ver detalle" width="20px" Height="20px"/>
                        
                         
                         </ItemTemplate>

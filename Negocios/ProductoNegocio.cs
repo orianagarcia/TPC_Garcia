@@ -16,9 +16,9 @@ namespace Negocio
             List<Producto> lista = new List<Producto>();
             try
             {
-                string consulta = "select p.id,p.nombre,m.id,m.nombre,c.id,c.nombre,p.stock,p.costo, p.precioVenta,p.ultimaActualizacion from productos as p inner join marcas as m on p.idMarca = m.id inner join categorias as c on c.id= p.idCategoria ";
+                string consulta = "select p.id,p.nombre,m.id,m.nombre,c.id,c.nombre,p.stock,p.costo, p.precioVenta,p.ultimaActualizacion from productos as p inner join marcas as m on p.idMarca = m.id inner join categorias as c on c.id= p.idCategoria where p.estado=1 ";
                 if (id != 0)
-                    consulta = consulta + "where p.id=" + id.ToString();
+                    consulta = consulta + "and p.id=" + id.ToString();
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();
@@ -147,6 +147,42 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool ContarRegistros(long id)
+        {
+            
+            AccesoDatos datos = new AccesoDatos();
+            Producto pr;
+            List<Producto> lista = new List<Producto>();
+            try
+            {
+                datos.setearQuery("select p.id,p.nombre from productos as p inner join fabricaciones as f on f.idProducto = p.id where f.idProducto=@id");
+                datos.agregarParametro("@id", id);
+                datos.ejecutarLector();
+                while (datos.lector.Read())
+                {
+                    pr = new Producto();
+                    pr.id = datos.lector.GetInt64(0);
+                    pr.nombre = datos.lector.GetString(1);
+                    lista.Add(pr);
+
+                }
+                if (lista.Count > 0) { return true; }
+
+                else { return false; }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
     }
 
 }
