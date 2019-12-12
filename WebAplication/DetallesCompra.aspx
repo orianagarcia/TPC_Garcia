@@ -23,6 +23,7 @@
             <asp:ListItem Text="Mercado Pago" Value="Mercado Pago"/>
             <asp:ListItem Text="Efectivo"  Value="Efectivo"/>
             <asp:ListItem Text="Tarjeta de Credito" Value="Tarjeta de Credito" />
+            <asp:ListItem Text="Tarjeta de Debito" Value="Tarjeta de Debito" />
             <asp:ListItem Text="Transferencia" Value="Transferencia" />
         </asp:DropDownList>
         <br />

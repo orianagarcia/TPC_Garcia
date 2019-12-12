@@ -25,72 +25,24 @@ namespace WebAplication
             List<Compra> lista = (new CompraNegocio().listar());
             dgvCompras.DataSource = lista;
             dgvCompras.DataBind();
-            //dgvCompras.Columns[0].Visible=false;
         }
         protected void CargarDetalle(int id)
         {
             List<Detallecompra> lista = (new DetalleCompraNegocio().Listar(id));
             dgvDetalles.DataSource = lista;
             dgvDetalles.DataBind();
-            InsumoNegocio InsumoNeg = new InsumoNegocio();
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = InsumoNeg.listar();
-            //((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
         }
 
-        protected void dgvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {   
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
+       
 
         protected void dgvCompras_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
             dgvCompras.EditIndex = e.NewEditIndex;
-            CargarCombos();
-            ProveedorNegocio provNeg = new ProveedorNegocio();
-            CompraNegocio compraNegocio = new CompraNegocio();
-            Compra compra = new Compra();
-            Estado estado = new Estado();
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataSource = provNeg.listar();
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataValueField = "id";
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataTextField = "nombre";
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).DataBind();
-            compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlProveedor")).Items.FindByValue(compra.proveedor.id.ToString()).Selected = true;
-
-            EstadoNegocio estadoNeg = new EstadoNegocio();
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataValueField = "nombre";
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataTextField = "nombre";
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataSource = estadoNeg.Listar();
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).DataBind();
-            compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
-          ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlEstado")).Items.FindByValue(compra.estadoCompra).Selected = true;
-
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Mercado Pago");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Efectivo");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Credito");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Tarjeta de Debito");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Transferencia");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.Add("Cuenta corriente");
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).DataBind();
-            compra = (compraNegocio.listar(e.NewEditIndex + 1))[0];
-            ((DropDownList)dgvCompras.Rows[e.NewEditIndex].FindControl("ddlPago")).Items.FindByValue(compra.formaPago).Selected = true;
+            long idCompra = Convert.ToInt64((dgvCompras.Rows[e.NewEditIndex].FindControl("lblID") as Label).Text);
+            Session["idCompraMod"] = idCompra;
+            Response.Redirect("ModificarCompra.aspx");
         }
 
-        protected void dgvCompras_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            dgvCompras.EditIndex = -1;
-            Response.Redirect("compras.aspx");
-        }
 
         protected void dgvCompras_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -134,35 +86,6 @@ namespace WebAplication
             }
         }
 
-        //protected void dgvCompras_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        //{
-        //    try
-        //    {
-        //        CompraNegocio ComprasNeg = new CompraNegocio();
-        //        DetalleCompraNegocio detNeg = new DetalleCompraNegocio();
-        //        long id = Convert.ToInt64(dgvCompras.DataKeys[e.RowIndex].Value.ToString());
-        //        ComprasNeg.ModificarEstado(id);
-        //        Compra compra = new Compra();
-        //        ComprasNeg = new CompraNegocio();
-        //        compra.detalle = new List<Detallecompra>();
-        //        compra = ComprasNeg.listar(Convert.ToInt32(id))[0];
-        //        compra.detalle = detNeg.Listar(Convert.ToInt32(id)); 
-        //        foreach (Detallecompra Item in compra.detalle)
-        //        {
-        //            compra.detalle = new List<Detallecompra>();
-        //            ComprasNeg = new CompraNegocio();
-        //            ComprasNeg.DisminuirStock(Item.insumo.id, Item.cantidad);
-        //        }
-        //        lblCorrecto.Text = "Compra devuelta.";
-        //        lblIncorrecto.Text = "";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lblCorrecto.Text = "";
-        //        lblIncorrecto.Text = ex.Message;
-
-        //    }
-        //}
         protected void btn_Detalle_Click(object sender, EventArgs e)
         {
             DetalleCompraNegocio detNegocio = new DetalleCompraNegocio();
@@ -175,10 +98,11 @@ namespace WebAplication
 
         protected void dgvCompras_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             GridViewRow gr = dgvCompras.SelectedRow;
             DetalleCompraNegocio detNegocio = new DetalleCompraNegocio();
-            CompraNegocio comNeg = new CompraNegocio(); 
-            int id ;
+            CompraNegocio comNeg = new CompraNegocio();
+            int id;
             id = Convert.ToInt32(dgvCompras.SelectedDataKey.Value.ToString());
             dgvDetalles.DataSource = detNegocio.Listar(id);
             dgvDetalles.DataBind();
@@ -187,11 +111,6 @@ namespace WebAplication
             dgvCompras.DataBind();
             Session["idCompra"] = id;
             CargarDetalle(id);
-            InsumoNegocio insumoNegocio = new InsumoNegocio();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataSource = insumoNegocio.listar();
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataValueField = "id";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataTextField = "nombre";
-            ((DropDownList)dgvDetalles.FooterRow.FindControl("ddlInsumosFooter")).DataBind();
             btnAtras.Visible = true;
         }
 

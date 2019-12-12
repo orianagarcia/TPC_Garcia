@@ -152,13 +152,13 @@ namespace WebAplication
             {
                 DetalleCompraNegocio DetallesNeg = new DetalleCompraNegocio();
                 long id = Convert.ToInt64(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
-                int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                //int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
                 double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
                 double Total = Convert.ToDouble(Session["TotalCompra"]);
                 Session["TotalCompra"] = Total - PU;
                 List<Detallecompra> lista = new List<Detallecompra>();
                 lista = (Session["DetalleCompra"] as List<Detallecompra>);
-                lista.RemoveAt(index);
+                lista.RemoveAt(e.RowIndex);
                 Session["DetalleCompra"] = lista;
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.DataBind();

@@ -38,12 +38,34 @@ namespace WebAplication
             dgvVentas.EditIndex = -1;
             Response.Redirect("ventas.aspx");
         }
-
-        protected void dgvVentas_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void CargarDetalle(int id)
         {
-
+            List<DetalleVenta> lista = (new DetalleVentaNegocio().Listar(id));
+            dgvDetalle.DataSource = lista;
+            dgvDetalle.DataBind();
+            
+        }
+        protected void dgvVentas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow gr = dgvVentas.SelectedRow;
+            DetalleVentaNegocio detNegocio = new DetalleVentaNegocio();
+            VentaNegocio ventaNeg = new VentaNegocio();
+            int id;
+            id = Convert.ToInt32(dgvVentas.SelectedDataKey.Value.ToString());
+            dgvDetalle.DataSource = detNegocio.Listar(id);
+            dgvDetalle.DataBind();
+            dgvDetalle.Visible = true;
+            dgvVentas.DataSource = ventaNeg.listar(id);
+            dgvVentas.DataBind();
+            Session["idCompra"] = id;
+            CargarDetalle(id);
+            btnAtras.Visible = true;
         }
 
 
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ventas.aspx"); 
+        }
     }
 }

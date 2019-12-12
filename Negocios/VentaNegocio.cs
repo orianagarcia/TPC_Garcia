@@ -82,5 +82,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void Modificar(Venta aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update ventas set idCliente=@cliente,formaPago=@formaPago, estadoVenta=@estado ,total=@total, fechaPedido=@fechaPedido, fechaEntrega=@fechaEntrega , idEmpleado=@empleado , descripcion=@desc, seña=seña+@seña where id=@id");
+                datos.agregarParametro("@id", aux.id);
+                datos.agregarParametro("@cliente", aux.cliente.id);
+                datos.agregarParametro("@total", aux.total);
+                datos.agregarParametro("@formaPago", aux.formaPago);
+                datos.agregarParametro("@estado", aux.estado);
+                datos.agregarParametro("@fechaPedido", aux.fechaPedido);
+                datos.agregarParametro("@fechaEntrega", aux.fechaEntrega);
+                datos.agregarParametro("@empleado", aux.empleado.id);
+                datos.agregarParametro("@desc", aux.descripcion);
+                datos.agregarParametro("@seña", aux.seña);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

@@ -42,8 +42,8 @@
         <asp:Button cssClass="btn btn-info" ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click"  runat="server" Text="Agregar Producto" />
         <br />
         </div>
-    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" 
-            Visible="false" OnRowDeleting="dgvDetalles_RowDeleting" >
+    <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false"  
+            Visible="false" OnRowDeleting="dgvDetalles_RowDeleting" OnSelectedIndexChanged="dgvDetalles_SelectedIndexChanged"  >
                     
             <columns>
                  
@@ -85,7 +85,7 @@
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 
-                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
+                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="delete" Tooltip="delete" width="20px" Height="20px"/>
                         </ItemTemplate>
                     </asp:TemplateField>
             </columns>

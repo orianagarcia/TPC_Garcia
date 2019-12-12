@@ -4,10 +4,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>   
          <h2  class="btn btn-info" style = color: " White">Ventas</h2>
+        <asp:Button ID="btnAtras" Text="Volver Atras" OnClick="btnAtras_Click" Visible="false" class="btn btn-info" runat="server" />
     </div>
 <div class="form-row ">
         <asp:GridView ID="dgvVentas" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
-            OnRowEditing="dgvVentas_RowEditing" OnRowCancelingEdit="dgvVentas_RowCancelingEdit" OnRowUpdating="dgvVentas_RowUpdating" >
+            OnRowEditing="dgvVentas_RowEditing" OnRowCancelingEdit="dgvVentas_RowCancelingEdit" OnSelectedIndexChanged="dgvVentas_SelectedIndexChanged" >
             <columns>
                  <%--<ID>--%>
                     <asp:TemplateField HeaderText="ID">
@@ -116,5 +117,47 @@
             </columns>
         </asp:GridView>
      </div>
+    <asp:GridView runat="server" ID="dgvDetalle" Visible="false" CssClass="table table-striped" AutoGenerateColumns="false" >
+                            
+            <columns>
+                 
+                 <%--<PRODUCTO>--%>
+                    <asp:TemplateField HeaderText="Producto">
+                    <ItemTemplate> 
+                        <asp:label  text='<%# Eval("producto.nombre")%>' runat="server" />
+                    </ItemTemplate>
+                    </asp:TemplateField>
+                   <%--<PRECIO>--%>
+                    <asp:TemplateField HeaderText="Precio">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("precio")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+              <asp:TextBox runat="server" ID="txbPrecio" Text='<%# Eval("producto.precioVenta")%>' />   
+                    </EditItemTemplate>
+                             </asp:TemplateField>
+               <%--<CANTIDAD>--%>
+                    <asp:TemplateField HeaderText="Cantidad">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("Cantidad")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:TextBox runat="server" ID="txbCantidad" Text='<%# Eval("Cantidad")%>' />  
+                    </EditItemTemplate>
+                    </asp:TemplateField>
+            
+             <%--<TOTAL POR PRODUCTO>--%>
+                    <asp:TemplateField HeaderText="Parcial por producto">
+                    <ItemTemplate> 
+                        <asp:label ID="LblTprod" text='<%# Eval("totalProducto")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+              <asp:TextBox runat="server" ID="txbParcial" Text='<%# Eval("totalProducto")%>' />   
+                       
+                    </EditItemTemplate>
+                    </asp:TemplateField>
+                 
+            </columns>
 
+    </asp:GridView>
 </asp:Content>

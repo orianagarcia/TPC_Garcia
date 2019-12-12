@@ -113,6 +113,40 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Formula ListarXidFormula(int idFormu)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Formula aux  = new Formula();
+            try
+            {
+                string consulta = "select f.id,p.id,p.nombre,i.id,i.nombre,cantidad from formulas as f inner join productos as p on p.id = f.idProducto inner join insumos as i on f.idInsumo = i.id where f.id=@idFormu and f.estado=1 ";
+                datos.agregarParametro("@idFormu", idFormu);
+                datos.setearQuery(consulta);
+                datos.ejecutarLector();
 
+                while (datos.lector.Read())
+                {
+                    aux.id = datos.lector.GetInt64(0);
+                    aux.producto = new Producto();
+                    aux.producto.id = datos.lector.GetInt64(1);
+                    aux.producto.nombre = datos.lector.GetString(2);
+                    aux.insumo = new Insumo();
+                    aux.insumo.id = datos.lector.GetInt64(3);
+                    aux.insumo.nombre = datos.lector.GetString(4);
+                    aux.cantidad = datos.lector.GetInt32(5);
+                    
+                }
+                return aux;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

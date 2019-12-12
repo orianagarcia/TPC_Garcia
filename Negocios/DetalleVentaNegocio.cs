@@ -59,7 +59,7 @@ namespace Negocio
                 datos.agregarParametro("@idVenta", aux.venta.id);
                 datos.agregarParametro("@idProducto", aux.producto.id);
                 datos.agregarParametro("@cant", aux.cantidad);
-                datos.agregarParametro("@precio", aux.precio);
+                datos.agregarParametro("@precio", aux.producto.precioVenta);
                 datos.agregarParametro("@total", aux.totalProducto);
                 datos.ejecutarAccion();
             }

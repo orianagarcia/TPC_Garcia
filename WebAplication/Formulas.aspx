@@ -6,10 +6,10 @@
         <h2 class="btn btn-info" style = color: " White" >Formulas</h2>
     </div>
      <div class="form-row"   Style="margin-top: 30px; margin-left: 30px;"> 
-        <h5>BUSCAR FORMULA POR PRODUCTO </h5>
-        <asp:DropDownList ID="cboBuscar" runat="server"> </asp:DropDownList>
-        <asp:Button CssClass="btn btn-success" ID="btnBuscar" Text="Buscar" runat="server" OnClick="btnBuscar_Click"/>
-        <asp:Button CssClass="btn btn-success" ID="btnCancelar" Text="Volver atras" runat="server" OnClick="btnCancelar_Click1" Visible="false"/>
+        <h5 class="btn btn-info" >Seleccione un producto para ver su formula </h5>
+        <asp:DropDownList ID="cboBuscar" runat="server" class="btn btn-secondary dropdown-toggle"> </asp:DropDownList>
+        <asp:Button class="btn btn-info" ID="btnBuscar" Text="Buscar" runat="server" OnClick="btnBuscar_Click"/>
+        <asp:Button class="btn btn-info" ID="btnCancelar" Text="Volver atras" runat="server" OnClick="btnCancelar_Click1" Visible="false"/>
     </div>
     <%--</div>--%>
     <div class="form-row ">
@@ -18,7 +18,12 @@
             OnRowCancelingEdit="dgvFormulas_RowCancelingEdit" OnRowUpdating="dgvFormulas_RowUpdating"
             OnRowDeleting="dgvFormulas_RowDeleting">
             <columns>
-                
+                  <%--<ID>--%>
+                    <asp:TemplateField HeaderText="ID" >
+                    <ItemTemplate> 
+                        <asp:label ID="lblId" text='<%# Eval("id")%>' runat="server" />
+                    </ItemTemplate>
+                    </asp:TemplateField>
                <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Producto">
                     <ItemTemplate> 
@@ -34,10 +39,10 @@
                  <%--<INSUMO>--%>
                     <asp:TemplateField HeaderText="Insumo">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("insumo.nombre")%>' runat="server" />
+                        <asp:label ID="lblInsumo" text='<%# Eval("insumo.nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
-                          <asp:TextBox ID="txbInsumos" runat="server" Enabled="false"></asp:TextBox>
+                          <asp:DropDownList ID="ddlInsumos" runat="server" DataTextField="insumo.nombre" DataValueField="insumo.id" ></asp:DropDownList>
                     </EditItemTemplate>
                     <FooterTemplate>
                          <asp:DropDownList ID="ddlInsumosFooter" runat="server" DataTextField="insumo.nombre" DataValueField="insumo.id"></asp:DropDownList>

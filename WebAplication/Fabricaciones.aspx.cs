@@ -89,11 +89,12 @@ namespace WebAplication
             //Fabricacion fab = (fabNeg.Listar(e.NewEditIndex + 1))[0];               
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEmpleados")).Items.FindByValue(fab.empleado.id.ToString()).Selected = true;
 
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Pendiente");
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Completado");
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Cancelado");
-            //((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).DataBind();
-            
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Pendiente");
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Completado");
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Cancelado");
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).DataBind();
+            ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.FindByValue(fab.estadoFab).Selected = true;
+
         }
 
         protected void dgvFabricaciones_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -115,6 +116,9 @@ namespace WebAplication
                 fab.empleado.id = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEmpleados") as DropDownList).Text);
                 fab.cantidad = Convert.ToDouble((dgvFabricaciones.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
                 fab.estadoFab = (dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEstadoEdit") as DropDownList).Text;
+                List<Formula> listaFormula;
+                FormulaNegocio formuNeg = new FormulaNegocio();
+                listaFormula = formuNeg.Listar(Convert.ToInt32(fab.producto.id)); 
                 if(fab.estadoFab.Equals("Completado"))
                 {
                     int cant = FabricacionesNeg.ContarInsumosXProd(fab.producto.id);
@@ -122,6 +126,10 @@ namespace WebAplication
                     {
                         FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                         FabricacionesNeg.Modificar(fab);
+                        foreach(Formula item in listaFormula)
+                        {
+                            FabricacionesNeg.DisminuirStock(item.insumo.id, item.cantidad, fab.cantidad);
+                        }
                         lblCorrecto.Text = "Modificado correctamente.";
                         lblIncorrecto.Text = "";
                         Response.Redirect("Fabricaciones.aspx");
@@ -135,7 +143,7 @@ namespace WebAplication
                     }
                     
                 }
-                else if (fab.estadoFab.Equals("Cancelado"))
+                else 
                 {
                     FabricacionesNeg.Modificar(fab);
                     Response.Redirect("Fabricaciones.aspx");
@@ -178,21 +186,31 @@ namespace WebAplication
             fab.empleado.id = Convert.ToInt64(ddlEmpleados.SelectedValue);
             fab.cantidad = Convert.ToDouble(txbCantidad.Text);
             fab.estadoFab = ddlEstados.SelectedValue;
-            if(fab.estadoFab.Equals("Completado"))
+            List<Formula> listaFormula;
+            FormulaNegocio formuNeg = new FormulaNegocio();
+            listaFormula = formuNeg.Listar(Convert.ToInt32(fab.producto.id));
+            if (fab.estadoFab.Equals("Completado"))
             {
                 int cant = FabricacionesNeg.ContarInsumosXProd(fab.producto.id);
                 if (FabricacionesNeg.VerificarStock(fab.producto.id, cant, fab.cantidad))
                 {
                     FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                     lblCorrecto.Text = "Tenemos los insumos!";
-                    lblIncorrecto.Text = " "; 
+                    lblIncorrecto.Text = " ";
+                    FabricacionesNeg.Agregar(fab);
+                    foreach (Formula item in listaFormula)
+                    {
+                        FabricacionesNeg.DisminuirStock(item.insumo.id, item.cantidad,fab.cantidad);
+                    }
+                    Cargardgv();
                 }
                 else
                 {
-                    lblIncorrecto.Text = "No hay insumos suficientes. ";
+                    lblIncorrecto.Text = "No hay insumos suficientes. Se asignara estado Pendiente";
                     lblCorrecto.Text = " ";
                     fab.estadoFab = "Pendiente";
                     FabricacionesNeg.Agregar(fab);
+                    Cargardgv();
 
                 }  
             }
@@ -216,6 +234,7 @@ namespace WebAplication
             {
                 lblCorrecto.Text = "Agregado correctamente.";
                 lblIncorrecto.Text = "";
+                FabricacionesNeg.Agregar(fab);
                 Cargardgv();
             }
            

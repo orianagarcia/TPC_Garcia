@@ -9,14 +9,13 @@
      <div> <asp:Button ID="btnAtras" cssClass="btn btn-info" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
 <div class="form-row ">
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
-                       OnRowCommand="dgvCompras_RowCommand" OnRowEditing="dgvCompras_RowEditing"
-            OnRowCancelingEdit="dgvCompras_RowCancelingEdit" OnRowUpdating="dgvCompras_RowUpdating" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
+                      OnRowEditing="dgvCompras_RowEditing" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
              ShowFooter="false" >
             <columns>
                  <%--<ID>--%>
                     <asp:TemplateField HeaderText="ID">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("Id")%>' runat="server" />
+                        <asp:label ID="lblID" text='<%# Eval("Id")%>' runat="server" />
                     </ItemTemplate>
                     
                     </asp:TemplateField>
@@ -98,8 +97,8 @@
 
     <div class="form-row ">
        
-        <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" ShowFooter="true" AutoGenerateColumns="false"  DataKeyNames="ID" 
-            Visible="false" ShowHeaderWhenEmpty="true" ShowFooterWhenEmpty="true" 
+        <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" ShowFooter="false" AutoGenerateColumns="false"  DataKeyNames="ID" 
+            Visible="false" ShowHeaderWhenEmpty="true" 
                       OnRowCommand="dgvDetalles_RowCommand" OnRowEditing="dgvDetalles_RowEditing"
             OnRowCancelingEdit="dgvDetalles_RowCancelingEdit" OnRowUpdating="dgvDetalles_RowUpdating"
             OnRowDeleting="dgvDetalles_RowDeleting">
@@ -155,21 +154,7 @@
                          <asp:Label runat="server" ID="txbParcialFooter" enabled="false"/>
                     </FooterTemplate>
                     </asp:TemplateField>
-                   <%--<ACCIONES >--%>
-                    <asp:TemplateField >
-                    <ItemTemplate> 
-          <%--<asp:ImageButton ImageUrl="~/Images/modificar.png" runat="server" CommandName="Edit" Tooltip="edit" width="20px" Height="20px"/>--%>    
-                        <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
-                        </ItemTemplate>
-                    <EditItemTemplate> 
-                       <asp:ImageButton ImageUrl="~/Images/guardar.png" runat="server" CommandName="Update" Tooltip="Update" width="20px" Height="20px"/>
-                       <asp:ImageButton ImageUrl="~/Images/cancelar.png" runat="server" CommandName="Cancel" Tooltip="Cancel" width="20px" Height="20px"/>
-                       
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:ImageButton ImageUrl="~/Images/agregar.png" runat="server" CommandName="AddNew" Tooltip="AddNew" width="20px" Height="20px"/>
-                    </FooterTemplate>
-                    </asp:TemplateField>
+          
             </columns>
         </asp:GridView>
 

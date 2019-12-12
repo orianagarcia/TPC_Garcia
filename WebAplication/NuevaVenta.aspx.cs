@@ -102,28 +102,34 @@ namespace WebAplication
             venta.total = Convert.ToDouble(txbTotal.Text);
             venta.seña = Convert.ToDouble(txbSeña.Text);
            DetalleVentaNegocio detalleNeg = new DetalleVentaNegocio();
-            
-            if (venta.estado.Equals("Entregado"))
+            if (venta.detalle != null)
             {
-                foreach (DetalleVenta item in venta.detalle)
-                {
-                    if(detalleNeg.VerificarStock(item))
-                    {
-                        ventaNegocio.agregar(venta);
-                        detalleNeg.Agregar(item);
-                        detalleNeg.DisminuirStock(item);
-                    }
-                    
-                }
-            }
-            else
-            {
+                int cantProductos = venta.detalle.Count; int cont = 0;
                 foreach (DetalleVenta item in venta.detalle)
                 {
                     detalleNeg.Agregar(item);
+                    if (detalleNeg.VerificarStock(item))
+                    {
+                        cont++;
+                    }
+                }
+                if (cont == cantProductos)
+                {
+                    venta.estado = ddlEstados.SelectedValue;
+                }
+                else
+                {
+                    venta.estado = "Pedido";
+                }
+                if(venta.estado.Equals("Entregado"))
+                {
+                    foreach (DetalleVenta item in venta.detalle)
+                    {
+                        detalleNeg.DisminuirStock(item);
+                    }
                 }
             }
-
+            ventaNegocio.agregar(venta);
             Session["DetalleVenta"] = null;
             Session["Total"] = null;
             Response.Redirect("NuevaVenta.aspx");
@@ -134,10 +140,39 @@ namespace WebAplication
             try
             {
                 DetalleVentaNegocio DetallesNeg = new DetalleVentaNegocio();
-                int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
-                double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
+                //int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                //double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
                 double Total = Convert.ToDouble(Session["TotalVenta"]);
-                Session["TotalVenta"] = Total - PU;
+                //Session["TotalVenta"] = Total - PU;
+                List<DetalleVenta> lista = new List<DetalleVenta>();
+                lista = (Session["DetalleVenta"] as List<DetalleVenta>);
+                lista.RemoveAt(e.RowIndex);
+                Session["DetalleVenta"] = lista;
+                dgvDetalles.DataSource = lista;
+                dgvDetalles.DataBind();
+                txbTotal.Text = Session["TotalVenta"].ToString();
+            }
+            catch (Exception ex)
+            {
+                lblCorrecto.Text = "";
+                lblIncorrecto.Text = ex.Message;
+            }
+        }
+
+        protected void dgvDetalles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow gr = dgvDetalles.SelectedRow;
+            
+            VentaNegocio comNeg = new VentaNegocio();
+            int index;
+            index = Convert.ToInt32(dgvDetalles.SelectedDataKey.Value.ToString());
+            try
+            {
+                DetalleVentaNegocio DetallesNeg = new DetalleVentaNegocio();
+                //int index = Convert.ToInt32(dgvDetalles.DataKeys[e.RowIndex].Value.ToString());
+                //double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
+                double Total = Convert.ToDouble(Session["TotalVenta"]);
+                //Session["TotalVenta"] = Total - PU;
                 List<DetalleVenta> lista = new List<DetalleVenta>();
                 lista = (Session["DetalleVenta"] as List<DetalleVenta>);
                 lista.RemoveAt(index);

@@ -134,13 +134,13 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void DisminuirStock(long id, double cant)
+        public void DisminuirStock(long id, double cantDismi, double cantFab)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearQuery("update insumos set stock= stock-@cant where id=@id");
-                datos.agregarParametro("@cant", cant);
+                datos.agregarParametro("@cant", cantDismi*cantFab);
                 datos.agregarParametro("@id", id);
                 datos.ejecutarAccion();
 

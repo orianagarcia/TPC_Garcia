@@ -82,6 +82,7 @@
     <Content Include="Images\modificar.png" />
     <Content Include="Inicio.aspx" />
     <Content Include="Insumos.aspx" />
+    <Content Include="ModificarCompra.aspx" />
     <Content Include="ModificarVenta.aspx" />
     <Content Include="NuevaVenta.aspx" />
     <Content Include="Productos.aspx" />
@@ -161,6 +162,13 @@
     </Compile>
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarCompra.aspx.cs">
+      <DependentUpon>ModificarCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarCompra.aspx.designer.cs">
+      <DependentUpon>ModificarCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarVenta.aspx.cs">
       <DependentUpon>ModificarVenta.aspx</DependentUpon>

@@ -4,22 +4,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div>
        <asp:Label ID="lbl" runat="server" Text="Nueva Formula" class="btn btn-info"></asp:Label>
-          <br />
-    <asp:Label Text="Fecha" runat="server" />
-    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" TextMode="DateTime" />  
+          <br /><br />
+    <asp:Label Text="Fecha" runat="server" cssClass="btn btn-info" />
+    <asp:TextBox id="txbFecha"  runat="server" Height="25px" Width="111px" TextMode="DateTime" class="btn btn-secondary"/>  
         <br />
         <br />
    
-    <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>
-    <asp:DropDownList ID="ddlProductos" runat="server" > </asp:DropDownList>
+    <asp:Label ID="lblProducto" runat="server" Text="Producto" cssClass="btn btn-info"></asp:Label>
+    <asp:DropDownList ID="ddlProductos" runat="server" class="btn btn-secondary dropdown-toggle" > </asp:DropDownList>
 
-       <asp:Label ID="lblInsumo" runat="server" Text="Insumo"></asp:Label>
-    <asp:DropDownList ID="ddlInsumos" runat="server" > </asp:DropDownList>
+       <asp:Label ID="lblInsumo" runat="server" Text="Insumo" cssClass="btn btn-info"></asp:Label>
+    <asp:DropDownList ID="ddlInsumos" runat="server" class="btn btn-secondary dropdown-toggle"> </asp:DropDownList>
            
-     <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
-     <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
+     <asp:Label ID="lblCantidad" runat="server" Text="Cantidad" cssClass="btn btn-info"></asp:Label>
+     <asp:TextBox ID="txbCantidad" Text="0" runat="server" class="btn btn-secondary"></asp:TextBox>
          <asp:Label ID="lblMedida" Text="" runat="server" />
-        <asp:Button cssClass="btn btn-success" ID="btnAgregarInsumo" runat="server" OnClick="btnAgregarInsumo_Click" Text="Agregar Insumo" />
+        <asp:Button cssClass="btn btn-info" ID="btnAgregarInsumo" runat="server" OnClick="btnAgregarInsumo_Click" Text="Agregar Insumo" />
         <br />
         </div>
     <asp:GridView ID="dgvFormulas" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" OnRowDeleting="dgvFormulas_RowDeleting">
@@ -55,7 +55,7 @@
  
         <br />
         <br />
-        <asp:Button cssClass="btn btn-success" ID="btnGuardarFormula" runat="server" OnClick="btnGuardarFormula_Click" Text="Guardar Formula" />
+        <asp:Button cssClass="btn btn-info" ID="btnGuardarFormula" runat="server" OnClick="btnGuardarFormula_Click" Text="Guardar Formula" />
 
         <br />
         <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>

@@ -6,22 +6,22 @@
         <h2 class="btn btn-info" style = color: " White">Fabricaciones</h2>
     </div>
     <div>
-     <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>
-    <asp:DropDownList ID="ddlProductos" runat="server" > </asp:DropDownList>
+     <asp:Label ID="lblProducto" runat="server" Text="Producto" class="btn btn-info"></asp:Label>
+    <asp:DropDownList ID="ddlProductos" runat="server" class="btn btn-secondary dropdown-toggle" > </asp:DropDownList>
 
-       <asp:Label ID="lblInsumo" runat="server" Text="Empleados"></asp:Label>
-    <asp:DropDownList ID="ddlEmpleados" runat="server" > </asp:DropDownList>
+       <asp:Label ID="lblInsumo" runat="server" Text="Empleados" class="btn btn-info"></asp:Label>
+    <asp:DropDownList ID="ddlEmpleados" runat="server" class="btn btn-secondary dropdown-toggle" > </asp:DropDownList>
            
-     <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
-     <asp:TextBox ID="txbCantidad" Text="0" runat="server"></asp:TextBox>
+     <asp:Label ID="lblCantidad" runat="server" Text="Cantidad" class="btn btn-info"></asp:Label>
+     <asp:TextBox ID="txbCantidad" Text="0" runat="server" class="btn btn-secondary"></asp:TextBox>
 
- <asp:Label ID="lblEstados" runat="server" Text="Estado"></asp:Label>
-        <asp:DropDownList runat="server" ID="ddlEstados">
+ <asp:Label ID="lblEstados" runat="server" Text="Estado" class="btn btn-info" ></asp:Label>
+        <asp:DropDownList runat="server" ID="ddlEstados" class="btn btn-secondary dropdown-toggle">
             <asp:ListItem Text="Completado" />
             <asp:ListItem Text="Pendiente" />
              <asp:ListItem Text="Cancelado" />
         </asp:DropDownList>
-        <asp:Button ID="btnAgregar" Text="Agregar" runat="server" OnClick="btnAgregar_Click"/>
+        <asp:Button ID="btnAgregar" Text="Agregar" runat="server" OnClick="btnAgregar_Click" class="btn btn-info"/>
     </div>
     <%--</div>--%>
     <div class="form-row ">
