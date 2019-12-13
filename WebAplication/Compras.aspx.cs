@@ -33,16 +33,24 @@ namespace WebAplication
             dgvDetalles.DataBind();
         }
 
-       
-
         protected void dgvCompras_RowEditing(object sender, GridViewEditEventArgs e)
         {
             dgvCompras.EditIndex = e.NewEditIndex;
+            CompraNegocio compraNegocio = new CompraNegocio(); 
             long idCompra = Convert.ToInt64((dgvCompras.Rows[e.NewEditIndex].FindControl("lblID") as Label).Text);
-            Session["idCompraMod"] = idCompra;
-            Response.Redirect("ModificarCompra.aspx");
-        }
+            Compra compra = compraNegocio.listar(Convert.ToInt32(idCompra))[0];
+            string estado = compra.estadoCompra; 
+            if (estado!="Devolucion")
+            {
+                Session["idCompraMod"] = idCompra;
+                Response.Redirect("ModificarCompra.aspx");
+            }
+            else
+            {
+                lblIncorrecto.Text = "No se puede editar.";
+            }
 
+        }
 
         protected void dgvCompras_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -112,6 +120,13 @@ namespace WebAplication
             Session["idCompra"] = id;
             CargarDetalle(id);
             btnAtras.Visible = true;
+            if (comNeg.listar(id)[0].estadoCompra.Equals("Devolucion"))
+            {
+                txbDesc.Visible = true;
+                lblDesc.Visible = true;
+                txbDesc.Text = comNeg.BuscarMotivo(id); 
+            }
+            
         }
 
         protected void btnAtras_Click(object sender, EventArgs e)
@@ -246,5 +261,7 @@ namespace WebAplication
             }
          
         }
+
+     
     }
 }

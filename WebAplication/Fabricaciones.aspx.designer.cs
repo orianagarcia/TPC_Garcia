@@ -85,6 +85,24 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.DropDownList ddlEstados;
         
         /// <summary>
+        /// Control txbInicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbInicio;
+        
+        /// <summary>
+        /// Control txbFin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbFin;
+        
+        /// <summary>
         /// Control btnAgregar.
         /// </summary>
         /// <remarks>
@@ -92,15 +110,6 @@ namespace WebAplication {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregar;
-        
-        /// <summary>
-        /// Control dgvFabricaciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvFabricaciones;
         
         /// <summary>
         /// Control lblCorrecto.
@@ -119,5 +128,14 @@ namespace WebAplication {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIncorrecto;
+        
+        /// <summary>
+        /// Control dgvFabricaciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvFabricaciones;
     }
 }

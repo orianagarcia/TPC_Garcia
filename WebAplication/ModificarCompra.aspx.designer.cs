@@ -85,6 +85,24 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.TextBox txbPedido;
         
         /// <summary>
+        /// Control txbDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbDescripcion;
+        
+        /// <summary>
+        /// Control btnAgregarDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarDesc;
+        
+        /// <summary>
         /// Control dgvDetalles.
         /// </summary>
         /// <remarks>

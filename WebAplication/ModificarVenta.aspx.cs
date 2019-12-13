@@ -19,6 +19,7 @@ namespace WebAplication
                 Session["TotalModVenta"] = 0;
                 Session["DetalleModVenta"] = null; 
                 CargarVenta();
+                dgvDetalles.Columns[0].Visible = false; 
             }
         }
         private void CargarVenta()
@@ -203,16 +204,18 @@ namespace WebAplication
             try
             {
                 DetalleVentaNegocio DetallesNeg = new DetalleVentaNegocio();
+                long ID = Convert.ToInt64((dgvDetalles.Rows[e.RowIndex].FindControl("LblID") as Label).Text);
                 double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
-                double Total = Convert.ToDouble(Session["TotalVenta"]);
-                Session["TotalVenta"] = Total - PU;
+                double Total = Convert.ToDouble(txbTotal.Text); 
+                Session["TotalModVenta"] = Total - PU;
                 List<DetalleVenta> lista = new List<DetalleVenta>();
                 lista = (Session["ListaVenta"] as List<DetalleVenta>);
                 lista.RemoveAt(e.RowIndex);
                 Session["ListaVenta"] = lista;
                 dgvDetalles.DataSource = lista;
                 dgvDetalles.DataBind();
-                //txbTotal.Text = Session["TotalVenta"].ToString();
+                txbTotal.Text = Session["TotalModVenta"].ToString();
+                DetallesNeg.Modificar(ID);
             }
             catch (Exception ex)
             {

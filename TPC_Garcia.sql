@@ -69,7 +69,7 @@ create table compras
 (
 id bigint not null primary key identity (1,1),
 idProveedor bigint not null foreign key references proveedores(id),
-fecha date not null,
+fecha datetime not null,
 formaPago varchar(50) not null,
 estadoCompra varchar (50) not null,
 total float null,
@@ -102,7 +102,9 @@ create table fabricaciones
   cantidad float not null,
   idEmpleado bigint not null foreign key references empleados(id),
   estadoFabricacion varchar(50),
-  estado bit null,
+  fechaInicio datetime null, 
+  fechaFin datetime null,
+  estado bit null ,
 )
 
 create table clientes
@@ -116,7 +118,6 @@ create table clientes
   telefono varchar(100) null,
   estado bit not null,
   )
-
 create table comentariosXcompra
   ( id bigint not null identity (1,1),
     idCompra bigint not null foreign key references compras(id),
@@ -167,3 +168,6 @@ insert into estados values ('Entregado',1),('Pedido',1),('Devolucion',1)
 insert into compras values (1,GETDATE(),'Mercado Pago','Entregado',1000,1)
 
 insert into detalleCompra values (1,1,50,1),(1,2,10,1)
+
+
+select * from fabricaciones

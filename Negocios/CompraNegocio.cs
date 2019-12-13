@@ -222,6 +222,70 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public string BuscarMotivo(int id)
+        {
+            string motivo=null;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("select descripcion from ComentariosXCompra where idCompra=@id");
+                datos.agregarParametro("id", id);
+                datos.ejecutarLector();
+                while(datos.lector.Read())
+                {
+                    motivo = datos.lector.GetString(0);
+                }
+                return motivo; 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        public List<Compra> BuscarPorFecha(DateTime fecha)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Compra compra;
+            List<Compra> lista = new List<Compra>();
+            try
+            {
+                string consulta = "select compras.id,idproveedor,p.nombre,fecha,total,formaPago,estadoCompra from compras inner join proveedores as p on p.id=compras.idProveedor";
+                
+                    consulta = consulta + " where compras.fecha=" + fecha.ToString();
+                datos.setearQuery(consulta);
+                datos.ejecutarLector();
+                while (datos.lector.Read())
+                {
+                    compra = new Compra();
+                    compra.id = datos.lector.GetInt64(0);
+                    compra.proveedor = new Proveedor();
+                    compra.proveedor.id = datos.lector.GetInt64(1);
+                    compra.proveedor.nombre = datos.lector.GetString(2);
+                    compra.fechaCompra = datos.lector.GetDateTime(3);
+                    compra.total = datos.lector.GetDouble(4);
+                    compra.formaPago = datos.lector.GetString(5);
+                    compra.estadoCompra = datos.lector.GetString(6);
+                    lista.Add(compra);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 
 }

@@ -19,7 +19,7 @@ namespace WebAplication
                 cboBuscar.DataTextField = "Nombre";
                 cboBuscar.DataValueField = "id";
                 cboBuscar.DataBind();
-                
+                dgvFormulas.Columns[0].Visible = false;
             }
 
 

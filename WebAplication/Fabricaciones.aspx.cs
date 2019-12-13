@@ -51,6 +51,8 @@ namespace WebAplication
                     fab.empleado.id = Convert.ToInt64((dgvFabricaciones.FooterRow.FindControl("ddlEmpleadosFooter") as DropDownList).Text);
                     fab.cantidad = Convert.ToDouble((dgvFabricaciones.FooterRow.FindControl("txbCantidadFooter") as TextBox).Text);
                     fab.estadoFab = ((dgvFabricaciones.FooterRow.FindControl("ddlEstadosFooter") as DropDownList).Text);
+                    fab.fechaInicio = Convert.ToDateTime(txbInicio.Text);
+                    fab.fechaFin = Convert.ToDateTime(txbFin.Text); 
                     FabricacionesNeg.Agregar(fab);
                     FabricacionesNeg.AgregarStock(fab.producto.id, fab.cantidad);
                     lblCorrecto.Text = "Agregado correctamente.";
@@ -94,7 +96,8 @@ namespace WebAplication
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.Add("Cancelado");
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).DataBind();
             ((DropDownList)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("ddlEstadoEdit")).Items.FindByValue(fab.estadoFab).Selected = true;
-
+            ((TextBox)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("txbFechaI")).Text = fab.fechaInicio.ToString("yyyy-MM-dd");
+            ((TextBox)dgvFabricaciones.Rows[e.NewEditIndex].FindControl("txbFechaFin")).Text = fab.fechaFin.ToString("yyyy-MM-dd");
         }
 
         protected void dgvFabricaciones_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -116,6 +119,8 @@ namespace WebAplication
                 fab.empleado.id = Convert.ToInt64((dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEmpleados") as DropDownList).Text);
                 fab.cantidad = Convert.ToDouble((dgvFabricaciones.Rows[e.RowIndex].FindControl("txbCantidad") as TextBox).Text);
                 fab.estadoFab = (dgvFabricaciones.Rows[e.RowIndex].FindControl("ddlEstadoEdit") as DropDownList).Text;
+                fab.fechaInicio = Convert.ToDateTime((dgvFabricaciones.Rows[e.RowIndex].FindControl("txbFechaI") as TextBox).Text);
+                fab.fechaFin = Convert.ToDateTime((dgvFabricaciones.Rows[e.RowIndex].FindControl("txbFechaFin") as TextBox).Text);
                 List<Formula> listaFormula;
                 FormulaNegocio formuNeg = new FormulaNegocio();
                 listaFormula = formuNeg.Listar(Convert.ToInt32(fab.producto.id)); 
@@ -186,6 +191,8 @@ namespace WebAplication
             fab.empleado.id = Convert.ToInt64(ddlEmpleados.SelectedValue);
             fab.cantidad = Convert.ToDouble(txbCantidad.Text);
             fab.estadoFab = ddlEstados.SelectedValue;
+            fab.fechaInicio = Convert.ToDateTime(txbInicio.Text);
+            fab.fechaFin = Convert.ToDateTime(txbFin.Text);
             List<Formula> listaFormula;
             FormulaNegocio formuNeg = new FormulaNegocio();
             listaFormula = formuNeg.Listar(Convert.ToInt32(fab.producto.id));
@@ -222,12 +229,14 @@ namespace WebAplication
                     lblCorrecto.Text = "Tenemos los insumos!";
                     lblIncorrecto.Text = " "; 
                     FabricacionesNeg.Agregar(fab);
+                    Cargardgv();
                 }
                else
                 {
-                    lblIncorrecto.Text = "No hay insumos suficientes. ";
+                    lblIncorrecto.Text = "No hay insumos suficientes.";
                     lblCorrecto.Text = " ";
                     FabricacionesNeg.Agregar(fab);
+                    Cargardgv();
                 }
             }
             else

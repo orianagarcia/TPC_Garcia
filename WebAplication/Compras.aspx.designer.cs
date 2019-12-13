@@ -13,6 +13,24 @@ namespace WebAplication {
     public partial class Compras {
         
         /// <summary>
+        /// Control lblCorrecto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCorrecto;
+        
+        /// <summary>
+        /// Control lblIncorrecto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIncorrecto;
+        
+        /// <summary>
         /// Control btnAtras.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,24 @@ namespace WebAplication {
         protected global::System.Web.UI.WebControls.Label lblCorrecto2;
         
         /// <summary>
+        /// Control lblDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDesc;
+        
+        /// <summary>
+        /// Control txbDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txbDesc;
+        
+        /// <summary>
         /// Control dgvDetalles.
         /// </summary>
         /// <remarks>
@@ -74,23 +110,5 @@ namespace WebAplication {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvDetalles;
-        
-        /// <summary>
-        /// Control lblCorrecto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCorrecto;
-        
-        /// <summary>
-        /// Control lblIncorrecto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIncorrecto;
     }
 }

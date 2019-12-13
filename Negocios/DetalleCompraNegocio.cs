@@ -16,9 +16,9 @@ namespace Negocio
 
             try
             {
-                string consulta = "select d.id, d.idcompra,d.idInsumo,i.nombre, d.cantidad, d.precioUnitario, d.totalProducto  from detalleCompra as d inner join compras as c on c.id=d.idCompra inner join insumos as i on i.id=d.idinsumo where d.estado=1 ";
+                string consulta = "select d.id, d.idcompra,d.idInsumo,i.nombre, d.cantidad, d.precioUnitario, d.totalProducto  from detalleCompra as d inner join compras as c on c.id=d.idCompra inner join insumos as i on i.id=d.idinsumo ";
                 if (id != 0)
-                    consulta = consulta + " and idCompra=" + id.ToString();
+                    consulta = consulta + " where idCompra=" + id.ToString();
 
                 datos.setearQuery(consulta);
                 datos.ejecutarLector();

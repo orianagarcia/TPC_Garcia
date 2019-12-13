@@ -5,9 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div>
         <h2 class="btn btn-info" style = color: " White">Compras</h2>
+          <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
+        <br />
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+    <br />
     </div>
-     <div> <asp:Button ID="btnAtras" cssClass="btn btn-info" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
+     <div> 
+         <asp:Button ID="btnAtras" cssClass="btn btn-info" Text="Volver Atras" runat="server" OnClick="btnAtras_Click" Visible="false"/>   </div>
 <div class="form-row ">
+           
         <asp:GridView ID="dgvCompras" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" DataKeyNames="ID" 
                       OnRowEditing="dgvCompras_RowEditing" OnSelectedIndexChanged="dgvCompras_SelectedIndexChanged"
              ShowFooter="false" >
@@ -31,7 +37,7 @@
                <%--<ESTADO>--%>
                     <asp:TemplateField HeaderText="Estado">
                     <ItemTemplate> 
-                        <asp:label text='<%# Eval("EstadoCompra")%>' runat="server" />
+                        <asp:label ID="lblEstado" text='<%# Eval("EstadoCompra")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate> 
                                <asp:DropDownList runat="server" ID="ddlEstado">
@@ -89,12 +95,14 @@
     <asp:TextBox id="txbDescripcion" runat="server" Visible="false" Height="50px" Width="300px" MaxLength="100"  />  
         <asp:Button ID="btnAgregarDesc" runat="server" Visible="false" Text="AgregarComentario" OnClick="btnAgregarDesc_Click"/>
    </div>
-    <br />
         <asp:Label ID="lblIncorrecto2" Text="" runat="server" forecolor="Red"/>
         <asp:Label ID="lblCorrecto2" Text="" runat="server" forecolor="Green"/>
    
     <%--</div>--%>
-
+    <div>   
+        <asp:Label id="lblDesc"  Text="Motivo de Cancelacion" runat="server" class="btn btn-info" Visible="false" />
+        <asp:Label id="txbDesc" Text="" runat="server" class="btn btn-info" Visible="false" />   
+    </div>
     <div class="form-row ">
        
         <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server" ShowFooter="false" AutoGenerateColumns="false"  DataKeyNames="ID" 
@@ -158,10 +166,7 @@
             </columns>
         </asp:GridView>
 
-        <br />
-        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
-        <br />
-        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+
     </div>
 
 

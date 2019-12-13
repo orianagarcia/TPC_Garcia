@@ -14,6 +14,8 @@ namespace Dominio
         public double cantidad { get; set; }
         public string estadoFab { get; set; }
         public bool estado { get; set; }
+        public DateTime fechaInicio { get; set; }
+        public DateTime fechaFin { get; set; }
             
     }
 }

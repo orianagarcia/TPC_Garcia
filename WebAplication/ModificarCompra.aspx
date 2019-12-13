@@ -8,7 +8,7 @@
     </div>   
     <asp:Label ID="lblProv" runat="server" Text="Proveedor" class="btn btn-info"></asp:Label>
     <asp:DropDownList ID="ddlProveedores" runat="server" class="btn btn-secondary dropdown-toggle"> </asp:DropDownList>
-   
+         
          <asp:Label ID="lblEstado" runat="server" Text="Estado" class="btn btn-info"></asp:Label>
         <asp:DropDownList runat="server" ID="ddlEstados" class="btn btn-secondary dropdown-toggle">
             <asp:ListItem Text="Entregado" Value="Entregado" />
@@ -29,13 +29,22 @@
         <asp:TextBox ID="txbPedido" runat="server" TextMode="Date"></asp:TextBox>
        <br />
          <br /> 
-        
+         <asp:Label Text="Descripcion" runat="server" Visible="false" />
+         <asp:TextBox id="txbDescripcion" runat="server" Visible="false" /> 
+         <asp:Button Text="Agregar Motivo de Devolucion" runat="server" id="btnAgregarDesc" Visible="false" class="btn btn-info" OnClick="btnAgregarDesc_Click" /> 
+         <br />
+         <br />
         </div>
-    <br />
+    
     <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" >
                     
             <columns>
-                 
+                 <%--<ID>--%>
+                    <asp:TemplateField HeaderText="ID">
+                    <ItemTemplate> 
+                        <asp:label  ID="LblID" text='<%# Eval("id")%>' runat="server" />
+                    </ItemTemplate>
+                    </asp:TemplateField>
                  <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 
@@ -72,11 +81,11 @@
                     </EditItemTemplate>
                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
-                    <asp:TemplateField >
+                    <%--<asp:TemplateField >
                     <ItemTemplate> 
                         <asp:ImageButton ImageUrl="~/Images/borrar.png" runat="server" CommandName="Delete" Tooltip="delete" width="20px" Height="20px"/>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
             </columns>
         </asp:GridView>
      <br />

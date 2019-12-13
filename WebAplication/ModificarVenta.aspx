@@ -46,7 +46,12 @@
     <asp:GridView ID="dgvDetalles" CssClass="table table-striped" runat="server"  AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="ID" OnRowDeleting="dgvDetalles_RowDeleting" >
                     
             <columns>
-                 
+                  <%--<ID>--%>
+                    <asp:TemplateField HeaderText="ID">
+                    <ItemTemplate> 
+                        <asp:label  ID="LblID" text='<%# Eval("id")%>' runat="server" />
+                    </ItemTemplate>
+                    </asp:TemplateField>
                  <%--<PRODUCTO>--%>
                     <asp:TemplateField HeaderText="Nombre">
                     <ItemTemplate> 

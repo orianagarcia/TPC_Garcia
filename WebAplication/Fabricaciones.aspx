@@ -21,8 +21,17 @@
             <asp:ListItem Text="Pendiente" />
              <asp:ListItem Text="Cancelado" />
         </asp:DropDownList>
+        <br />
+        <br />
+        <asp:Label Text="Fecha inicio" runat="server" class="btn btn-info"/>
+        <asp:TextBox ID="txbInicio" runat="server" TextMode="Date" />  
+        <asp:Label Text="Fecha Fin" runat="server" class="btn btn-info"/>
+        <asp:TextBox ID="txbFin" runat="server" TextMode="Date" />
         <asp:Button ID="btnAgregar" Text="Agregar" runat="server" OnClick="btnAgregar_Click" class="btn btn-info"/>
     </div>
+        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
+        <br />
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
     <%--</div>--%>
     <div class="form-row ">
         <asp:GridView ID="dgvFabricaciones" CssClass="table table-striped" runat="server" AutoGenerateColumns="false"  DataKeyNames="ID" 
@@ -70,6 +79,24 @@
                         </asp:DropDownList>
                     </EditItemTemplate>
                     </asp:TemplateField>
+                <%--<Fecha inicio>--%>
+                    <asp:TemplateField HeaderText="Fecha inicio">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("fechaInicio")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:Textbox runat="server" ID="txbFechaI" TextMode="Date" />  
+                    </EditItemTemplate>
+                     </asp:TemplateField>
+                <%--<Fecha Fin>--%>
+                    <asp:TemplateField HeaderText="Fecha Fin">
+                    <ItemTemplate> 
+                        <asp:label text='<%# Eval("fechaFin")%>' runat="server" />
+                    </ItemTemplate>
+                    <EditItemTemplate> 
+                        <asp:Textbox runat="server" ID="txbFechaFin" TextMode="Date" />  
+                    </EditItemTemplate>
+                     </asp:TemplateField>
                    <%--<ACCIONES >--%>
                     <asp:TemplateField >
                     <ItemTemplate> 
@@ -84,9 +111,6 @@
             </columns>
         </asp:GridView>
 
-        <br />
-        <asp:Label ID="lblCorrecto" Text="" runat="server" forecolor="Green"/>
-        <br />
-        <asp:Label ID="lblIncorrecto" Text="" runat="server" forecolor="Red"/>
+        
     </div>
 </asp:Content>

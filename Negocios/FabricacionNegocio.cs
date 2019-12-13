@@ -15,7 +15,7 @@ namespace Negocio
             List<Fabricacion> lista = new List<Fabricacion>();
             try
             {
-                string consulta = "select f.id,f.idProducto,p.nombre,f.idEmpleado,e.nombre,f.cantidad,f.estadoFabricacion from fabricaciones as f  inner join productos as p on p.id=f.idProducto inner join empleados as e on e.id=f.idEmpleado ";
+                string consulta = "select f.id,f.idProducto,p.nombre,f.idEmpleado,e.nombre,f.cantidad,f.estadoFabricacion, f.fechaInicio, f.fechaFin from fabricaciones as f  inner join productos as p on p.id=f.idProducto inner join empleados as e on e.id=f.idEmpleado ";
                 if (id != 0)
                     consulta = consulta + " where f.id=" + id.ToString();
                
@@ -34,6 +34,8 @@ namespace Negocio
                     aux.empleado.nombre = datos.lector.GetString(4);
                     aux.cantidad = datos.lector.GetDouble(5);
                     aux.estadoFab = datos.lector.GetString(6);
+                    aux.fechaInicio = datos.lector.GetDateTime(7);
+                    aux.fechaFin = datos.lector.GetDateTime(8);
                     lista.Add(aux);
                 }
                 return lista;
@@ -53,11 +55,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Insert into Fabricaciones values (@idProducto, @cantidad,@idEmpleado,@estadoFab,1)");
+                datos.setearQuery("Insert into Fabricaciones values (@idProducto, @cantidad,@idEmpleado,@estadoFab,@fechai,@fechafin,1)");
+                datos.Clear();
                 datos.agregarParametro("@idProducto", aux.producto.id);
                 datos.agregarParametro("@idEmpleado", aux.empleado.id);
                 datos.agregarParametro("@cantidad", aux.cantidad);
                 datos.agregarParametro("@estadoFab", aux.estadoFab);
+                datos.agregarParametro("@fechai", aux.fechaInicio);
+                datos.agregarParametro("@fechafin", aux.fechaFin);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -76,12 +81,14 @@ namespace Negocio
 
             try
             {
-                datos.setearQuery("update Fabricaciones set idProducto=@idProducto,idEmpleado=@idEmpleado, cantidad=@cantidad, estadoFabricacion=@estadoFab where id=@id ");
+                datos.setearQuery("update Fabricaciones set idProducto=@idProducto,idEmpleado=@idEmpleado, cantidad=@cantidad, estadoFabricacion=@estadoFab, fechaInicio=@fechai , fechaFin=@fechafin where id=@id ");
                 datos.agregarParametro("@id", aux.id);
                 datos.agregarParametro("@idProducto", aux.producto.id);
                 datos.agregarParametro("@idEmpleado", aux.empleado.id);
                 datos.agregarParametro("@cantidad", aux.cantidad);
                 datos.agregarParametro("@estadoFab", aux.estadoFab);
+                datos.agregarParametro("@fechai", aux.fechaInicio);
+                datos.agregarParametro("@fechafin", aux.fechaFin);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

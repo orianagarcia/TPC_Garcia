@@ -149,5 +149,24 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void Modificar(long id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearQuery("update detalleventa set estado=0 where id= @id");
+                datos.agregarParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

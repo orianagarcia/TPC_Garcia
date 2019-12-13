@@ -19,6 +19,7 @@ namespace WebAplication
             {
                 CargarDGV();
                 Session["TotalCompra"] = 0;
+                Session["DetalleCompra"] = null; 
             }
         }
 
